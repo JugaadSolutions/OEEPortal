@@ -10,9 +10,14 @@ namespace OEEPortal.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.Message = "";
+            ViewBag.Message = "Home";
 
             return View();
+        }
+        public ActionResult Input()
+        {
+            ViewBag.Message = "Input";
+                return View();
         }
 
        
