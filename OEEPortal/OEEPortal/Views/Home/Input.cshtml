@@ -2,7 +2,247 @@
     ViewBag.Title = "Input";
 }
 
-<h2>Input</h2>
+
 @section menu{
     @Html.Partial("Menu")
 }
+@section Styles{
+    <link href="~/Content/bootstrap.min.css" type="text/css" rel="stylesheet" />
+<link href="~/Content/bootstrap-datetimepicker.min.css" type="text/css" rel="stylesheet" />
+<link href="~/Content/bootstrap-datetimepicker.css" type="text/css" rel="stylesheet" />
+    
+    }
+
+@section Scripts{
+
+<script src="~/Scripts/moment.js"></script>
+<script src="~/Scripts/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var source = [
+               "Ideonics"
+            ];
+            // Create a jqxComboBox
+            $("#jqxcombobox").jqxComboBox({ source: source, selectedIndex: 0, width: '200px', height: '25px' });
+            // disable the sixth item.
+            $("#jqxcombobox").jqxComboBox('disableAt', 5);
+            // bind to 'select' event.
+            $('#jqxcombobox').bind('select', function (event) {
+                var args = event.args;
+                var item = $('#jqxcombobox').jqxComboBox('getItem', args.index);
+                alert('Selected: ' + item.label);
+            });
+        });
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var source = [
+           "Saagar"
+        ];
+        // Create a jqxComboBox
+        $("#jqxcombobox1").jqxComboBox({ source: source, selectedIndex: 0, width: '200px', height: '25px' });
+        // disable the sixth item.
+        $("#jqxcombobox1").jqxComboBox('disableAt', 5);
+        // bind to 'select' event.
+        $('#jqxcombobox1').bind('select', function (event) {
+            var args = event.args;
+            var item = $('#jqxcombobox1').jqxComboBox('getItem', args.index);
+            alert('Selected: ' + item.label);
+        });
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var source = [
+           "Avinash"
+        ];
+        // Create a jqxComboBox
+        $("#jqxcombobox2").jqxComboBox({ source: source, selectedIndex: 0, width: '200px', height: '25px' });
+        // disable the sixth item.
+        $("#jqxcombobox2").jqxComboBox('disableAt', 5);
+        // bind to 'select' event.
+        $('#jqxcombobox2').bind('select', function (event) {
+            var args = event.args;
+            var item = $('#jqxcombobox2').jqxComboBox('getItem', args.index);
+            alert('Selected: ' + item.label);
+        });
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var source = [
+           "Bangluru"
+        ];
+        // Create a jqxComboBox
+        $("#jqxcombobox3").jqxComboBox({ source: source, selectedIndex: 0, width: '200px', height: '25px' });
+        // disable the sixth item.
+        $("#jqxcombobox3").jqxComboBox('disableAt', 5);
+        // bind to 'select' event.
+        $('#jqxcombobox3').bind('select', function (event) {
+            var args = event.args;
+            var item = $('#jqxcombobox3').jqxComboBox('getItem', args.index);
+            alert('Selected: ' + item.label);
+        });
+    });
+</script>
+    <script type="text/javascript">
+        $(".numericOnly").bind('keypress', function (e) {
+            if (e.keyCode == '9' || e.keyCode == '16') {
+                return;
+            }
+            var code;
+            if (e.keyCode) code = e.keyCode;
+            else if (e.which) code = e.which;
+            if (e.which == 46)
+                return false;
+            if (code == 8 || code == 46)
+                return true;
+            if (code < 48 || code > 57)
+                return false;
+        });
+
+        //Disable paste
+        $(".numericOnly").bind("paste", function (e) {
+            e.preventDefault();
+        });
+
+        $(".numericOnly").bind('mouseenter', function (e) {
+            var val = $(this).val();
+            if (val != '0') {
+                val = val.replace(/[^0-9]+/g, "")
+                $(this).val(val);
+            }
+        });
+
+
+
+    </script>
+<script type="text/javascript">
+
+    $('#datetimepicker1').datetimepicker();
+    $('#datetimepicker2').datetimepicker();
+
+</script>
+
+
+
+    
+    }
+<div class="wrap">
+    <div class="container">
+
+        <div class="col-md-2">
+            <label id="lbl1" style="margin-top:10%;padding:10px 10px 0px 0px;display:inline;">Line:</label>
+            <div id='jqxcombobox'>
+            </div>
+        </div>
+        <div class="col-md-2" style="padding:0px 0px 0px 40px">
+            <label id="lbl2" style="margin-top:10%;padding:10px 20px 0px 0px;display:inline;">Machine:</label>
+            <div id='jqxcombobox1'>
+            </div>
+        </div>
+        <div class="col-md-2" style="padding:0px 0px 0px 69px">
+            <label id="lbl3" style="margin-top:10%;padding:10px 20px 0px 0px;display:inline;">Shift:</label>
+            <div id='jqxcombobox2'>
+            </div>
+        </div>
+        <div class="col-md-2" style="padding:0px 0px 0px 95px">
+            <label id="lbl4" style="margin-top:10%;padding:10px 20px 0px 0px;display:inline;">Shift:</label>
+            <div id='jqxcombobox3'>
+            </div>
+        </div>
+    </div>
+    <div class='col-md-5' style="margin:0 auto">
+        <div class="form-group" style="margin-top:7%">
+            <b style="margin-top:15px;margin-left:20%;">  Starttime:   </b>
+            <div class='input-group date' id='datetimepicker1' style="padding-left:20%;margin-top:5px;margin-bottom:0px;">
+
+                <input type='text' class="form-control" />
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+    <div class='col-md-5'>
+        <div class="form-group" style="margin-top:7%">
+            <b style="margin-top:15px;margin-left:20%;"> Endtime:   </b>
+            <div class='input-group date' id='datetimepicker2' style="padding-left:20%;margin-top:5px;margin-bottom:0px;">
+                <input type='text' class="form-control" />
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="wrap1" style="display:inline;">
+        <div class="col-md-5" style="margin-top:2%;margin-left:3%;display:inline;">
+            <label id="lbltxt" style="margin-left:12%">Target Quantity:</label>
+            <input type="text" class="numericOnly" placeholder="Enter Only number" id="txtSearch">
+            
+        </div>
+        <div class="col-md-5" style="margin-left:46%;margin-top:-3%">
+            <label id="lbltxt1" style="margin-left:10%;display:inline;">Diffective Quantity:</label>
+            <input type="text" class="numericOnly" placeholder="Enter Only number" id="txtSearch1">
+
+        </div>
+    </div>
+    <div class="wrap2" >
+        <div class="row">
+            <div class="col-md-5" style="margin-top:2%;margin-left:7%">
+                <label id="labl">Lable1:</label>
+                <input type="text" id="txt2" style="" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-5" style="margin:0 auto;margin-top:1%;margin-left:7%">
+                <label id="labl">Lable2:</label>
+                <input type="text" id="txt2" style="" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-5" style="margin-top:1%;margin-left:7%">
+                <label id="labl2">Lable3:</label>
+                <input type="text" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-5" style="margin-top:1%;margin-left:7%">
+                <label id="labl3">Lable4:</label>
+                <input type="text" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-5" style="margin-top:1%;margin-left:7%">
+
+                <label id="labl4">Lable5:</label>
+                <input type="text" />
+
+            </div>
+            <div class="col-md-5" style="margin-top:-15%;">
+
+                <label id="labl5">Lable6:</label>
+                <input type="text" />
+            </div>
+            <div class="col-md-5" style="margin-top:-12%;">
+
+                <label id="labl6">Lable7:</label>
+                <input type="text" />
+            </div>
+            <div class="col-md-5" style="margin-top:-9%;">
+
+                <label id="labl7">Lable8:</label>
+                <input type="text" />
+            </div>
+            <div class="col-md-5" style="margin-top:-6%;">
+
+                <label id="labl8">Lable9:</label>
+                <input type="text" />
+            </div>
+        </div>
+
+
+
+    </div>
