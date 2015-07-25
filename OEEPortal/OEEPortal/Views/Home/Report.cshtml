@@ -1,0 +1,60 @@
+﻿@{
+    ViewBag.Title = "Report";
+}
+
+@section menu{
+    @Html.Partial("Menu")
+}
+@section Styles{
+    <link href="~/Content/bootstrap.min.css" type="text/css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-datetimepicker.min.css" type="text/css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-datetimepicker.css" type="text/css" rel="stylesheet" />
+
+}
+
+@section Scripts{
+<script src="~/Scripts/moment.js"></script>
+<script src="~/Scripts/bootstrap-datetimepicker.min.js"></script>
+    
+    <script type="text/javascript">
+
+    $('#datetimepicker1').datetimepicker();
+    $('#datetimepicker2').datetimepicker();
+
+</script>
+    
+    }
+
+<div id="ContentDiv" class="roundedDiv text-center" style="border:green medium solid;border-width:2px;margin:20px 20px 300px 15px; padding:5px 2px 5px 2px">
+<div class="container">
+    <div class="wrap">
+        <div class='col-md-5' style="margin:0 auto">
+            <div class="form-group" style="margin-top:7%;margin-right:8%">
+                <b style="margin-top:15px;margin-left:1%;margin-right:150%">  From:   </b>
+                <div class='input-group date' id='datetimepicker1' style="padding-right:10%;margin-top:5px;margin-bottom:20px;width:90%">
+
+                    <input type='text' class="form-control" />
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class='col-md-5'>
+        <div class="form-group" style="margin-top:7%;margin-right:8%">
+            <b style="margin-top:15px;margin-left:1%;margin-right:150%"> Endtime:   </b>
+            <div class='input-group date' id='datetimepicker2' style="padding-right:10%;margin-top:5px;margin-bottom:20px;width:90%">
+                <input type='text' class="form-control" />
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    </div>
+
+
+</div>
+</div>
+

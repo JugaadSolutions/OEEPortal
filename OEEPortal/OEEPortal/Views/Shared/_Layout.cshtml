@@ -75,7 +75,12 @@ else
 
                 <footer class="footer">
 
-                   
+                    <div class="col-md-10 text-center">
+                        <p class="roundedDiv"
+                           style="margin:0px 50px 0px 20px;width:100%;color:white;font-family:'Arial Rounded MT';font-size:small;background-color:green;border:green medium solid">
+                            &copy; SEPFC
+                        </p>
+                    </div>
 
                 </footer>
             </div>
@@ -94,7 +99,12 @@ else
                     $('#inputbtn').click(function () {
                         document.location = '@Url.Action("Input","Home")';
                     })
-                  
+                    $('#reprtbtn').click(function () {
+                        document.location = '@Url.Action("Report","Home")';
+                    })
+                    $('#grpbtn').click(function () {
+                        document.location = '@Url.Action("Graphs","Home")';
+                    })
                 });
             </script>
 

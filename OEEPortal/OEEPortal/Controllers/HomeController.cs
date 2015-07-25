@@ -19,6 +19,16 @@ namespace OEEPortal.Controllers
             ViewBag.Message = "Input";
                 return View();
         }
+        public ActionResult Report()
+        {
+            ViewBag.Title = "Report";
+            return View();
+        }
+        public ActionResult Graphs()
+        {
+            ViewBag.Tittle = "Graphs";
+                return View();
+        }
 
        
     }
