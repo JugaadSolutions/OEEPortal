@@ -1,0 +1,99 @@
+﻿@model IEnumerable<OEEPortal_MVC5.Models.MachineOutputRecord>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Machine.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Reference.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Shift.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EquipmentBreakDown)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ChangeOver)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MaterialDownTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.QuantityDownTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OtherNonProduct)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PreventiveMaintenance)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ManagementMeeting)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RegulatoryBreaks)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PilotRun)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Machine.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Reference.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Shift.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EquipmentBreakDown)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ChangeOver)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MaterialDownTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.QuantityDownTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OtherNonProduct)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PreventiveMaintenance)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ManagementMeeting)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RegulatoryBreaks)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PilotRun)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.MachineOutputRecordId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.MachineOutputRecordId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.MachineOutputRecordId })
+        </td>
+    </tr>
+}
+
+</table>

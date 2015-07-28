@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using OEEPortal_MVC5.Models;
 
 namespace OEEPortal.Controllers
 {
@@ -16,6 +17,10 @@ namespace OEEPortal.Controllers
         }
         public ActionResult Input()
         {
+            using (OEEPortalContext db = new OEEPortalContext())
+            {
+                var lines = db.Lines.ToList();
+            }
             ViewBag.Message = "Input";
                 return View();
         }
