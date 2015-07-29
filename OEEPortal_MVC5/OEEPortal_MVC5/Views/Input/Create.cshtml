@@ -4,7 +4,7 @@
     ViewBag.Title = "Create";
 }
 
-<h2 style="margin-top:-1%">Create</h2>
+@*<h2 style="margin-top:-1%">Machine Output Record</h2>*@
 
 @section menu{
     @Html.Partial("Menu")
@@ -31,23 +31,31 @@
                     </div>
 
                     <div class="col-md-2">
-                        <label id="lbl1" style="margin-top:10%;padding:10px 10px 0px 0px;display:inline;margin-right:70%;margin-left:0%">Line:</label>
-                        <div id='jqxcombobox'>
+                        <label id="lbl1" 
+                               style="margin-top:5%;padding:10px 10px 0px 0px;display:inline;margin-right:70%;margin-left:0%">
+                                Line:</label>
+                        <div id='LineCombobox'>
                         </div>
                     </div>
                     <div class="col-md-2" style="padding:0px 0px 0px 40px">
-                        <label id="lbl2" style="margin-top:20%;padding:10px 20px 0px 0px;display:inline;margin-right:70%;margin-left:0%">Machine:</label>
-                        <div id='jqxcombobox1'>
+                        <label id="lbl2" 
+                               style="margin-top:5%;padding:10px 20px 0px 0px;display:inline;margin-right:70%;margin-left:0%">
+                        Machine:</label>
+                        <div id='MachineCombobox'>
                         </div>
                     </div>
                     <div class="col-md-2" style="padding:0px 0px 0px 50px">
-                        <label id="lbl3" style="margin-top:30%;padding:10px 20px 0px 0px;display:inline;margin-right:70%;margin-left:0%">Shift:</label>
-                        <div id='jqxcombobox2'>
+                        <label id="lbl3" 
+                               style="margin-top:5%;padding:10px 20px 0px 0px;display:inline;margin-right:70%;margin-left:0%">
+                        Shift:</label>
+                        <div id='ShiftCombobox'>
                         </div>
                     </div>
                     <div class="col-md-2" style="padding:0px 0px 0px 75px">
-                        <label id="lbl4" style="margin-top:40%;padding:10px 20px 0px 0px;display:inline;margin-right:70%;margin-left:0%">Reference:</label>
-                        <div id='jqxcombobox3'>
+                        <label id="lbl4" 
+                               style="margin-top:5%;padding:10px 20px 0px 0px;display:inline;margin-right:70%;margin-left:0%">
+                                Reference:</label>
+                        <div id='ReferenceCombobox'>
                         </div>
                     </div>
                 </div>
@@ -141,11 +149,11 @@
                     </div>
                 </div>
                 <div class="innerwrap1" style="margin-left:11%;margin-top:3%;margin-bottom:1%">
-                    <button class="btn btn-lg btn-primary" value="" id="btn1" style="display:inline;width:18%;height:10%">Update</button>
-                    <button class="btn btn-lg btn-primary" value="" id="btn2" style="display:inline; width:18%;height:10%">Clear</button>
+                    <button class="btn btn-lg btn-primary" value="" id="btn1" style="display:inline;width:18%;height:5%">Update</button>
+                    <button class="btn btn-lg btn-primary" value="" id="btn2" style="display:inline; width:18%;height:5%">Clear</button>
 
                 </div>
-                @Html.ActionLink("Back to List", "Index")
+                @*@Html.ActionLink("Back to List", "Index")*@
 
             </div>
         </div>
@@ -166,10 +174,10 @@
     <script type="text/javascript">
         $(document).ready(function () {
             var source = [
-               "Ideonics"
+               "Select Line"
             ];
             // Create a jqxComboBox
-            $("#jqxcombobox").jqxComboBox({ source: source, selectedIndex: 0, width: '150px', height: '25px' });
+            $("#LineCombobox").jqxComboBox({ source: source, selectedIndex: 0, width: '150px', height: '25px' });
             // disable the sixth item.
             //$("#jqxcombobox").jqxComboBox('disableAt', 5);
             //// bind to 'select' event.
@@ -184,10 +192,10 @@
     <script type="text/javascript">
         $(document).ready(function () {
             var source = [
-               "Saagar"
+               "Select Machine"
             ];
             // Create a jqxComboBox
-            $("#jqxcombobox1").jqxComboBox({ source: source, selectedIndex: 0, width: '150px', height: '25px' });
+            $("#MachineCombobox").jqxComboBox({ source: source, selectedIndex: 0, width: '150px', height: '25px' });
             // disable the sixth item.
             //$("#jqxcombobox1").jqxComboBox('disableAt', 5);
             //// bind to 'select' event.
@@ -201,10 +209,10 @@
     <script type="text/javascript">
         $(document).ready(function () {
             var source = [
-               "Avinash"
+               "Select Reference"
             ];
             // Create a jqxComboBox
-            $("#jqxcombobox2").jqxComboBox({ source: source, selectedIndex: 0, width: '150px', height: '25px' });
+            $("#ReferenceCombobox").jqxComboBox({ source: source, selectedIndex: 0, width: '150px', height: '25px' });
             // disable the sixth item.
             //$("#jqxcombobox2").jqxComboBox('disableAt', 5);
             //// bind to 'select' event.
@@ -218,10 +226,10 @@
     <script type="text/javascript">
         $(document).ready(function () {
             var source = [
-               "Bangluru"
+               "Select Shift"
             ];
             // Create a jqxComboBox
-            $("#jqxcombobox3").jqxComboBox({ source: source, selectedIndex: 0, width: '150px', height: '25px' });
+            $("#ShiftCombobox").jqxComboBox({ source: source, selectedIndex: 0, width: '150px', height: '25px' });
             // disable the sixth item.
             //$("#jqxcombobox3").jqxComboBox('disableAt', 5);
             //// bind to 'select' event.
