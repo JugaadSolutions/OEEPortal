@@ -183,8 +183,6 @@
       <DependentUpon>201507281538597_MachineOutputRecordOperationIdStartTimeEndTime.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\DataContext.cs" />
-    <Compile Include="Models\Entity.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">

@@ -12,5 +12,7 @@ namespace OEEPortal_MVC5.Models
 
         public DateTime Start { get; set; }
         public DateTime End { get; set; }
+
+        public virtual ICollection<MachineOutputRecord> MachineOutputRecords { get; set; }
     }
 }

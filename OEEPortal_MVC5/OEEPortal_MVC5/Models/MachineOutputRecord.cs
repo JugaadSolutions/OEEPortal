@@ -7,6 +7,10 @@ namespace OEEPortal_MVC5.Models
 {
     public class MachineOutputRecord
     {
+        public MachineOutputRecord()
+        {
+
+        }
         public int MachineOutputRecordId { get; set; }
         public string OperatorId { get; set; }
         public DateTime StartTime { get; set; }
@@ -26,6 +30,5 @@ namespace OEEPortal_MVC5.Models
         public virtual Reference Reference { get; set; }
         public int ShiftId { get; set; }
         public virtual Shift Shift { get; set; }
-       
     }
 }
