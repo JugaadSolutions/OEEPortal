@@ -16,7 +16,7 @@ namespace OEEPortal_MVC5.Models
 
         public int LineId { get; set; }
         public virtual Line Line { get; set; }
-        public virtual ICollection<Reference> References { get; set; }
+        public virtual ICollection<ReferenceMachine> ReferenceMachines { get; set; }
         public virtual ICollection<MachineOutputRecord> MachineOutputRecords { get; set; }
     }
 }
