@@ -1,0 +1,31 @@
+﻿@model OEEPortal_MVC5.Models.Line
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+@section menu {
+
+    @Html.Partial("Menu");
+
+}
+
+<div>
+    <h4>Line</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.LineId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

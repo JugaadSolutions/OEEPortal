@@ -1,0 +1,80 @@
+﻿@model IEnumerable<OEEPortal_MVC5.Models.Line>
+@{
+    ViewBag.Title = "Manage";
+}
+
+<h2>Manage</h2>
+@section menu {
+  
+    @Html.Partial("Menu");
+
+}
+@section styles{
+    <link href="~/Content/bootstrap.min.css" type="text/css" rel="stylesheet" />
+   
+
+    <link href="~/Content/smoothness/jquery-ui.css" type="text/css" rel="stylesheet" />
+
+    <link href="~/Content/tab.css" type="text/css" rel="stylesheet" />
+    <link href="~/Content/style.css" type="text/css" rel="stylesheet" />
+}
+
+
+@section scripts {
+
+     
+    <script type="text/javascript">
+        $(function () {
+            $('#tabs').tabs();
+        });
+    </script>
+  <script type="text/javascript">
+     
+    </script>
+
+    }
+<div class="responsive-container" id="SummaryPanel"></div>
+<div id="ContentDiv" class="roundedDiv text-center" style="border:green medium solid;border-width:2px;margin:20px -10px 300px 0px; padding:5px 2px 5px 2px">
+
+    <div id="tabs" class="tabs-min">
+        <ul>
+            <li><a href="#tabs-1">Line</a></li>
+
+        </ul>
+
+        <div id="tabs-1">
+            <div class="container">
+                <div class="innerwrap" style="margin-right:1%;padding:2% 1% 2% 1%;margin-left:-15%;">
+                    @Html.DropDownList("Line", Model.Select(m => new SelectListItem() { Text = m.Name, Value = m.Name }).ToList())
+                    <a href="@Url.Action("Create","Lines")" id="creatBtn" class="btn btn-info btn-lg">
+                        <span class="glyphicon glyphicon-plus"></span> Add
+                    </a>
+                    <a href="@Url.Action("Delete","Lines")" id="deleteBtn" class="btn btn-info btn-lg">
+                        <span class="glyphicon glyphicon-minus"></span> Delete
+                    </a>
+                    <a href="@Url.Action("Edit", "Lines")" id="editBtn" class="btn btn-info btn-lg">
+                        <span class="glyphicon glyphicon-pencil"></span> Edit
+                    </a>
+                  
+                    <a href="@Url.Action("Details","Lines")" id=" detailbtn" class="btn btn-info btn-lg">
+                        <span class="glyphicon glyphicon-th-list"></span> Details
+                    </a>
+                     
+
+                </div>
+
+
+
+
+            </div>
+
+
+        </div>
+
+
+
+
+    </div>
+
+
+</div>

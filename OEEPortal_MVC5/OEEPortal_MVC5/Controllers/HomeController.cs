@@ -35,6 +35,17 @@ namespace OEEPortal.Controllers
                 return View();
         }
 
+        public ActionResult Manage()
+        {
+            ViewBag.Title = "Manage";
+       
+            
+            using(var db=new OEEPortalContext()){
+                return View(db.Lines.ToList());
+            }
+           
+        }
+
        
     }
 }

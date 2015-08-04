@@ -170,6 +170,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\InputController.cs" />
+    <Compile Include="Controllers\LinesController.cs" />
     <Compile Include="Migrations\201507281125297_InitialCreate.cs" />
     <Compile Include="Migrations\201507281125297_InitialCreate.Designer.cs">
       <DependentUpon>201507281125297_InitialCreate.cs</DependentUpon>
@@ -793,6 +794,12 @@
     <Content Include="Views\Input\Details.cshtml" />
     <Content Include="Views\Input\Edit.cshtml" />
     <Content Include="Views\Input\Index.cshtml" />
+    <Content Include="Views\Home\Manage.cshtml" />
+    <Content Include="Views\Lines\Create.cshtml" />
+    <Content Include="Views\Lines\Delete.cshtml" />
+    <Content Include="Views\Lines\Details.cshtml" />
+    <Content Include="Views\Lines\Edit.cshtml" />
+    <Content Include="Views\Lines\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

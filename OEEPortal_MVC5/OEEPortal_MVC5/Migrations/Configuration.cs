@@ -9,6 +9,7 @@ namespace OEEPortal_MVC5.Migrations
     {
         public Configuration()
         {
+            AutomaticMigrationDataLossAllowed = true;
             AutomaticMigrationsEnabled = true;
             ContextKey = "OEEPortal_MVC5.Models.OEEPortalContext";
         }

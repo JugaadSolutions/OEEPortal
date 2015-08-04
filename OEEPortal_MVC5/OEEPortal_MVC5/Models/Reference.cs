@@ -12,7 +12,6 @@ namespace OEEPortal_MVC5.Models
     }
         public int ReferenceId { get; set; }
         public string Name { get; set; }
-     
         public virtual ICollection<ReferenceMachine> ReferenceMachine { get; set; }
         public virtual ICollection<MachineOutputRecord> MachineOutputRecords { get; set; }
     }
