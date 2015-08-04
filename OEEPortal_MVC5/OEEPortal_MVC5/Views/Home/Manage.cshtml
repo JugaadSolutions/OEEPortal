@@ -29,6 +29,25 @@
         });
     </script>
   <script type="text/javascript">
+            $(document).ready(function () {               
+               
+                var source =
+                {
+                    
+                    datatype: "json",
+                    datafields: [
+                        { name: 'Name' }
+                       
+                    ],
+                    id: 'LineId',
+                    url: '/Home/GetData',
+                    async: false
+                };
+                var dataAdapter = new $.jqx.dataAdapter(source);
+                // Create a jqxComboBox
+                $("#jqxWidget").jqxComboBox({ selectedIndex: 0, source: dataAdapter, displayMember: "LineId", valueMember: "Name", width: 200, height: 25});
+               
+            });
      
     </script>
 
@@ -45,7 +64,8 @@
         <div id="tabs-1">
             <div class="container">
                 <div class="innerwrap" style="margin-right:1%;padding:2% 1% 2% 1%;margin-left:-15%;">
-                    @Html.DropDownList("Line", Model.Select(m => new SelectListItem() { Text = m.Name, Value = m.Name }).ToList())
+                    <div id='jqxWidget' style="margin:2% 10% 1% 10%">
+                    </div>
                     <a href="@Url.Action("Create","Lines")" id="creatBtn" class="btn btn-info btn-lg">
                         <span class="glyphicon glyphicon-plus"></span> Add
                     </a>
