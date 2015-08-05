@@ -51,8 +51,8 @@ namespace OEEPortal.Controllers
                 var Lines = db.Lines.ToArray();
 
                 Line[] LinesList = new Line[Lines.Length];
-
-                int i = 0;
+                
+                int i = 0; 
                 foreach( Line l in Lines)
                 {
                     LinesList[i++] = new Line { LineId = l.LineId, Name = l.Name };

@@ -21,50 +21,65 @@
 
 
 @section scripts {
+    <script type="text/javascript">
+             
+             
+    </script>
 
 
     <script type="text/javascript">
-        var LinesList;
-        $(function () {
-           // debugger;
-            $('#tabs').tabs();
+    var LinesList;
+    $(function () {
+        //debugger;
+        $('#tabs').tabs();
 
 
 
-            $.ajax({
+        $.ajax({
 
-                url: '/Home/GetLines',
+            url: '/Home/GetLines',
 
-                data: { format: JSON },
-                async: true,
-                error: function () { alert('GetLines Failure'); },
-                success: function (lines) {
+            data: { format: JSON },
+            async: true,
+            error: function () { alert('GetLines Failure'); },
+            success: function (lines) {
 
-                    LinesList = lines;
-                    var source = {
+                LinesList = lines;
+                var source = {
 
-                        localdata: LinesList,
-                        datatype: "json",
-                        datafields: [
-                            { name: "LineId" },
-                            { name: "Name" }
+                    localdata: LinesList,
+                    datatype: "json",
+                    datafields: [
+                        { name: "LineId" },
+                        { name: "Name" }
 
-                        ],
-                        id: 'LineId'
-
-
-                    };
-                    var dataAdapter = new $.jqx.dataAdapter(source);
-                    // Create a jqxComboBox
-                    $("#LineCombobox").jqxComboBox({
-                        selectedIndex: 0, source: dataAdapter,
-                        displayMember: "Name", valueMember: "LineId", width: 200, height: 25
-                    });
-                }
-            });
+                    ],
+                    id: 'LineId'
 
 
+                };
+                var dataAdapter = new $.jqx.dataAdapter(source);
+                // Create a jqxComboBox
+                $("#LineCombobox").jqxComboBox({
+                    selectedIndex: 0, source: dataAdapter,
+                    displayMember: "Name", valueMember: "LineId", width: 200, height: 25
+                });
+
+                
+                $('#detailBtn').click(function () {
+                    var item = $("#LineCombobox").jqxComboBox('getSelectedItem');
+                    document.location='@Url.Action("Details", "Lines")';
+                    //var id = $("LineCombobox").val();
+                    //window.location.href = "/Home/EditBodyStyle/?id=" + id;
+                });
+                  
+              
+            }
+            
         });
+
+
+    });
 
     </script>
 
@@ -89,13 +104,13 @@
                     <a href="@Url.Action("Delete","Lines")" id="deleteBtn" class="btn btn-info btn-lg">
                         <span class="glyphicon glyphicon-minus"></span> Delete
                     </a>
-                    <a href="@Url.Action("Edit", "Lines")" id="editBtn" class="btn btn-info btn-lg">
+                    <a href="@Url.Action("Index", "Lines")" id="editBtn" class="btn btn-info btn-lg">
                         <span class="glyphicon glyphicon-pencil"></span> Edit
                     </a>
 
-                    <a href="@Url.Action("Details","Lines")" id=" detailbtn" class="btn btn-info btn-lg">
+                    <button  id="detailbtn" class="btn btn-info btn-lg">
                         <span class="glyphicon glyphicon-th-list"></span> Details
-                    </a>
+                    </Button>
 
 
                 </div>
