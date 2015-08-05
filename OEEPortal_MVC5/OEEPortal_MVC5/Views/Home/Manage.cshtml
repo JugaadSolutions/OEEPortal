@@ -21,16 +21,13 @@
 
 
 @section scripts {
-    <script type="text/javascript">
-             
-             
-    </script>
+    
 
 
     <script type="text/javascript">
     var LinesList;
     $(function () {
-        //debugger;
+        debugger;
         $('#tabs').tabs();
 
 
@@ -66,9 +63,10 @@
                 });
 
                 
-                $('#detailBtn').click(function () {
+                $('#detailbtn').click(function () {
+                    debugger;
                     var item = $("#LineCombobox").jqxComboBox('getSelectedItem');
-                    document.location='@Url.Action("Details", "Lines")';
+                    document.location = '/Lines/Details/' + item.value;
                     //var id = $("LineCombobox").val();
                     //window.location.href = "/Home/EditBodyStyle/?id=" + id;
                 });
