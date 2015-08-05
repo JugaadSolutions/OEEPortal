@@ -5,13 +5,13 @@
 
 <h2>Manage</h2>
 @section menu {
-  
+
     @Html.Partial("Menu");
 
 }
 @section styles{
     <link href="~/Content/bootstrap.min.css" type="text/css" rel="stylesheet" />
-   
+
 
     <link href="~/Content/smoothness/jquery-ui.css" type="text/css" rel="stylesheet" />
 
@@ -22,36 +22,53 @@
 
 @section scripts {
 
-     
+
     <script type="text/javascript">
+        var LinesList;
         $(function () {
+           // debugger;
             $('#tabs').tabs();
-        });
-    </script>
-  <script type="text/javascript">
-            $(document).ready(function () {               
-               
-                var source =
-                {
-                    
-                    datatype: "json",
-                    datafields: [
-                        { name: 'Name' }
-                       
-                    ],
-                    id: 'LineId',
-                    url: '/Home/GetData',
-                    async: false
-                };
-                var dataAdapter = new $.jqx.dataAdapter(source);
-                // Create a jqxComboBox
-                $("#jqxWidget").jqxComboBox({ selectedIndex: 0, source: dataAdapter, displayMember: "LineId", valueMember: "Name", width: 200, height: 25});
-               
+
+
+
+            $.ajax({
+
+                url: '/Home/GetLines',
+
+                data: { format: JSON },
+                async: true,
+                error: function () { alert('GetLines Failure'); },
+                success: function (lines) {
+
+                    LinesList = lines;
+                    var source = {
+
+                        localdata: LinesList,
+                        datatype: "json",
+                        datafields: [
+                            { name: "LineId" },
+                            { name: "Name" }
+
+                        ],
+                        id: 'LineId'
+
+
+                    };
+                    var dataAdapter = new $.jqx.dataAdapter(source);
+                    // Create a jqxComboBox
+                    $("#LineCombobox").jqxComboBox({
+                        selectedIndex: 0, source: dataAdapter,
+                        displayMember: "Name", valueMember: "LineId", width: 200, height: 25
+                    });
+                }
             });
-     
+
+
+        });
+
     </script>
 
-    }
+}
 <div class="responsive-container" id="SummaryPanel"></div>
 <div id="ContentDiv" class="roundedDiv text-center" style="border:green medium solid;border-width:2px;margin:20px -10px 300px 0px; padding:5px 2px 5px 2px">
 
@@ -64,7 +81,7 @@
         <div id="tabs-1">
             <div class="container">
                 <div class="innerwrap" style="margin-right:1%;padding:2% 1% 2% 1%;margin-left:-15%;">
-                    <div id='jqxWidget' style="margin:2% 10% 1% 10%">
+                    <div id='LineCombobox' style="margin:2% 10% 1% 10%">
                     </div>
                     <a href="@Url.Action("Create","Lines")" id="creatBtn" class="btn btn-info btn-lg">
                         <span class="glyphicon glyphicon-plus"></span> Add
@@ -75,11 +92,11 @@
                     <a href="@Url.Action("Edit", "Lines")" id="editBtn" class="btn btn-info btn-lg">
                         <span class="glyphicon glyphicon-pencil"></span> Edit
                     </a>
-                  
+
                     <a href="@Url.Action("Details","Lines")" id=" detailbtn" class="btn btn-info btn-lg">
                         <span class="glyphicon glyphicon-th-list"></span> Details
                     </a>
-                     
+
 
                 </div>
 

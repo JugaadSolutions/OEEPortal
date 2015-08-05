@@ -9,7 +9,7 @@ namespace OEEPortal.Controllers
 {
     public class HomeController : Controller
     {
-        OEEPortalContext db = new OEEPortalContext();
+        
         public ActionResult Index()
         {
             ViewBag.Message = "Home";
@@ -38,20 +38,30 @@ namespace OEEPortal.Controllers
 
         public ActionResult Manage()
         {
-
-            return View(db.Lines.ToList());
+            using (OEEPortalContext db = new OEEPortalContext())
+            {
+                return View(db.Lines.ToList());
+            }
         }
 
-        public JsonResult GetData()
+        public JsonResult GetLines()
         {
-            var dbResult = db.Lines.ToList();
-            var lines = (from Lines in dbResult
-                         select new
-                         {
-                             Lines.LineId,
-                             Lines.Name
-                         });
-            return Json(lines, JsonRequestBehavior.AllowGet);
+            using (OEEPortalContext db = new OEEPortalContext())
+            {
+                var Lines = db.Lines.ToArray();
+
+                Line[] LinesList = new Line[Lines.Length];
+
+                int i = 0;
+                foreach( Line l in Lines)
+                {
+                    LinesList[i++] = new Line { LineId = l.LineId, Name = l.Name };
+                }
+                
+                return  Json(LinesList, JsonRequestBehavior.AllowGet);
+
+                
+            }
         }
        
     }
