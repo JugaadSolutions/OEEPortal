@@ -84,7 +84,7 @@ namespace OEEPortal_MVC5.Controllers
             {
                 db.Entry(line).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Manage","Home");
             }
             return View(line);
         }
@@ -113,7 +113,7 @@ namespace OEEPortal_MVC5.Controllers
             Line line = db.Lines.Find(id);
             db.Lines.Remove(line);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Manage","Home");
         }
 
         protected override void Dispose(bool disposing)

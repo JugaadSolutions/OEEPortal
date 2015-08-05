@@ -27,7 +27,7 @@
     <script type="text/javascript">
     var LinesList;
     $(function () {
-        debugger;
+       // debugger;
         $('#tabs').tabs();
 
 
@@ -62,16 +62,34 @@
                     displayMember: "Name", valueMember: "LineId", width: 200, height: 25
                 });
 
+                $('#createbtn').click(function () {
+                    // debugger;
+                   // var item = $("#LineCombobox").jqxComboBox('getSelectedItem');
+                    document.location = '/Lines/Create/';
+
+                });
                 
                 $('#detailbtn').click(function () {
-                    debugger;
+                   // debugger;
                     var item = $("#LineCombobox").jqxComboBox('getSelectedItem');
                     document.location = '/Lines/Details/' + item.value;
                     //var id = $("LineCombobox").val();
                     //window.location.href = "/Home/EditBodyStyle/?id=" + id;
                 });
                   
-              
+                $('#editbtn').click(function () {
+                    // debugger;
+                    var item = $("#LineCombobox").jqxComboBox('getSelectedItem');
+                    document.location = '/Lines/Edit/' + item.value;
+                   
+                });
+                $('#deletebtn').click(function () {
+                    // debugger;
+                    var item = $("#LineCombobox").jqxComboBox('getSelectedItem');
+                    document.location = '/Lines/Delete/' + item.value;
+                   
+                });
+
             }
             
         });
@@ -96,19 +114,19 @@
                 <div class="innerwrap" style="margin-right:1%;padding:2% 1% 2% 1%;margin-left:-15%;">
                     <div id='LineCombobox' style="margin:2% 10% 1% 10%">
                     </div>
-                    <a href="@Url.Action("Create","Lines")" id="creatBtn" class="btn btn-info btn-lg">
+                    <button id="createbtn" class="btn btn-info btn-lg">
                         <span class="glyphicon glyphicon-plus"></span> Add
-                    </a>
-                    <a href="@Url.Action("Delete","Lines")" id="deleteBtn" class="btn btn-info btn-lg">
+                    </button>
+                    <button id="deletebtn" class="btn btn-info btn-lg">
                         <span class="glyphicon glyphicon-minus"></span> Delete
-                    </a>
-                    <a href="@Url.Action("Index", "Lines")" id="editBtn" class="btn btn-info btn-lg">
+                    </button>
+                    <button id="editbtn" class="btn btn-info btn-lg">
                         <span class="glyphicon glyphicon-pencil"></span> Edit
-                    </a>
+                    </button>
 
                     <button  id="detailbtn" class="btn btn-info btn-lg">
                         <span class="glyphicon glyphicon-th-list"></span> Details
-                    </Button>
+                    </button>
 
 
                 </div>
