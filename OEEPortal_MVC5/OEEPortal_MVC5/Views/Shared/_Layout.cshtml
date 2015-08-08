@@ -36,8 +36,9 @@
             </div>
             <div class="col-md-10 text-center" style="display:inline;">
                 <p class="roundedDiv"
-                   style="margin-right:5px;margin-left:-10px;color:white;font-family:'Arial Rounded MT';font-size:xx-large;background-color:green;border:green medium solid">
-                    OEEPortal
+                   style="margin-right:5px;margin-left:-10px;color:white;font-family:'Arial Rounded MT';
+                        font-size:xx-large;background-color:green;border:green medium solid">
+                    SEPFC - OEEPortal
                     <a href='@Url.Action("Index", "Home")' style="float:right;">
                         <img src="~/Images/green-home-icon.png" style="width:50px;height:40px;padding:1px 9px 3px 1px" />
                     </a> 
@@ -97,7 +98,7 @@ else
 
                     $('.roundedDiv').corner('keep 10px');
                     $('#inputbtn').click(function () {
-                        document.location = '@Url.Action("Create","Input")';
+                        document.location = '@Url.Action("Index","Lines")';
                     })
                     $('#reprtbtn').click(function () {
                         document.location = '@Url.Action("Report","Home")';

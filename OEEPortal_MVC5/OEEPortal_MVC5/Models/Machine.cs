@@ -13,7 +13,7 @@ namespace OEEPortal_MVC5.Models
         }
         public int MachineId { get; set; }
         public string Name { get; set; }
-
+        public string Icon { get; set; }
         public int LineId { get; set; }
         public virtual Line Line { get; set; }
         public virtual ICollection<ReferenceMachine> ReferenceMachines { get; set; }

@@ -1,53 +1,41 @@
-﻿@model IEnumerable<OEEPortal_MVC5.Models.Line>
-
-
-@section menu{
+﻿@section menu{
     @Html.Partial("Menu")
 }
-
-@section Scripts{
-    <script type="text/javascript">
-
-        
-        
-    </script>
-
-}
-
 
 <div id="ContentDiv" class="roundedDiv text-center"
      style="border:green medium solid;border-width:2px;margin:20px -10px 300px 0px; padding:5px 2px 5px 2px;min-height:400px;">
 
     <div class="container-fluid" id="BaseContainerDiv">
-        <div class="row" id="LineRow1">
-            <div class="col-md-3" id="LineDiv1">
-                <button class="btn btn-info btn-lg btn-block" onclick="location.href='@Url.Action("Index","Machines")'" id="Winding">
-                    Winding
+        <div class="row">
+            <div class="col-md-3" id="Line1Div">
+                <button class="btn btn-info btn-lg btn-block" style="background-image:url('../../Images/Machines/Metar M1.jpg');
+                        background-repeat:no-repeat;min-height:60px;text-align:right;" onclick="location.href='@Url.Action("Index","MachineOutputRecords")'">
+                    Metar M1 
                 </button>
             </div>
 
-            <div class="col-md-3" id="LineDiv2">
+            @*<div class="col-md-3" id="Line2Div">
                 <button id="createbtn" class="btn btn-info btn-lg btn-block">
                     Spray
                 </button>
             </div>
 
-            <div class="col-md-3" id="LineDiv3">
+            <div class="col-md-3" id="Line3Div">
                 <button id="createbtn" class="btn btn-info btn-lg btn-block">
                     VHT
                 </button>
             </div>
 
-            <div class="col-md-3" id="LineDiv4">
+            <div class="col-md-3" id="Line4Div">
                 <button id="createbtn" class="btn btn-info btn-lg btn-block">
                     Support Assembly
                 </button>
-            </div>
+            </div>*@
 
 
         </div>
 
-        <div class="row" style="padding-top:5px">
+        @*<div class="row" style="padding-top:5px">
             <div class="col-md-3" id="Line5Div">
                 <button id="createbtn" class="btn btn-info btn-lg btn-block">
                     Micafil
@@ -96,7 +84,7 @@
 
             </div>
 
-        </div>
+        </div>*@
 
 
     </div>

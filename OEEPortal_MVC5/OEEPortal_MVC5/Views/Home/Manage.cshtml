@@ -25,74 +25,84 @@
 
 
     <script type="text/javascript">
+
+
+        $body = $("body");
+
+        $(document).on({
+            ajaxStart: function () { $body.addClass("loading"); },
+            ajaxStop: function () { $body.removeClass("loading"); }
+        });
+
+    
     var LinesList;
     $(function () {
        // debugger;
         $('#tabs').tabs();
 
+        //$.ajax({
+
+        //    url: '/Home/GetLines',
+
+        //    data: { format: JSON },
+        //    async: true,
+        //    error: function () { alert('GetLines Failure'); },
+        //    success: function (lines) {
+
+        //        LinesList = lines;
+        //       // debugger;
+        //        var totalLines = lines.length;
+        //        var source = {
+
+        //            localdata: LinesList,
+        //            datatype: "json",
+        //            datafields: [
+        //                { name: "LineId" },
+        //                { name: "Name" }
+
+        //            ],
+        //            id: 'LineId'
 
 
-        $.ajax({
+        //        };
+        //        var dataAdapter = new $.jqx.dataAdapter(source);
+        //        // bind to LineCombobox
+        //        $("#LineCombobox").jqxComboBox({
+        //            selectedIndex: 0, source: dataAdapter,
+        //            displayMember: "Name", valueMember: "LineId", width: 200, height: 25
+        //        });
 
-            url: '/Home/GetLines',
+        //        $('#createbtn').click(function () {
+        //            // debugger;
+        //           // var item = $("#LineCombobox").jqxComboBox('getSelectedItem');
+        //            document.location = '/Lines/Create/';
 
-            data: { format: JSON },
-            async: true,
-            error: function () { alert('GetLines Failure'); },
-            success: function (lines) {
-
-                LinesList = lines;
-                var source = {
-
-                    localdata: LinesList,
-                    datatype: "json",
-                    datafields: [
-                        { name: "LineId" },
-                        { name: "Name" }
-
-                    ],
-                    id: 'LineId'
-
-
-                };
-                var dataAdapter = new $.jqx.dataAdapter(source);
-                // Create a jqxComboBox
-                $("#LineCombobox").jqxComboBox({
-                    selectedIndex: 0, source: dataAdapter,
-                    displayMember: "Name", valueMember: "LineId", width: 200, height: 25
-                });
-
-                $('#createbtn').click(function () {
-                    // debugger;
-                   // var item = $("#LineCombobox").jqxComboBox('getSelectedItem');
-                    document.location = '/Lines/Create/';
-
-                });
+        //        });
                 
-                $('#detailbtn').click(function () {
-                   // debugger;
-                    var item = $("#LineCombobox").jqxComboBox('getSelectedItem');
-                    document.location = '/Lines/Details/' + item.value;
-                    //var id = $("LineCombobox").val();
-                    //window.location.href = "/Home/EditBodyStyle/?id=" + id;
-                });
+        //        $('#detailbtn').click(function () {
+        //           // debugger;
+        //            var item = $("#LineCombobox").jqxComboBox('getSelectedItem');
+        //            document.location = '/Lines/Details/' + item.value;
+        //            //var id = $("LineCombobox").val();
+        //            //window.location.href = "/Home/EditBodyStyle/?id=" + id;
+        //        });
                   
-                $('#editbtn').click(function () {
-                    // debugger;
-                    var item = $("#LineCombobox").jqxComboBox('getSelectedItem');
-                    document.location = '/Lines/Edit/' + item.value;
+        //        $('#editbtn').click(function () {
+        //            // debugger;
+        //            var item = $("#LineCombobox").jqxComboBox('getSelectedItem');
+        //            document.location = '/Lines/Edit/' + item.value;
                    
-                });
-                $('#deletebtn').click(function () {
-                    // debugger;
-                    var item = $("#LineCombobox").jqxComboBox('getSelectedItem');
-                    document.location = '/Lines/Delete/' + item.value;
+        //        });
+        //        $('#deletebtn').click(function () {
+        //            // debugger;
+        //            var item = $("#LineCombobox").jqxComboBox('getSelectedItem');
+        //            document.location = '/Lines/Delete/' + item.value;
                    
-                });
+        //        });
 
-            }
+        //    }
             
-        });
+        //});
 
 
     });
@@ -100,10 +110,112 @@
     </script>
 
 }
-<div class="responsive-container" id="SummaryPanel"></div>
+
 <div id="ContentDiv" class="roundedDiv text-center" style="border:green medium solid;border-width:2px;margin:20px -10px 300px 0px; padding:5px 2px 5px 2px">
 
-    <div id="tabs" class="tabs-min">
+
+    <div class="container-fluid" id="BaseContainerDiv">
+        <div class="row">
+            <div class="col-md-3" id="Line1Div">
+                <button class="btn btn-info btn-lg btn-block">
+                    Winding
+                </button>
+            </div>
+
+            <div class="col-md-3" id="Line2Div">
+                <button id="createbtn" class="btn btn-info btn-lg btn-block">
+                    Spray
+                </button>
+            </div>
+
+            <div class="col-md-3" id="Line3Div">
+                <button id="createbtn" class="btn btn-info btn-lg btn-block">
+                    VHT
+                </button>
+            </div>
+
+            <div class="col-md-3" id="Line4Div">
+                <button id="createbtn" class="btn btn-info btn-lg btn-block">
+                    Support Assembly
+                </button>
+            </div>
+          
+
+        </div>
+
+        <div class="row" style="padding-top:5px">
+            <div class="col-md-3" id="Line5Div">
+                <button id="createbtn" class="btn btn-info btn-lg btn-block">
+                    Micafil
+                </button>
+            </div>
+            <div class="col-md-3" id="Line6Div">
+                <button id="createbtn" class="btn btn-info btn-lg btn-block">
+                    Schugenpflug
+                </button>
+            </div>
+
+            <div class="col-md-3" id="Line7Div">
+                <button id="createbtn" class="btn btn-info btn-lg btn-block">
+                    Soft Resin
+                </button>
+            </div>
+
+            <div class="col-md-3" id="Line8Div">
+                <button id="createbtn" class="btn btn-info btn-lg btn-block">
+                    Box Assembly
+                </button>
+
+            </div>
+        </div>
+
+        <div class="row" style="padding-top:5px;">
+          
+
+            <div class="col-md-3" id="Line9Div">
+                <button id="createbtn" class="btn btn-info btn-lg btn-block">
+                    Final Assembly(Infinity)
+                </button>
+            </div>
+
+            <div class="col-md-3" id="Line10Div">
+                <button id="createbtn" class="btn btn-info btn-lg btn-block">
+                    Final Assembly(Koti)
+                </button>
+            </div>
+            <div class="col-md-3" id="Line11Div">
+                <button id="createbtn" class="btn btn-info btn-lg btn-block">
+                    MV Line
+                </button>
+            </div>
+            <div class="col-md-3" id="Line12Div">
+                
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="innerwrap" style="margin-right:1%;padding:2% 1% 2% 1%;margin-left:-15%;">
+               
+                <button id="createbtn" class="btn btn-info btn-lg">
+                    <span class="glyphicon glyphicon-plus"></span> Add
+                </button>
+                <button id="deletebtn" class="btn btn-info btn-lg">
+                    <span class="glyphicon glyphicon-minus"></span> Delete
+                </button>
+                <button id="editbtn" class="btn btn-info btn-lg">
+                    <span class="glyphicon glyphicon-pencil"></span> Edit
+                </button>
+
+                <button id="detailbtn" class="btn btn-info btn-lg">
+                    <span class="glyphicon glyphicon-th-list"></span> Details
+                </button>
+
+
+            </div>
+        </div>
+    </div>
+    @*<div id="tabs" class="tabs-min">
         <ul>
             <li><a href="#tabs-1">Line</a></li>
 
@@ -111,25 +223,7 @@
 
         <div id="tabs-1">
             <div class="container">
-                <div class="innerwrap" style="margin-right:1%;padding:2% 1% 2% 1%;margin-left:-15%;">
-                    <div id='LineCombobox' style="margin:2% 10% 1% 10%">
-                    </div>
-                    <button id="createbtn" class="btn btn-info btn-lg">
-                        <span class="glyphicon glyphicon-plus"></span> Add
-                    </button>
-                    <button id="deletebtn" class="btn btn-info btn-lg">
-                        <span class="glyphicon glyphicon-minus"></span> Delete
-                    </button>
-                    <button id="editbtn" class="btn btn-info btn-lg">
-                        <span class="glyphicon glyphicon-pencil"></span> Edit
-                    </button>
-
-                    <button  id="detailbtn" class="btn btn-info btn-lg">
-                        <span class="glyphicon glyphicon-th-list"></span> Details
-                    </button>
-
-
-                </div>
+               
 
 
 
@@ -142,7 +236,9 @@
 
 
 
-    </div>
+    </div>*@
 
 
 </div>
+
+<div class="modal"></div>

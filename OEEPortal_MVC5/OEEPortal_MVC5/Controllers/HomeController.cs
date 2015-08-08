@@ -9,9 +9,10 @@ namespace OEEPortal.Controllers
 {
     public class HomeController : Controller
     {
-        
+
         public ActionResult Index()
         {
+            
             ViewBag.Message = "Home";
 
             return View();
@@ -23,7 +24,7 @@ namespace OEEPortal.Controllers
                 var lines = db.Lines.ToList();
             }
             ViewBag.Message = "Input";
-                return View();
+            return View();
         }
         public ActionResult Report()
         {
@@ -33,7 +34,7 @@ namespace OEEPortal.Controllers
         public ActionResult Graphs()
         {
             ViewBag.Tittle = "Graphs";
-                return View();
+            return View();
         }
 
         public ActionResult Manage()
@@ -51,18 +52,18 @@ namespace OEEPortal.Controllers
                 var Lines = db.Lines.ToArray();
 
                 Line[] LinesList = new Line[Lines.Length];
-                
-                int i = 0; 
-                foreach( Line l in Lines)
+
+                int i = 0;
+                foreach (Line l in Lines)
                 {
                     LinesList[i++] = new Line { LineId = l.LineId, Name = l.Name };
                 }
-                
-                return  Json(LinesList, JsonRequestBehavior.AllowGet);
 
-                
+                return Json(LinesList, JsonRequestBehavior.AllowGet);
+
+
             }
         }
-       
+
     }
 }

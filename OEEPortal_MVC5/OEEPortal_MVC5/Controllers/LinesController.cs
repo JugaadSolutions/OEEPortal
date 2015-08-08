@@ -12,12 +12,17 @@ namespace OEEPortal_MVC5.Controllers
 {
     public class LinesController : Controller
     {
-        private OEEPortalContext db = new OEEPortalContext();
+        //private 
 
         // GET: Lines
         public ActionResult Index()
         {
-            return View(db.Lines.ToList());
+            using (OEEPortalContext db = new OEEPortalContext())
+            {
+                var lines = db.Lines.Include("Machines").ToList();
+                return View(lines);
+            }
+
         }
 
         // GET: Lines/Details/5
@@ -27,12 +32,16 @@ namespace OEEPortal_MVC5.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Line line = db.Lines.Find(id);
-            if (line == null)
+
+            using (OEEPortalContext db = new OEEPortalContext())
             {
-                return HttpNotFound();
+                Line line = db.Lines.Find(id);
+                if (line == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(line);
             }
-            return View(line);
         }
 
         // GET: Lines/Create
@@ -50,11 +59,13 @@ namespace OEEPortal_MVC5.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Lines.Add(line);
-                db.SaveChanges();
-                return RedirectToAction("Manage","Home");
+                using (OEEPortalContext db = new OEEPortalContext())
+                {
+                    db.Lines.Add(line);
+                    db.SaveChanges();
+                    return RedirectToAction("Manage", "Home");
+                }
             }
-
             return View(line);
         }
 
@@ -65,12 +76,15 @@ namespace OEEPortal_MVC5.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Line line = db.Lines.Find(id);
-            if (line == null)
+            using (OEEPortalContext db = new OEEPortalContext())
             {
-                return HttpNotFound();
+                Line line = db.Lines.Find(id);
+                if (line == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(line);
             }
-            return View(line);
         }
 
         // POST: Lines/Edit/5
@@ -82,9 +96,12 @@ namespace OEEPortal_MVC5.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(line).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Manage","Home");
+                using (OEEPortalContext db = new OEEPortalContext())
+                {
+                    db.Entry(line).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Manage", "Home");
+                }
             }
             return View(line);
         }
@@ -96,13 +113,16 @@ namespace OEEPortal_MVC5.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Line line = db.Lines.Find(id);
-            if (line == null)
+            using (OEEPortalContext db = new OEEPortalContext())
             {
-                return HttpNotFound();
+                Line line = db.Lines.Find(id);
+                if (line == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(line);
             }
-            return View(line);
-           
+
         }
 
         // POST: Lines/Delete/5
@@ -110,17 +130,23 @@ namespace OEEPortal_MVC5.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Line line = db.Lines.Find(id);
-            db.Lines.Remove(line);
-            db.SaveChanges();
-            return RedirectToAction("Manage","Home");
+            using (OEEPortalContext db = new OEEPortalContext())
+            {
+                Line line = db.Lines.Find(id);
+                db.Lines.Remove(line);
+                db.SaveChanges();
+                return RedirectToAction("Manage", "Home");
+            }
         }
 
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                db.Dispose();
+                using (OEEPortalContext db = new OEEPortalContext())
+                {
+                    db.Dispose();
+                }
             }
             base.Dispose(disposing);
         }

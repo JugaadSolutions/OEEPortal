@@ -13,22 +13,22 @@ namespace OEEPortal_MVC5.Models
         }
         public int MachineOutputRecordId { get; set; }
         public string OperatorId { get; set; }
-        public DateTime StartTime { get; set; }
-        public DateTime EndTime { get; set; }
-        public double EquipmentBreakDown { get; set; }
-        public double ChangeOver { get; set; }
-        public double MaterialDownTime { get; set; }
-        public double QuantityDownTime { get; set; }
-        public double OtherNonProduct { get; set; }
-        public double PreventiveMaintenance { get; set; }
-        public double ManagementMeeting { get; set; }
-        public double RegulatoryBreaks { get; set; }
-        public double PilotRun { get; set; }
+        public Nullable<DateTime> StartTime { get; set; }
+        public Nullable<DateTime> EndTime { get; set; }
+        public int OutputQuantity { get; set; }
+        public int DefectQuantity { get; set; }
+        public Nullable<TimeSpan> EquipmentBreakDownTime { get; set; }
+        public Nullable<TimeSpan> ChangeOverTime { get; set; }
+        public Nullable<TimeSpan> MaterialDownTime { get; set; }
+        public Nullable<TimeSpan> QuantityDownTime { get; set; }
+        public Nullable<TimeSpan> OtherNonProductTime { get; set; }
+        public Nullable<TimeSpan> PreventiveMaintenanceTime { get; set; }
+        public Nullable<TimeSpan> ManagementMeetingTime { get; set; }
+        public Nullable<TimeSpan> RegulatoryBreaksTime { get; set; }
+        public Nullable<TimeSpan> PilotRunTime { get; set; }
         public int MachineId { get; set; }
         public virtual Machine Machine { get; set; }
         public int ReferenceId { get; set; }
         public virtual Reference Reference { get; set; }
-        public int ShiftId { get; set; }
-        public virtual Shift Shift { get; set; }
     }
 }

@@ -10,19 +10,18 @@ using OEEPortal_MVC5.Models;
 
 namespace OEEPortal_MVC5.Controllers
 {
-    public class InputController : Controller
+    public class MachineOutputRecordsController : Controller
     {
         private OEEPortalContext db = new OEEPortalContext();
 
-        // GET: Input
+        // GET: MachineOutputRecords
         public ActionResult Index()
         {
-            var machineOutputRecords = 
-                db.MachineOutputRecords.Include(m => m.Machine).Include(m => m.Reference);
+            var machineOutputRecords = db.MachineOutputRecords.Include(m => m.Machine).Include(m => m.Reference);
             return View(machineOutputRecords.ToList());
         }
 
-        // GET: Input/Details/5
+        // GET: MachineOutputRecords/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -37,7 +36,7 @@ namespace OEEPortal_MVC5.Controllers
             return View(machineOutputRecord);
         }
 
-        // GET: Input/Create
+        // GET: MachineOutputRecords/Create
         public ActionResult Create()
         {
             ViewBag.MachineId = new SelectList(db.Machines, "MachineId", "Name");
@@ -46,12 +45,12 @@ namespace OEEPortal_MVC5.Controllers
             return View();
         }
 
-        // POST: Input/Create
+        // POST: MachineOutputRecords/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "MachineOutputRecordId,EquipmentBreakDown,ChangeOver,MaterialDownTime,QuantityDownTime,OtherNonProduct,PreventiveMaintenance,ManagementMeeting,RegulatoryBreaks,PilotRun,MachineId,ReferenceId,ShiftId")] MachineOutputRecord machineOutputRecord)
+        public ActionResult Create([Bind(Include = "MachineOutputRecordId,OperatorId,StartTime,EndTime,EquipmentBreakDown,ChangeOver,MaterialDownTime,QuantityDownTime,OtherNonProduct,PreventiveMaintenance,ManagementMeeting,RegulatoryBreaks,PilotRun,MachineId,ReferenceId,ShiftId")] MachineOutputRecord machineOutputRecord)
         {
             if (ModelState.IsValid)
             {
@@ -66,7 +65,7 @@ namespace OEEPortal_MVC5.Controllers
             return View(machineOutputRecord);
         }
 
-        // GET: Input/Edit/5
+        // GET: MachineOutputRecords/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -84,12 +83,12 @@ namespace OEEPortal_MVC5.Controllers
             return View(machineOutputRecord);
         }
 
-        // POST: Input/Edit/5
+        // POST: MachineOutputRecords/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "MachineOutputRecordId,EquipmentBreakDown,ChangeOver,MaterialDownTime,QuantityDownTime,OtherNonProduct,PreventiveMaintenance,ManagementMeeting,RegulatoryBreaks,PilotRun,MachineId,ReferenceId,ShiftId")] MachineOutputRecord machineOutputRecord)
+        public ActionResult Edit([Bind(Include = "MachineOutputRecordId,OperatorId,StartTime,EndTime,EquipmentBreakDown,ChangeOver,MaterialDownTime,QuantityDownTime,OtherNonProduct,PreventiveMaintenance,ManagementMeeting,RegulatoryBreaks,PilotRun,MachineId,ReferenceId,ShiftId")] MachineOutputRecord machineOutputRecord)
         {
             if (ModelState.IsValid)
             {
@@ -103,7 +102,7 @@ namespace OEEPortal_MVC5.Controllers
             return View(machineOutputRecord);
         }
 
-        // GET: Input/Delete/5
+        // GET: MachineOutputRecords/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -118,7 +117,7 @@ namespace OEEPortal_MVC5.Controllers
             return View(machineOutputRecord);
         }
 
-        // POST: Input/Delete/5
+        // POST: MachineOutputRecords/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

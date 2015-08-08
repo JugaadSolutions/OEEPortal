@@ -171,19 +171,8 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\InputController.cs" />
     <Compile Include="Controllers\LinesController.cs" />
-    <Compile Include="Migrations\201507281125297_InitialCreate.cs" />
-    <Compile Include="Migrations\201507281125297_InitialCreate.Designer.cs">
-      <DependentUpon>201507281125297_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201507281146362_ShiftStartEnd.cs" />
-    <Compile Include="Migrations\201507281146362_ShiftStartEnd.Designer.cs">
-      <DependentUpon>201507281146362_ShiftStartEnd.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201507281538597_MachineOutputRecordOperationIdStartTimeEndTime.cs" />
-    <Compile Include="Migrations\201507281538597_MachineOutputRecordOperationIdStartTimeEndTime.Designer.cs">
-      <DependentUpon>201507281538597_MachineOutputRecordOperationIdStartTimeEndTime.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Controllers\MachineOutputRecordsController.cs" />
+    <Compile Include="Controllers\MachinesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
@@ -607,7 +596,9 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\accent.png" />
+    <Content Include="Images\ajax-loader.gif" />
     <Content Include="Images\bullet.png" />
+    <Content Include="Images\capacitorimage.png" />
     <Content Include="Images\Dispatch.jpg" />
     <Content Include="Images\energyEfficiency.jpg" />
     <Content Include="Images\Finishing.jpg" />
@@ -615,7 +606,8 @@
     <Content Include="Images\green-home-icon.png" />
     <Content Include="Images\heroAccent.png" />
     <Content Include="Images\i.png" />
-    <Content Include="Images\IDF4TestLab.jpg" />
+    <Content Include="Images\Machines\Metar M1.jpg" />
+    <Content Include="Images\Machines\Metar M2.jpg" />
     <Content Include="Images\orderedList0.png" />
     <Content Include="Images\orderedList1.png" />
     <Content Include="Images\orderedList2.png" />
@@ -629,6 +621,7 @@
     <Content Include="Images\Release.jpg" />
     <Content Include="Images\schneider.png" />
     <Content Include="Images\schneider_logo.jpg" />
+    <Content Include="Images\SEPFC.jpg" />
     <Content Include="Images\uiTabsArrow.png" />
     <Content Include="Scripts\app.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
@@ -637,6 +630,7 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <None Include="Properties\PublishProfiles\OEEPortal.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\ie10-viewport-bug-workaround.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -800,6 +794,16 @@
     <Content Include="Views\Lines\Details.cshtml" />
     <Content Include="Views\Lines\Edit.cshtml" />
     <Content Include="Views\Lines\Index.cshtml" />
+    <Content Include="Views\Machines\Create.cshtml" />
+    <Content Include="Views\Machines\Delete.cshtml" />
+    <Content Include="Views\Machines\Details.cshtml" />
+    <Content Include="Views\Machines\Edit.cshtml" />
+    <Content Include="Views\Machines\Index.cshtml" />
+    <Content Include="Views\MachineOutputRecords\Create.cshtml" />
+    <Content Include="Views\MachineOutputRecords\Delete.cshtml" />
+    <Content Include="Views\MachineOutputRecords\Details.cshtml" />
+    <Content Include="Views\MachineOutputRecords\Edit.cshtml" />
+    <Content Include="Views\MachineOutputRecords\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -811,17 +815,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201507281125297_InitialCreate.resx">
-      <DependentUpon>201507281125297_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201507281146362_ShiftStartEnd.resx">
-      <DependentUpon>201507281146362_ShiftStartEnd.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201507281538597_MachineOutputRecordOperationIdStartTimeEndTime.resx">
-      <DependentUpon>201507281538597_MachineOutputRecordOperationIdStartTimeEndTime.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -837,7 +830,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>32696</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

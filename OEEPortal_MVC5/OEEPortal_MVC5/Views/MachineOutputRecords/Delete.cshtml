@@ -1,0 +1,144 @@
+﻿@model OEEPortal_MVC5.Models.MachineOutputRecord
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>MachineOutputRecord</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Machine.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Machine.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Reference.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Reference.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Shift.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Shift.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OperatorId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OperatorId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StartTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StartTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EndTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EndTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EquipmentBreakDown)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EquipmentBreakDown)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ChangeOver)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ChangeOver)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MaterialDownTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaterialDownTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QuantityDownTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QuantityDownTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OtherNonProduct)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OtherNonProduct)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PreventiveMaintenance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PreventiveMaintenance)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ManagementMeeting)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ManagementMeeting)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RegulatoryBreaks)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RegulatoryBreaks)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PilotRun)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PilotRun)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
