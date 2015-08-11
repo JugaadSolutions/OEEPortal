@@ -31,28 +31,38 @@
                     success: function (lines) {
 
                         LinesList = lines;
+
+                        var divappend = $("<div class='col-md-3'></div>");
+                        var item = lines[0].name;
+                              //.hide()
+                        var btnappend = $("<button class='btn btn-info btn-lg btn-block'></button>").html(item);
+                                
+                             // .val(lines);
+                        $("#LineRow1").append(divappend, btnappend);
+                                  
+                        
                         // debugger;
-                        var totalLines = lines.length;
-                        var source = {
+                        //var totalLines = lines.length;
+                        //var source = {
 
-                            localdata: LinesList,
-                            datatype: "json",
-                            datafields: [
-                                { name: "LineId" },
-                                { name: "Name" }
+                        //    localdata: LinesList,
+                        //    datatype: "json",
+                        //    datafields: [
+                        //        { name: "LineId" },
+                        //        { name: "Name" }
 
-                            ],
-                            id: 'LineId'
-
-                            
-                        };
+                        //    ],
+                        //    id: 'LineId'
                       
-                        function appenddiv(){
-                        var txt = document.createElement("<div id='division'/>");
-                        txt.innerHTML("<button>append</button>");
-                       // $("body").appendTo("#LineRow1");
-                        $("body").append(txt);
-                        }
+                            
+                        //};
+                      
+                        //var txt = document.createElement("<div id='division' class='btn btn-info btn-lg btn-block'/>");
+                        //    txt.innerHTML("<button>append</button>");
+                        //    // $("body").appendTo("#LineRow1");
+                        //    $("body").append(txt);
+                 
+                       
                         //$("#Linerow1").append("<div></div>").class("col-md-3");
                         //var item = name;
                         //var $newdiv1 = $("<div id='object1'/>"),
@@ -74,7 +84,7 @@
      style="border:green medium solid;border-width:2px;margin:20px -10px 300px 0px; padding:5px 2px 5px 2px;min-height:400px;">
 
     <div class="container-fluid" id="BaseContainerDiv">
-        <div class="row" id="LineRow1" onload="appenddiv()">
+        <div class="row" id="LineRow1">
             <div class="col-md-3" id="LineDiv1">
                 <button class="btn btn-info btn-lg btn-block" onclick="location.href='@Url.Action("Index","Machines")'" id="Winding">
                     Winding
