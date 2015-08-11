@@ -19,7 +19,7 @@
 
             var LinesList;
             $(function () {
-                debugger;
+              //  debugger;
 
                 $.ajax({
 
@@ -44,10 +44,24 @@
                             ],
                             id: 'LineId'
 
-
+                            
                         };
-                        $(".row").append("<div></div>").data(name)
+                      
+                        function appenddiv(){
+                        var txt = document.createElement("<div id='division'/>");
+                        txt.innerHTML("<button>append</button>");
+                       // $("body").appendTo("#LineRow1");
+                        $("body").append(txt);
                         }
+                        //$("#Linerow1").append("<div></div>").class("col-md-3");
+                        //var item = name;
+                        //var $newdiv1 = $("<div id='object1'/>"),
+                        //  //newdiv2 = document.createElement("div"),
+                        //  //existingdiv1 = document.getElementById("foo");
+                        //  newdiv2 = name;
+                        //$("body").append($newdiv1, [newdiv2]);
+                        //$("#LineDiv1").append("<button>append</button>");
+                    }
                 });
             });
 
@@ -60,7 +74,7 @@
      style="border:green medium solid;border-width:2px;margin:20px -10px 300px 0px; padding:5px 2px 5px 2px;min-height:400px;">
 
     <div class="container-fluid" id="BaseContainerDiv">
-        <div class="row" id="LineRow1">
+        <div class="row" id="LineRow1" onload="appenddiv()">
             <div class="col-md-3" id="LineDiv1">
                 <button class="btn btn-info btn-lg btn-block" onclick="location.href='@Url.Action("Index","Machines")'" id="Winding">
                     Winding
