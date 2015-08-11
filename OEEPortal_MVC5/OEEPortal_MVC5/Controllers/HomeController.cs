@@ -65,5 +65,26 @@ namespace OEEPortal.Controllers
             }
         }
 
+
+        public JsonResult GetMachines(int id)
+        {
+            using(OEEPortalContext db = new OEEPortalContext())
+            {
+                var machines = db.Machines.Where(m => m.LineId == id).ToList();
+
+                MachineVM[] machinesList = new MachineVM[machines.Count];
+
+                int i  = 0;
+                foreach(Machine m in machines)
+                {
+                    machinesList[i++] = 
+                        new MachineVM { MachineId = m.MachineId, Name = m.Name, Icon= m.Icon };
+                }
+
+                return Json(machinesList,JsonRequestBehavior.AllowGet);
+
+            }
+        }
+
     }
 }

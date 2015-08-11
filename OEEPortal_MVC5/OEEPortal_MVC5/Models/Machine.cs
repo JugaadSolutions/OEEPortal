@@ -19,4 +19,18 @@ namespace OEEPortal_MVC5.Models
         public virtual ICollection<ReferenceMachine> ReferenceMachines { get; set; }
         public virtual ICollection<MachineOutputRecord> MachineOutputRecords { get; set; }
     }
+
+
+    public class MachineVM
+    {
+        public MachineVM()
+        {
+
+        }
+        public int MachineId { get; set; }
+        public string Name { get; set; }
+        public string Icon { get; set; }
+    
+       
+    }
 }

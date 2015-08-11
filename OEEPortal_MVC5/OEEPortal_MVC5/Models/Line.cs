@@ -12,4 +12,12 @@ namespace OEEPortal_MVC5.Models
         public string Name { get; set; }
         public virtual ICollection<Machine> Machines { get; set; }
     }
+
+    public class LineVM
+    {
+
+        public int LineId { get; set; }
+        public string Name { get; set; }
+        
+    }
 }
