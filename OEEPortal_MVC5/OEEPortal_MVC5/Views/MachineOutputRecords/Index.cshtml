@@ -32,45 +32,83 @@
 
                         LinesList = lines;
 
-                        var divappend = $("<div class='col-md-3'></div>");
-                        var item = lines[0].name;
+                        var divappend = $("<div class='col-md-3' id='Linediv1'></div>");
+                        var item = lines[0]["Name"];
                               //.hide()
                         var btnappend = $("<button class='btn btn-info btn-lg btn-block'></button>").html(item);
                                 
                              // .val(lines);
-                        $("#LineRow1").append(divappend, btnappend);
-                                  
+                        $("#LineRow1").append(divappend);
+                        $("#Linediv1").append(btnappend);
+                              
+                        var divappend1 = $("<div class='col-md-3' id='Linediv2'></div>");
+                        var item = lines[1]["Name"];
+                        //.hide()
+                        var btnappend1 = $("<button class='btn btn-info btn-lg btn-block'></button>").html(item);
+
+                        // .val(lines);
+                        $("#LineRow1").append(divappend1);
+                        $("#Linediv2").append(btnappend1);
                         
-                        // debugger;
-                        //var totalLines = lines.length;
-                        //var source = {
+                        var divappend2 = $("<div class='col-md-3' id='Linediv3'></div>");
+                        var item = lines[2]["Name"];
+                        //.hide()
+                        var btnappend2 = $("<button class='btn btn-info btn-lg btn-block'></button>").html(item);
 
-                        //    localdata: LinesList,
-                        //    datatype: "json",
-                        //    datafields: [
-                        //        { name: "LineId" },
-                        //        { name: "Name" }
+                        // .val(lines);
+                        $("#LineRow1").append(divappend2);
+                        $("#Linediv3").append(btnappend2);
 
-                        //    ],
-                        //    id: 'LineId'
-                      
-                            
-                        //};
-                      
-                        //var txt = document.createElement("<div id='division' class='btn btn-info btn-lg btn-block'/>");
-                        //    txt.innerHTML("<button>append</button>");
-                        //    // $("body").appendTo("#LineRow1");
-                        //    $("body").append(txt);
-                 
-                       
-                        //$("#Linerow1").append("<div></div>").class("col-md-3");
-                        //var item = name;
-                        //var $newdiv1 = $("<div id='object1'/>"),
-                        //  //newdiv2 = document.createElement("div"),
-                        //  //existingdiv1 = document.getElementById("foo");
-                        //  newdiv2 = name;
-                        //$("body").append($newdiv1, [newdiv2]);
-                        //$("#LineDiv1").append("<button>append</button>");
+                        var divappend3 = $("<div class='col-md-3' id='Linediv4'></div>");
+                        var item = lines[3]["Name"];
+                        //.hide()
+                        var btnappend3 = $("<button class='btn btn-info btn-lg btn-block'></button>").html(item);
+
+                        // .val(lines);
+                        $("#LineRow1").append(divappend3);
+                        $("#Linediv4").append(btnappend3);
+
+                        var div1appendrow2 = $("<div class='col-md-3' id='Line1div'></div>");
+                        var item = lines[4]["Name"];
+                        var btn1appendrow2 = $("<button class='btn btn-info btn-lg btn-block'></button>").html(item);
+                        $("#LineRow2").append(div1appendrow2);
+                        $("#Line1div").append(btn1appendrow2);
+
+                        var div2appendrow2 = $("<div class='col-md-3' id='Line2div'></div>");
+                        var item = lines[5]["Name"];
+                        var btn2appendrow2 = $("<button class='btn btn-info btn-lg btn-block'></button>").html(item);
+                        $("#LineRow2").append(div2appendrow2);
+                        $("#Line2div").append(btn2appendrow2);
+
+                        var div3appendrow2 = $("<div class='col-md-3' id='Line3div'></div>");
+                        var item = lines[6]["Name"];
+                        var btn3appendrow2 = $("<button class='btn btn-info btn-lg btn-block'></button>").html(item);
+                        $("#LineRow2").append(div3appendrow2);
+                        $("#Line3div").append(btn3appendrow2);
+
+                        var div4appendrow2 = $("<div class='col-md-3' id='Line4div'></div>");
+                        var item = lines[7]["Name"];
+                        var btn4appendrow2 = $("<button class='btn btn-info btn-lg btn-block'></button>").html(item);
+                        $("#LineRow2").append(div4appendrow2);
+                        $("#Line4div").append(btn4appendrow2);
+
+                        var div5appendrow3 = $("<div class='col-md-3' id='Line5div'></div>");
+                        var item = lines[8]["Name"];
+                        var btn5appendrow3 = $("<button class='btn btn-info btn-lg btn-block'></button>").html(item);
+                        $("#LineRow3").append(div5appendrow3);
+                        $("#Line5div").append(btn5appendrow3);
+
+                        var div6appendrow3 = $("<div class='col-md-3' id='Line6div'></div>");
+                        var item = lines[9]["Name"];
+                        var btn6appendrow3 = $("<button class='btn btn-info btn-lg btn-block'></button>").html(item);
+                        $("#LineRow3").append(div6appendrow3);
+                        $("#Line6div").append(btn6appendrow3);
+
+                        var div7appendrow3 = $("<div class='col-md-3' id='Line7div'></div>");
+                        var item = lines[10]["Name"];
+                        var btn7appendrow3 = $("<button class='btn btn-info btn-lg btn-block'></button>").html(item);
+                        $("#LineRow3").append(div7appendrow3);
+                        $("#Line7div").append(btn7appendrow3);
                     }
                 });
             });
@@ -85,13 +123,13 @@
 
     <div class="container-fluid" id="BaseContainerDiv">
         <div class="row" id="LineRow1">
-            <div class="col-md-3" id="LineDiv1">
+            @*<div class="col-md-3" id="LineDiv1">
                 <button class="btn btn-info btn-lg btn-block" onclick="location.href='@Url.Action("Index","Machines")'" id="Winding">
                     Winding
                 </button>
-            </div>
+            </div>*@
 
-            <div class="col-md-3" id="LineDiv2">
+            @*<div class="col-md-3" id="LineDiv2">
                 <button id="createbtn" class="btn btn-info btn-lg btn-block">
                     Spray
                 </button>
@@ -107,13 +145,13 @@
                 <button id="createbtn" class="btn btn-info btn-lg btn-block">
                     Support Assembly
                 </button>
-            </div>
+            </div>*@
 
 
         </div>
 
-        <div class="row" style="padding-top:5px">
-            <div class="col-md-3" id="Line5Div">
+        <div class="row" style="padding-top:5px" id="LineRow2">
+            @*<div class="col-md-3" id="Line5Div">
                 <button id="createbtn" class="btn btn-info btn-lg btn-block">
                     Micafil
                 </button>
@@ -135,13 +173,13 @@
                     Box Assembly
                 </button>
 
-            </div>
+            </div>*@
         </div>
 
-        <div class="row" style="padding-top:5px;">
+        <div class="row" style="padding-top:5px;" id="LineRow3">
 
 
-            <div class="col-md-3" id="Line9Div">
+            @*<div class="col-md-3" id="Line9Div">
                 <button id="createbtn" class="btn btn-info btn-lg btn-block">
                     Final Assembly(Infinity)
                 </button>
@@ -156,10 +194,10 @@
                 <button id="createbtn" class="btn btn-info btn-lg btn-block">
                     MV Line
                 </button>
-            </div>
-            <div class="col-md-3" id="Line12Div">
+            </div>*@
+            @*<div class="col-md-3" id="Line12Div">
 
-            </div>
+            </div>*@
 
         </div>
 
