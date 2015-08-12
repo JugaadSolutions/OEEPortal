@@ -4,3 +4,85 @@
 @section menu{
     @Html.Partial("Menu")
 }
+
+@section scripts{
+    <script type="text/javascript">
+        function addLines(lines) {
+            var noOfLines = lines.length;
+
+            for (var i = 0; i < noOfLines; i++) {
+
+                var rowId = "LineRow" + parseInt(i / 4).toString();
+                var divId = "LineDiv" + (i).toString();
+
+                var Id = lines[i]["LineId"];
+                var LineName = lines[i]["Name"];
+
+                var divappend = $("<div class='col-md-3' id=\"" + divId + "\"></div>");
+                var btnappend = $("<button class='btn btn-info btn-lg btn-block' line-id=\"" + Id.toString() + "\"></button>").html(LineName);
+
+
+                $("#" + rowId).append(divappend);
+                $("#" + divId).append(btnappend);
+
+            }
+        }
+        $.ajax({
+
+            url: '/Home/GetLines',
+
+            dataType: 'json',
+            async: true,
+            error: function () { alert('GetLines Failure'); },
+            success: function (lines) {
+
+                //debugger;
+
+                addLines(lines);
+            }
+        });
+    </script>
+}
+
+<div id="ContentDiv" class="roundedDiv text-center" style="border:green medium solid;border-width:2px;margin:20px -10px 300px 0px; padding:5px 2px 5px 2px">
+
+    <div class="container-fluid" id="BaseContainerDiv">
+        <div class="row" id="LineRow0">
+
+        </div>
+
+        <div class="row" style="padding-top:5px" id="LineRow1">
+
+        </div>
+
+        <div class="row" style="padding-top:5px;" id="LineRow2">
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <div class="row">
+        <div class="innerwrap" style="margin-right:1%;padding:2% 1% 2% 1%;margin-left:-15%;">
+
+            <button id="createbtn" class="btn btn-info btn-lg">
+                <span class="glyphicon glyphicon-plus"></span> Add
+            </button>
+            <button id="deletebtn" class="btn btn-info btn-lg">
+                <span class="glyphicon glyphicon-minus"></span> Delete
+            </button>
+            <button id="editbtn" class="btn btn-info btn-lg">
+                <span class="glyphicon glyphicon-pencil"></span> Edit
+            </button>
+
+            <button id="detailbtn" class="btn btn-info btn-lg">
+                <span class="glyphicon glyphicon-th-list"></span> Details
+            </button>
+
+
+        </div>
+    </div>
+</div>
