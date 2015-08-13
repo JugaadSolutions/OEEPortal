@@ -86,5 +86,27 @@ namespace OEEPortal.Controllers
             }
         }
 
+
+        public JsonResult GetReferences(int machine)
+        {
+            using (OEEPortalContext db = new OEEPortalContext())
+            {
+                var references = db.ReferenceMachines.Where(rm => rm.MachineId == machine).ToList();
+
+                ReferenceVM[] ReferenceList = new ReferenceVM[references.Count];
+
+                int i = 0;
+                foreach(ReferenceMachine r in references )
+                {
+                    ReferenceList[i++] = new ReferenceVM { Name = r.Reference.Name, ReferenceId = r.ReferenceId,  UsefullTime = r.UsefullTime };
+                }
+
+                
+
+                return Json(ReferenceList, JsonRequestBehavior.AllowGet);
+
+            }
+        }
+
     }
 }

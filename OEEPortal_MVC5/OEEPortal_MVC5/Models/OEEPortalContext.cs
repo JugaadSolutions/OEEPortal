@@ -13,6 +13,7 @@ namespace OEEPortal_MVC5.Models
         public DbSet<Machine> Machines { get; set; }
         public DbSet<Reference> References { get; set; }
         public DbSet<MachineOutputRecord> MachineOutputRecords { get; set; }
+        public DbSet<ReferenceMachine> ReferenceMachines { get; set; }
 
 
         public OEEPortalContext()

@@ -37,11 +37,10 @@ namespace OEEPortal_MVC5.Controllers
         }
 
         // GET: MachineOutputRecords/Create
-        public ActionResult Create()
+        public ActionResult Create(int Machine)
         {
-            ViewBag.MachineId = new SelectList(db.Machines, "MachineId", "Name");
-            ViewBag.ReferenceId = new SelectList(db.References, "ReferenceId", "Name");
-            ViewBag.ShiftId = new SelectList(db.Shifts, "ShiftId", "Name");
+            ViewBag.Title = "Data Input";
+            ViewBag.Machine = Machine;
             return View();
         }
 

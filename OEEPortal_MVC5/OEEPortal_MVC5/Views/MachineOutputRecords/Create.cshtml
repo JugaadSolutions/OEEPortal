@@ -1,10 +1,11 @@
 ﻿@model OEEPortal_MVC5.Models.MachineOutputRecord
 
 @{
-    ViewBag.Title = "Create";
+    var Title = ViewBag.Title;
+    var Machine = ViewBag.Machine;
 }
 
-<h2>Create</h2>
+<h2>@Title</h2>
 
 @using (Html.BeginForm()) 
 {
@@ -27,7 +28,38 @@
 
 
         <script type="text/javascript">
-        $("#ReferenceCombobox").jqxComboBox({ width: '200px', height: '30px' });
+            var ReferenceList;
+            $(function () {
+                debugger;
+                var ajx =  $.ajax({
+                    url: '/Home/GetReferences/',
+                    data: "{'machine':" + @Machine+ "}",
+                    type: "POST",
+                    contentType: "application/json",
+                    error: function () { alert("References Not Found") },
+                    success: function (references) {
+
+                        debugger;
+                        ReferenceList = references;
+
+                        var source = {
+                            localdata: ReferenceList,
+                            id: "id",
+                            datatype: "json",
+                            datafields: [{ name: "ReferenceId" }, { name: "Name" }, { name: "UsefullTime" }]
+                        };
+                        var dataSource = new $.jqx.dataAdapter(source);
+
+                        // Create a jqxComboBox
+                        $("#ReferenceCombobox").jqxComboBox({
+                            selectedIndex: 0, source: dataSource, displayMember: "Name",
+                            valueMember: "UsefullTime", width: 200, height: 25
+                        });
+
+                    }
+                });
+            });
+       
         $("#OutputQuantityInput").jqxFormattedInput({ spinButtons: false, dropDown: false });
         $("#DefectQuantityInput").jqxFormattedInput({ spinButtons: false, dropDown: false });
 

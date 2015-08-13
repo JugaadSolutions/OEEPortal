@@ -21,14 +21,14 @@
                 var Id = lines[i]["LineId"];
                 var LineName = lines[i]["Name"];
 
-                var divappend = $("<div class='col-md-3' id=\"" + divId + "\"></div>");
-                var btnappend = $("<button class='btn btn-info btn-lg btn-block' line-id=\""+ Id.toString()+"\"></button>").html(LineName);
+                var LineDiv = $("<div class='col-md-3' id=\"" + divId + "\"></div>");
+                var LineButton = $("<button class='btn btn-info btn-lg btn-block' line-id=\""+ Id.toString()+"\"></button>").html(LineName);
 
 
-                $("#" + rowId).append(divappend);
-                $("#" + divId).append(btnappend);
+                $("#" + rowId).append(LineDiv);
+                LineDiv.append(LineButton);
 
-                btnappend.on("click", function (e) {
+                LineButton.on("click", function (e) {
                     debugger;
                     var i = $(e.currentTarget).attr("line-id");
                     var line = {
@@ -69,7 +69,8 @@
 
                 var rowId = "MachineRow" + parseInt(i / 4).toString();
                 var divId = "MachineDiv" + (i).toString();
-                var MachineName = machines[i]["Name"]
+                var MachineName = machines[i]["Name"];
+                var Machine = machines[i]["MachineId"];
 
 
                 var MachineCol = $("<div class='col-md-3' id=\"" + divId + "\"></div>");
@@ -77,7 +78,11 @@
 
 
                 $("#" + rowId).append(MachineCol);
-                $("#" + divId).append(MachineButton);
+                MachineCol.append(MachineButton);
+
+                MachineButton.on("click", function (e) {
+                    location.href = '@Url.Action("Create","MachineOutputRecords")?Machine='+ Machine.toString();
+                });
             }
         }
             
