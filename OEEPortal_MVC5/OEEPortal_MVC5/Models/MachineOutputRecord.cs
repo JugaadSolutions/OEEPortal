@@ -20,7 +20,7 @@ namespace OEEPortal_MVC5.Models
         public Nullable<TimeSpan> EquipmentBreakDownTime { get; set; }
         public Nullable<TimeSpan> ChangeOverTime { get; set; }
         public Nullable<TimeSpan> MaterialDownTime { get; set; }
-        public Nullable<TimeSpan> QuantityDownTime { get; set; }
+        public Nullable<TimeSpan> QualityDownTime { get; set; }
         public Nullable<TimeSpan> OtherNonProductTime { get; set; }
         public Nullable<TimeSpan> PreventiveMaintenanceTime { get; set; }
         public Nullable<TimeSpan> ManagementMeetingTime { get; set; }

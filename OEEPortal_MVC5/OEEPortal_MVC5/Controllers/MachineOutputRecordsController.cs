@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using OEEPortal_MVC5.Models;
+using System.Web.Script.Serialization;
 
 namespace OEEPortal_MVC5.Controllers
 {
@@ -48,20 +49,23 @@ namespace OEEPortal_MVC5.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "MachineOutputRecordId,OperatorId,StartTime,EndTime,EquipmentBreakDown,ChangeOver,MaterialDownTime,QuantityDownTime,OtherNonProduct,PreventiveMaintenance,ManagementMeeting,RegulatoryBreaks,PilotRun,MachineId,ReferenceId,ShiftId")] MachineOutputRecord machineOutputRecord)
+       // [ValidateAntiForgeryToken]
+       // public ActionResult Create([Bind(Include = "MachineOutputRecordId,OperatorId,StartTime,EndTime,EquipmentBreakDown,ChangeOver,MaterialDownTime,QuantityDownTime,OtherNonProduct,PreventiveMaintenance,ManagementMeeting,RegulatoryBreaks,PilotRun,MachineId,ReferenceId,ShiftId")] MachineOutputRecord machineOutputRecord)
+        public JsonResult Create(MachineOutputRecord machineOutputRecord)
         {
+            
             if (ModelState.IsValid)
             {
                 db.MachineOutputRecords.Add(machineOutputRecord);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return Json(new { result = true });
             }
 
             ViewBag.MachineId = new SelectList(db.Machines, "MachineId", "Name", machineOutputRecord.MachineId);
             ViewBag.ReferenceId = new SelectList(db.References, "ReferenceId", "Name", machineOutputRecord.ReferenceId);
+
+            return Json(new { result = false });
             
-            return View(machineOutputRecord);
         }
 
         // GET: MachineOutputRecords/Edit/5
