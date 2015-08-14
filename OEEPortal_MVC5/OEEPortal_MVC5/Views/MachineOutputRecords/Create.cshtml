@@ -7,8 +7,7 @@
 
 <h2>@Title</h2>
 
-@using (Html.BeginForm()) 
-{
+
     @Html.AntiForgeryToken()
     
     @section menu{
@@ -53,7 +52,7 @@
                         // Create a jqxComboBox
                         $("#ReferenceCombobox").jqxComboBox({
                             selectedIndex: 0, source: dataSource, displayMember: "Name",
-                            valueMember: "UsefullTime", width: 200, height: 25
+                            valueMember: "ReferenceId", width: 200, height: 25
                         });
 
                     }
@@ -82,15 +81,34 @@
 
         $('#SaveButton').on("click", function () {
             debugger;
-            var machineoutputrecord = {
+            var selectedReference = $("#ReferenceCombobox").jqxComboBox('getSelectedItem');
+            var referenceId = selectedReference.value;
+            var record = {
 
                 OperatorID: document.getElementById("OperatorIDInput").value,
                 StartTime: document.getElementById("StartDateTimePickerInput").value,
                 EndTime: document.getElementById("EndDateTimePickerInput").value,
                 OutputQuantity: document.getElementById("OutputQuantityInput").value,
                 DefectQuantity: document.getElementById("DefectQuantityInput").value,
+                MachineId:@Machine,
+                ReferenceId : referenceId
+
 
             }
+            //$.post("/MachineOutputRecords/Create", { jsonInput: "Sagar" });
+
+          $.ajax({
+                url: '/MachineOutputRecords/Create',
+                data: "{'MachineOutputRecord':" + JSON.stringify(record) +"}",
+                type: "POST",
+                contentType: "application/json",
+                error: function () { alert("Error While Saving. Please Verify") },
+                success: function (SaveResult) {
+
+                    alert(SaveResult.result ? "Data Saved" : "Failed to Save Data" );
+                    
+                }
+            });
         })
         </script>
 
@@ -241,8 +259,5 @@
         </div>
     </div>
 
-}
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+
