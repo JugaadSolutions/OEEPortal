@@ -1,0 +1,276 @@
+﻿
+
+
+
+
+@section Scripts{
+    
+    
+    <script type="text/javascript">  
+  
+
+     $(document).ready(function () {
+         $("#ReportTabs").jqxTabs({ width: '80%', height: 400, position: 'top' });
+
+         $("#JanCheckbox").jqxCheckBox({ width: 120, height: 25 });
+         $("#FebCheckbox").jqxCheckBox({ width: 120, height: 25 });
+         $("#MarCheckbox").jqxCheckBox({ width: 120, height: 25 });
+         $("#AprCheckbox").jqxCheckBox({ width: 120, height: 25 });
+         $("#MayCheckbox").jqxCheckBox({ width: 120, height: 25 });
+         $("#JunCheckbox").jqxCheckBox({ width: 120, height: 25 });
+         $("#JulCheckbox").jqxCheckBox({ width: 120, height: 25 });
+         $("#AugCheckbox").jqxCheckBox({ width: 120, height: 25 });
+         $("#SepCheckbox").jqxCheckBox({ width: 120, height: 25 });
+         $("#OctCheckbox").jqxCheckBox({ width: 120, height: 25 });
+         $("#NovCheckbox").jqxCheckBox({ width: 120, height: 25 });
+         $("#DecCheckbox").jqxCheckBox({ width: 120, height: 25 });
+         $("#ShiftACheckbox").jqxCheckBox({ width: 120, height: 25 });
+         $("#ShiftBCheckbox").jqxCheckBox({ width: 120, height: 25 });
+         $("#ShiftCCheckbox").jqxCheckBox({ width: 120, height: 25 });
+
+         $("#MachineShiftACheckbox").jqxCheckBox({ width: 120, height: 25 });
+         $("#MachineShiftBCheckbox").jqxCheckBox({ width: 120, height: 25 });
+         $("#MachineShiftCCheckbox").jqxCheckBox({ width: 120, height: 25 });
+
+
+
+         $('#DailyStartDateTimePickerDiv').jqxDateTimeInput({ width: '100%', formatString: 'dd/MM/yyyy', showTimeButton: false, value: null });
+         $('#DailyEndDateTimePickerDiv').jqxDateTimeInput({ width: '100%', formatString: 'dd/MM/yyyy', showTimeButton: false, value: null });
+         $('#ShiftStartDateTimePickerDiv').jqxDateTimeInput({ width: '100%', formatString: 'dd/MM/yyyy', showTimeButton: false, value: null });
+         $('#ShiftEndDateTimePickerDiv').jqxDateTimeInput({ width: '100%', formatString: 'dd/MM/yyyy', showTimeButton: false, value: null });
+
+         $('#MachineStartDateTimePickerDiv').jqxDateTimeInput({ width: '100%', formatString: 'dd/MM/yyyy', showTimeButton: false, value: null });
+         $('#MachineEndDateTimePickerDiv').jqxDateTimeInput({ width: '100%', formatString: 'dd/MM/yyyy', showTimeButton: false, value: null });
+
+         $('#LogStartDateTimePickerDiv').jqxDateTimeInput({ width: '100%', formatString: 'dd/MM/yyyy', showTimeButton: false, value: null });
+         $('#LogEndDateTimePickerDiv').jqxDateTimeInput({ width: '100%', formatString: 'dd/MM/yyyy', showTimeButton: false, value: null });
+         var source = [
+                   "Ideonics",
+                   "Software",
+                   "Solution",
+
+         ];
+        
+         $("#Machinelistbox").jqxListBox({ source: source, width: '200px', height: '200px' });
+         $("#Machinelistbox").jqxListBox({ multiple: true });
+     });
+
+    
+    
+     </script>
+}
+
+<div id="ContentDiv" class="roundedDiv text-center"
+     style="border:green medium solid;border-width:2px;margin:20px 10px 300px 0px; padding:5px 2px 5px 2px;min-height:400px;width:85%;">
+    <div id='jqxWidget'>
+        <div id='ReportTabs'>
+            <ul>
+                <li style="margin-left: 30px;">Monthly Cumulative</li>
+                <li>Daily Cumulative</li>
+                <li>Shift Cumulative</li>
+                <li>Machine Cumulative</li>
+                <li>Log</li>
+            </ul>
+            <div>
+                <div class="container" style="margin-top:2%">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div id="JanCheckbox">
+                                January
+                            </div>
+                            <div id="FebCheckbox">
+                                February
+                            </div>
+                            <div id="MarCheckbox">
+                                March
+                            </div>
+                            <div id="AprCheckbox">
+                                April
+                            </div>
+                            <div id="MayCheckbox">
+                                May
+                            </div>
+                            <div id="JunCheckbox">
+                                June
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div id="JulCheckbox">
+                               July
+                            </div>
+                            <div id="AugCheckbox">
+                               August
+                            </div>
+                            <div id="SepCheckbox">
+                               September
+                            </div>
+                            <div id="OctCheckbox">
+                               October
+                            </div>
+                            <div id="NovCheckbox">
+                                November
+                            </div>
+                            <div id="DecCheckbox">
+                               December
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="padding-top:5px; margin:1% 0% 0% 10%">
+                        <button id="ShowMonthButton" class="btn btn-info btn-lg ">
+                           Show
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div>
+
+                <div class="row" style="padding-top:5px;margin:1% 1% 0% -5%">
+                    <div class="col-md-2" style="text-align:right">
+                        <b> Start Time:</b>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="input-group date" id="DailyStartDateTimePickerDiv">
+                            <input type='text' class="form-control" id="DailyStartDatePickerInput" />
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-2" style="text-align:right">
+                        <b> End Time:</b>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="input-group date" id="DailyEndDateTimePickerDiv">
+                            <input type='text' class="form-control" id="DailyEndDatePickerInput" />
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="padding-top:5px; margin:1% 0% 0% 48%">
+                    <button id="ShowDailyButton" class="btn btn-info btn-lg ">
+                        Show
+                    </button>
+                </div>
+            </div>
+                 <div>
+                     <div class="row" style="padding-top:5px;margin:1% 1% 0% -5%">
+                         <div class="col-md-2" style="text-align:right">
+                             <b> Start Time:</b>
+                         </div>
+                         <div class="col-md-4">
+                             <div class="input-group date" id="ShiftStartDateTimePickerDiv">
+                                 <input type='text' class="form-control" id="ShiftStartDatePickerInput" />
+                                 <span class="input-group-addon">
+                                     <span class="glyphicon glyphicon-calendar"></span>
+                                 </span>
+                             </div>
+                         </div>
+                         <div class="col-md-2" style="text-align:right">
+                             <b> End Time:</b>
+                         </div>
+                         <div class="col-md-4">
+                             <div class="input-group date" id="ShiftEndDateTimePickerDiv">
+                                 <input type='text' class="form-control" id="ShiftEndDatePickerInput" />
+                                 <span class="input-group-addon">
+                                     <span class="glyphicon glyphicon-calendar"></span>
+                                 </span>
+                             </div>
+                         </div>
+                     </div>
+                     <div id="ShiftACheckbox">
+                         ShiftA
+                     </div>
+                     <div id="ShiftBCheckbox">
+                         ShiftB
+                     </div>
+                     <div id="ShiftCCheckbox">
+                         ShiftC
+                     </div>
+                     <div class="row" style="padding-top:5px; margin:1% 0% 0% 48%">
+                         <button id="ShowShiftButton" class="btn btn-info btn-lg ">
+                             Show
+                         </button>
+                     </div>
+                 </div>
+            <div>
+                <div class="row" style="padding-top:5px;margin:1% 1% 0% -5%">
+                    <div class="col-md-2" style="text-align:right">
+                        <b> Start Time:</b>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="input-group date" id="MachineStartDateTimePickerDiv">
+                            <input type='text' class="form-control" id="MachineStartDatePickerInput" />
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-2" style="text-align:right">
+                        <b> End Time:</b>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="input-group date" id="MachineEndDateTimePickerDiv">
+                            <input type='text' class="form-control" id="MachineEndDatePickerInput" />
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div id="MachineShiftACheckbox">
+                    ShiftA
+                </div>
+                <div id="MachineShiftBCheckbox">
+                    ShiftB
+                </div>
+                <div id="MachineShiftCCheckbox">
+                    ShiftC
+                </div>
+                <div id="Machinelistbox">
+
+                </div>
+                <div class="row" style="padding-top:5px; margin:1% 0% 0% 48%">
+                    <button id="ShowMachineButton" class="btn btn-info btn-lg ">
+                        Show
+                    </button>
+                </div>
+
+            </div>
+            <div>
+                <div class="row" style="padding-top:5px;margin:1% 1% 0% -5%">
+                    <div class="col-md-2" style="text-align:right">
+                        <b> Start Time:</b>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="input-group date" id="LogStartDateTimePickerDiv">
+                            <input type='text' class="form-control" id="LogStartDatePickerInput" />
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-2" style="text-align:right">
+                        <b> End Time:</b>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="input-group date" id="LogEndDateTimePickerDiv">
+                            <input type='text' class="form-control" id="LogEndDatePickerInput" />
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="padding-top:5px; margin:1% 0% 0% 48%">
+                    <button id="ShowLineButton" class="btn btn-info btn-lg ">
+                        Show
+                    </button>
+                </div>
+            </div>
+
+</div>
+        </div>
+
+        </div>
