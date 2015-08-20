@@ -181,6 +181,15 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201508130542060_InitialCreate.cs" />
+    <Compile Include="Migrations\201508130542060_InitialCreate.Designer.cs">
+      <DependentUpon>201508130542060_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508200508388_start_end_machineoutputrecord.cs" />
+    <Compile Include="Migrations\201508200508388_start_end_machineoutputrecord.Designer.cs">
+      <DependentUpon>201508200508388_start_end_machineoutputrecord.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Line.cs" />
@@ -627,6 +636,7 @@
     <Content Include="Images\SEPFC.jpg" />
     <Content Include="Images\uiTabsArrow.png" />
     <Content Include="Scripts\app.js" />
+    <Content Include="Scripts\appScripts\addMachines.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -818,6 +828,14 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201508130542060_InitialCreate.resx">
+      <DependentUpon>201508130542060_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508200508388_start_end_machineoutputrecord.resx">
+      <DependentUpon>201508200508388_start_end_machineoutputrecord.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

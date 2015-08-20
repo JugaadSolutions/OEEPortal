@@ -4,92 +4,149 @@
     var Title = ViewBag.Title;
     var Machine = ViewBag.Machine;
 }
+@Html.AntiForgeryToken()
 
-<h2>@Title</h2>
-
-
-    @Html.AntiForgeryToken()
-    
-    @section menu{
+@section menu{
     @Html.Partial("Menu")
-    }
-    @section Styles{
-        <link href="~/Content/bootstrap.min.css" type="text/css" rel="stylesheet" />
-        <link href="~/Content/bootstrap-datetimepicker.min.css" type="text/css" rel="stylesheet" />
-        <link href="~/Content/bootstrap-datetimepicker.css" type="text/css" rel="stylesheet" />
+}
+@section Styles{
+    <link href="~/Content/bootstrap.min.css" type="text/css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-datetimepicker.min.css" type="text/css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-datetimepicker.css" type="text/css" rel="stylesheet" />
 
-    }
+}
 
-    @section Scripts{
+@section Scripts{
 
-        <script src="~/Scripts/moment.js"></script>
-        <script src="~/Scripts/bootstrap-datetimepicker.min.js"></script>
+    <script src="~/Scripts/moment.js"></script>
+    <script src="~/Scripts/bootstrap-datetimepicker.min.js"></script>
 
 
-        <script type="text/javascript">
-            var ReferenceList;
-            $(function () {
-                debugger;
-                var ajx =  $.ajax({
-                    url: '/Home/GetReferences/',
-                    data: "{'machine':" + @Machine+ "}",
-                    type: "POST",
-                    contentType: "application/json",
-                    error: function () { alert("References Not Found") },
-                    success: function (references) {
+    <script type="text/javascript">
+        var ReferenceList;
+        $(function () {
+            //debugger;
+            var ajx =  $.ajax({
+                url: '/Home/GetReferences/',
+                data: "{'machine':" + @Machine+ "}",
+                type: "POST",
+                contentType: "application/json",
+                error: function () { alert("References Not Found") },
+                success: function (references) {
 
-                        debugger;
-                        ReferenceList = references;
+                    //debugger;
+                    ReferenceList = references;
 
-                        var source = {
-                            localdata: ReferenceList,
-                            id: "id",
-                            datatype: "json",
-                            datafields: [{ name: "ReferenceId" }, { name: "Name" }, { name: "UsefullTime" }]
-                        };
-                        var dataSource = new $.jqx.dataAdapter(source);
+                    var source = {
+                        localdata: ReferenceList,
+                        id: "id",
+                        datatype: "json",
+                        datafields: [{ name: "ReferenceId" }, { name: "Name" }, { name: "UsefullTime" }]
+                    };
+                    var dataSource = new $.jqx.dataAdapter(source);
 
-                        // Create a jqxComboBox
-                        $("#ReferenceCombobox").jqxComboBox({
-                            selectedIndex: 0, source: dataSource, displayMember: "Name",
-                            valueMember: "ReferenceId", width: 200, height: 25
-                        });
+                    // Create a jqxComboBox
+                    $("#ReferenceCombobox").jqxComboBox({
+                        selectedIndex: 0, source: dataSource, displayMember: "Name",
+                        valueMember: "ReferenceId", width: 200, height: 25
+                    });
 
-                    }
-                });
+                }
             });
-       
+        });
+
         $("#OutputQuantityInput").jqxFormattedInput({ spinButtons: false, dropDown: false });
         $("#DefectQuantityInput").jqxFormattedInput({ spinButtons: false, dropDown: false });
 
-        $("#EquipmentBreakdownTime").jqxDateTimeInput({ width: '65px', height: '30px', formatString: "HH:mm:ss", showCalendarButton: false });
-        $("#ChangeOverTime").jqxDateTimeInput({ width: '65px', height: '30px', formatString: "HH:mm:ss", showCalendarButton: false });
-        $("#MaterialShortageTime").jqxDateTimeInput({ width: '65px', height: '30px', formatString: "HH:mm:ss", showCalendarButton: false });
-        $("#QualityTime").jqxDateTimeInput({ width: '65px', height: '30px', formatString: "HH:mm:ss", showCalendarButton: false });
-        $("#NonProductionTime").jqxDateTimeInput({ width: '65px', height: '30px', formatString: "HH:mm:ss", showCalendarButton: false });
+        $("#EquipmentBreakdownExpander").jqxExpander({width:'100%',expanded:false});
+        $("#ChangeOverExpander").jqxExpander({width:'100%',expanded:false});
+        $("#MaterialDowntimeExpander").jqxExpander({width:'100%',expanded:false});
+        $("#QualityDowntimeExpander").jqxExpander({width:'100%',expanded:false});
+        $("#NonProductionExpander").jqxExpander({width:'100%',expanded:false});
+        $("#PrenventiveMaintenanceExpander").jqxExpander({width:'100%',expanded:false});
+        $("#ManagementMeetingExpander").jqxExpander({width:'100%',expanded:false});
+        $("#RegulatoryBreaksExpander").jqxExpander({width:'100%',expanded:false});
+        $("#PilotRunExpander").jqxExpander({width:'100%',expanded:false});
 
 
-        $("#PreventiveMaintenanceTime").jqxDateTimeInput({ width: '65px', height: '30px', formatString: "HH:mm:ss", showCalendarButton: false });
-        $("#ManagementMeetingTime").jqxDateTimeInput({ width: '65px', height: '30px', formatString: "HH:mm:ss", showCalendarButton: false });
-        $("#RegulatoryBreaksTime").jqxDateTimeInput({ width: '65px', height: '30px', formatString: "HH:mm:ss", showCalendarButton: false });
-        $("#PilotRunTime").jqxDateTimeInput({ width: '65px', height: '30px', formatString: "HH:mm:ss", showCalendarButton: false });
 
 
 
-        $('#StartDateTimePickerDiv').datetimepicker();
-        $('#EndDateTimePickerDiv').datetimepicker();
+        $('#EquipmentBreakdownStartInput').jqxDateTimeInput({ width:'100%', formatString:'dd/MM/yyyy hh:mm:ss', showTimeButton: true,value:null});
+        $("#EquipmentBreakdownEndInput").jqxDateTimeInput({ width:'100%', formatString:'dd/MM/yyyy hh:mm:ss', showTimeButton: true,value:null});
+
+        $('#ChangeOverStartInput').jqxDateTimeInput({ width:'100%', formatString:'dd/MM/yyyy hh:mm:ss', showTimeButton: true,value:null});
+        $("#ChangeOverEndInput").jqxDateTimeInput({ width:'100%', formatString:'dd/MM/yyyy hh:mm:ss', showTimeButton: true,value:null});
+
+        $('#MaterialDowntimeStartInput').jqxDateTimeInput({ width:'100%', formatString:'dd/MM/yyyy hh:mm:ss', showTimeButton: true,value:null});
+        $("#MaterialDowntimeEndInput").jqxDateTimeInput({ width:'100%', formatString:'dd/MM/yyyy hh:mm:ss', showTimeButton: true,value:null});
+
+        $('#QualityDowntimeStartInput').jqxDateTimeInput({ width:'100%', formatString:'dd/MM/yyyy hh:mm:ss', showTimeButton: true,value:null});
+        $("#QualityDowntimeEndInput").jqxDateTimeInput({ width:'100%', formatString:'dd/MM/yyyy hh:mm:ss', showTimeButton: true,value:null});
+
+
+        $('#NonProductionStartInput').jqxDateTimeInput({ width:'100%', formatString:'dd/MM/yyyy hh:mm:ss', showTimeButton: true,value:null});
+        $("#NonProductionEndInput").jqxDateTimeInput({ width:'100%', formatString:'dd/MM/yyyy hh:mm:ss', showTimeButton: true,value:null});
+
+        $('#PreventiveMaintenanceStartInput').jqxDateTimeInput({ width:'100%', formatString:'dd/MM/yyyy hh:mm:ss', showTimeButton: true,value:null});
+        $("#PreventiveMaintenanceEndInput").jqxDateTimeInput({ width:'100%', formatString:'dd/MM/yyyy hh:mm:ss', showTimeButton: true,value:null});
+
+        $('#ManagementMeetingStartInput').jqxDateTimeInput({ width:'100%', formatString:'dd/MM/yyyy hh:mm:ss', showTimeButton: true,value:null});
+        $("#ManagementMeetingEndInput").jqxDateTimeInput({ width:'100%', formatString:'dd/MM/yyyy hh:mm:ss', showTimeButton: true,value:null});
+
+        $('#RegulatoryBreaksStartInput').jqxDateTimeInput({ width:'100%', formatString:'dd/MM/yyyy hh:mm:ss', showTimeButton: true,value:null});
+        $("#RegulatoryBreaksEndInput").jqxDateTimeInput({ width:'100%', formatString:'dd/MM/yyyy hh:mm:ss', showTimeButton: true,value:null});
+
+
+        $('#PilotRunStartInput').jqxDateTimeInput({ width:'100%', formatString:'dd/MM/yyyy hh:mm:ss', showTimeButton: true,value:null});
+        $("#PilotRunEndInput").jqxDateTimeInput({ width:'100%', formatString:'dd/MM/yyyy hh:mm:ss', showTimeButton: true,value:null});
+
+
+
+        $('#StartDateTimePickerDiv').jqxDateTimeInput({width:'100%',formatString:'dd/MM/yyyy hh:mm:ss', showTimeButton:true,value:null});
+        $('#EndDateTimePickerDiv').jqxDateTimeInput({width:'100%',formatString:'dd/MM/yyyy hh:mm:ss', showTimeButton:true,value:null});
 
         $('#SaveButton').on("click", function () {
-            debugger;
+            //debugger;
             var selectedReference = $("#ReferenceCombobox").jqxComboBox('getSelectedItem');
             var referenceId = selectedReference.value;
+            debugger;
             var record = {
-
+                
                 OperatorID: document.getElementById("OperatorIDInput").value,
-                StartTime: document.getElementById("StartDateTimePickerInput").value,
-                EndTime: document.getElementById("EndDateTimePickerInput").value,
+                StartTime: $('#StartDateTimePickerDiv').jqxDateTimeInput('value'),
+                EndTime: $('#EndDateTimePickerDiv').jqxDateTimeInput('value'),
                 OutputQuantity: document.getElementById("OutputQuantityInput").value,
                 DefectQuantity: document.getElementById("DefectQuantityInput").value,
+
+                EquipmentBreakDownStart:$('#EquipmentBreakdownStartInput').jqxDateTimeInput('value'),
+                EquipmentBreakDownEnd:$('#EquipmentBreakdownEndInput').jqxDateTimeInput('value'),
+
+
+                ChangeOverStart:$('#ChangeOverStartInput').jqxDateTimeInput('value'),
+                ChangeOverEnd:$('#ChangeOverEndInput').jqxDateTimeInput('value'),
+
+                MaterialDownStart:$('#MaterialDowntimeStartInput').jqxDateTimeInput('value'),
+                MaterialDownEnd:$('#MaterialDowntimeEndInput').jqxDateTimeInput('value'),
+
+                QualityDownStart:$('#QualityDowntimeStartInput').jqxDateTimeInput('value'),
+                QualityDownEnd:$('#QualityDowntimeEndInput').jqxDateTimeInput('value'),
+
+                NonProductionStart:$('#NonProductionStartInput').jqxDateTimeInput('value'),
+                NonProductionEnd:$('#NonProductionEndInput').jqxDateTimeInput('value'),
+
+                PreventiveMaintenanceStart:$('#PreventiveMaintenanceStartInput').jqxDateTimeInput('value'),
+                PreventiveMaintenanceEnd:$('#PreventiveMaintenanceEndInput').jqxDateTimeInput('value'),
+
+                ManagementMeetingStart:$('#ManagementMeetingStartInput').jqxDateTimeInput('value'),
+                ManagementMeetingEnd:$('#ManagementMeetingEndInput').jqxDateTimeInput('value'),
+
+                RegulatoryBreaksStart:$('#RegulatoryBreaksStartInput').jqxDateTimeInput('value'),
+                RegulatoryBreaksEnd:$('#RegulatoryBreaksEndInput').jqxDateTimeInput('value'),
+
+                PilotRunStart:$('#PilotRunStartInput').jqxDateTimeInput('value'),
+                PilotRunEnd:$('#PilotRunEndInput').jqxDateTimeInput('value'),
+
                 MachineId:@Machine,
                 ReferenceId : referenceId
 
@@ -97,7 +154,7 @@
             }
             //$.post("/MachineOutputRecords/Create", { jsonInput: "Sagar" });
 
-          $.ajax({
+            $.ajax({
                 url: '/MachineOutputRecords/Create',
                 data: "{'MachineOutputRecord':" + JSON.stringify(record) +"}",
                 type: "POST",
@@ -106,158 +163,335 @@
                 success: function (SaveResult) {
 
                     alert(SaveResult.result ? "Data Saved" : "Failed to Save Data" );
-                    
+
                 }
             });
         })
-        </script>
+    </script>
 
-    }
+}
 
-    <div id="ContentDiv" class="roundedDiv text-center" style="border:green medium solid;border-width:2px;margin:10px 10px 60px 15px; padding:5px 2px 5px 2px">
+<div id="ContentDiv" class="roundedDiv text-center" style="border:green medium solid;border-width:2px;margin:5px 10px 60px 15px;">
 
-        <div class="container-fluid" style="margin-left:5%;margin-top:2%">
-            <div class="row">
-                <div class="col-md-2" style="text-align:right;text-anchor:middle">
-                    <label for="inputdefault"> Operator ID:</label>
-                </div>
-                <div class="col-md-4" style="text-align:left;">
-                    <input class="form-control" id="OperatorIDInput" type="text">
-                </div>
-                <div class="col-md-2" style="text-align:right;text-anchor:middle">
-                    <label for="inputdefault"> Reference:</label>
-                </div>
-                <div class="col-md-4" id="ReferenceCombobox" style="text-align:left;">
-
-                </div>
+    <div class="container-fluid" style="margin-left:5%;margin-top:1%">
+        <div class="row">
+            <div class="col-md-2" style="text-align:right;text-anchor:middle">
+                <label for="inputdefault"> Operator ID:</label>
+            </div>
+            <div class="col-md-4" style="text-align:left;">
+                <input class="form-control" id="OperatorIDInput" type="text">
+            </div>
+            <div class="col-md-2" style="text-align:right;text-anchor:middle">
+                <label for="inputdefault"> Reference:</label>
+            </div>
+            <div class="col-md-4" id="ReferenceCombobox" style="text-align:left;">
 
             </div>
-
-            <div class="row" style="padding-top:5px;">
-                <div class="col-md-2" style="text-align:right">
-                    <b> Start Time:</b>
-                </div>
-                <div class="col-md-4">
-                    <div class="input-group date" id="StartDateTimePickerDiv">
-                        <input type='text' class="form-control" id="StartDateTimePickerInput" />
-                        <span class="input-group-addon">
-                            <span class="glyphicon glyphicon-calendar"></span>
-                        </span>
-                    </div>
-                </div>
-                <div class="col-md-2" style="text-align:right">
-                    <b> End Time:</b>
-                </div>
-                <div class="col-md-4">
-                    <div class="input-group date" id="EndDateTimePickerDiv">
-                        <input type='text' class="form-control" id="EndDateTimePickerInput" />
-                        <span class="input-group-addon">
-                            <span class="glyphicon glyphicon-calendar"></span>
-                        </span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row" style="padding-top:5px;">
-                <div class="col-md-2" style="text-align:right">
-                    <b> Output Quantity:</b>
-                </div>
-                <div class="col-md-4">
-                    <input type="text" class="form-control" id="OutputQuantityInput" />
-
-                </div>
-                <div class="col-md-2" style="text-align:right">
-                    <b> Defect Quantity:</b>
-                </div>
-                <div class="col-md-4">
-                    <input type='text' class="form-control" id="DefectQuantityInput" />
-                </div>
-            </div>
-
-            <div class="row" style="padding-top:15px;">
-                <div class="col-md-2" style="text-align:right;text-anchor:middle">
-                    <label>Equipment Breakdown:</label>
-                </div>
-                <div class="col-md-2" style="text-align:left;" id="EquipmentBreakdownTime">
-
-                </div>
-
-                <div class="col-md-2" style="text-align:right;text-anchor:middle">
-                    <label>Change Over:</label>
-                </div>
-                <div class="col-md-2" style="text-align:left;" id="ChangeOverTime">
-
-                </div>
-                <div class="col-md-2" style="text-align:right;">
-                    <label>Material Downtime:</label>
-                </div>
-                <div class="col-md-2" style="text-align:left;" id="MaterialShortageTime">
-
-                </div>
-
-
-            </div>
-
-            <div class="row" style="padding-top:3px;">
-
-
-                <div class="col-md-2" style="text-align:right;">
-                    <label>Quality DownTime:</label>
-                </div>
-                <div class="col-md-2" style="text-align:left;" id="QualityTime">
-
-                </div>
-
-                <div class="col-md-2" style="text-align:right;">
-                    <label>Other Non Production:</label>
-                </div>
-                <div class="col-md-2" style="text-align:left;" id="NonProductionTime">
-
-                </div>
-
-            </div>
-
-            <div class="row" style="padding-top:15px;">
-                <div class="col-md-2" style="text-align:right;">
-                    <label>Preventive Maintenance:</label>
-                </div>
-                <div class="col-md-2" style="text-align:left;" id="PreventiveMaintenanceTime">
-
-                </div>
-
-                <div class="col-md-2" style="text-align:right;">
-                    <label>Management Meeeting:</label>
-                </div>
-                <div class="col-md-2" style="text-align:left;" id="ManagementMeetingTime">
-
-                </div>
-
-            </div>
-
-            <div class="row" style="padding-top:3px;">
-                <div class="col-md-2" style="text-align:right;">
-                    <label>Regulatory Breaks:</label>
-                </div>
-                <div class="col-md-2" style="text-align:left;" id="RegulatoryBreaksTime">
-
-                </div>
-                <div class="col-md-2" style="text-align:right;">
-                    <label>Pilot Run/Excess WIP:</label>
-                </div>
-                <div class="col-md-2" style="text-align:left;" id="PilotRunTime">
-
-                </div>
-            </div>
-
-            <div class="row" style="padding-top:20px">
-                <button id="SaveButton" class="btn btn-info btn-lg ">
-                    Save
-                </button>
-            </div>
-
 
         </div>
+
+        <div class="row" style="padding-top:5px;">
+            <div class="col-md-2" style="text-align:right">
+                <b> Start Time:</b>
+            </div>
+            <div class="col-md-4">
+                <div class="input-group date" id="StartDateTimePickerDiv">
+                    <input type='text' class="form-control" id="StartDateTimePickerInput" />
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-2" style="text-align:right">
+                <b> End Time:</b>
+            </div>
+            <div class="col-md-4">
+                <div class="input-group date" id="EndDateTimePickerDiv">
+                    <input type='text' class="form-control" id="EndDateTimePickerInput" />
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" style="padding-top:5px;">
+            <div class="col-md-2" style="text-align:right">
+                <b> Output Quantity:</b>
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="form-control" id="OutputQuantityInput" />
+
+            </div>
+            <div class="col-md-2" style="text-align:right">
+                <b> Defect Quantity:</b>
+            </div>
+            <div class="col-md-4">
+                <input type='text' class="form-control" id="DefectQuantityInput" />
+            </div>
+        </div>
+
+        <div class="row" style="padding-top:15px;">
+            <div class="col-md-12">
+                <div id="EquipmentBreakdownExpander">
+                    <div>
+                        Equipment Breakdown
+                    </div>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-2" style="text-align:right">
+                                <label>Start:</label>
+                            </div>
+                            <div class="col-md-4">
+                                <div id="EquipmentBreakdownStartInput"></div>
+                            </div>
+
+                            <div class="col-md-2" style="text-align:right">
+                                <label>End:</label>
+                            </div>
+                            <div class="col-md-4">
+                                <div id="EquipmentBreakdownEndInput"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="row" style="padding-top:5px;">
+            <div class="col-md-12">
+                <div id="ChangeOverExpander">
+                    <div>
+                        Change Over
+                    </div>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-2" style="text-align:right">
+                                <label>Start:</label>
+                            </div>
+                            <div class="col-md-4">
+                                <div id="ChangeOverStartInput"></div>
+                            </div>
+
+                            <div class="col-md-2" style="text-align:right">
+                                <label>End:</label>
+                            </div>
+                            <div class="col-md-4">
+                                <div id="ChangeOverEndInput"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" style="padding-top:5px;">
+            <div class="col-md-12">
+                <div id="MaterialDowntimeExpander">
+                    <div>
+                        Material Downtime
+                    </div>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-2" style="text-align:right">
+                                <label>Start:</label>
+                            </div>
+                            <div class="col-md-4">
+                                <div id="MaterialDowntimeStartInput"></div>
+                            </div>
+
+                            <div class="col-md-2" style="text-align:right">
+                                <label>End:</label>
+                            </div>
+                            <div class="col-md-4">
+                                <div id="MaterialDowntimeEndInput"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="row" style="padding-top:5px;">
+            <div class="col-md-12">
+                <div id="QualityDowntimeExpander">
+                    <div>
+                        Quality Downtime
+                    </div>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-2" style="text-align:right">
+                                <label>Start:</label>
+                            </div>
+                            <div class="col-md-4">
+                                <div id="QualityDowntimeStartInput"></div>
+                            </div>
+
+                            <div class="col-md-2" style="text-align:right">
+                                <label>End:</label>
+                            </div>
+                            <div class="col-md-4">
+                                <div id="QualityDowntimeEndInput"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" style="padding-top:5px;">
+            <div class="col-md-12">
+                <div id="NonProductionExpander">
+                    <div>
+                        Other Non Production Downtime
+                    </div>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-2" style="text-align:right">
+                                <label>Start:</label>
+                            </div>
+                            <div class="col-md-4">
+                                <div id="NonProductionStartInput"></div>
+                            </div>
+
+                            <div class="col-md-2" style="text-align:right">
+                                <label>End:</label>
+                            </div>
+                            <div class="col-md-4">
+                                <div id="NonProductionEndInput"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <div class="row" style="padding-top:5px;">
+            <div class="col-md-12">
+                <div id="PrenventiveMaintenanceExpander">
+                    <div>
+                        Preventive Maintenance
+                    </div>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-2" style="text-align:right">
+                                <label>Start:</label>
+                            </div>
+                            <div class="col-md-4">
+                                <div id="PreventiveMaintenanceStartInput"></div>
+                            </div>
+
+                            <div class="col-md-2" style="text-align:right">
+                                <label>End:</label>
+                            </div>
+                            <div class="col-md-4">
+                                <div id="PreventiveMaintenanceEndInput"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" style="padding-top:5px;">
+            <div class="col-md-12">
+                <div id="ManagementMeetingExpander">
+                    <div>
+                        Management Meeting
+                    </div>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-2" style="text-align:right">
+                                <label>Start:</label>
+                            </div>
+                            <div class="col-md-4">
+                                <div id="ManagementMeetingStartInput"></div>
+                            </div>
+
+                            <div class="col-md-2" style="text-align:right">
+                                <label>End:</label>
+                            </div>
+                            <div class="col-md-4">
+                                <div id="ManagementMeetingEndInput"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="row" style="padding-top:5px;">
+            <div class="col-md-12">
+                <div id="RegulatoryBreaksExpander">
+                    <div>
+                        Regulatory Breaks
+                    </div>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-2" style="text-align:right">
+                                <label>Start:</label>
+                            </div>
+                            <div class="col-md-4">
+                                <div id="RegulatoryBreaksStartInput"></div>
+                            </div>
+
+                            <div class="col-md-2" style="text-align:right">
+                                <label>End:</label>
+                            </div>
+                            <div class="col-md-4">
+                                <div id="RegulatoryBreaksEndInput"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" style="padding-top:5px;">
+            <div class="col-md-12">
+                <div id="PilotRunExpander">
+                    <div>
+                        PilotRun/Excess WIP
+                    </div>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-2" style="text-align:right">
+                                <label>Start:</label>
+                            </div>
+                            <div class="col-md-4">
+                                <div id="PilotRunStartInput"></div>
+                            </div>
+
+                            <div class="col-md-2" style="text-align:right">
+                                <label>End:</label>
+                            </div>
+                            <div class="col-md-4">
+                                <div id="PilotRunEndInput"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" style="padding-top:5px">
+            <button id="SaveButton" class="btn btn-info btn-lg ">
+                Save
+            </button>
+        </div>
+
+
     </div>
+</div>
 
 
 
