@@ -23,10 +23,10 @@
     <script src="~/Scripts/JQWidgets/jqxvalidator.js"></script>
 
     <script type="text/javascript">
-        $(document).ready(function(){
-            $('#SaveButton').on('click',function(){
-                $('#ContentDiv').jqxValidator('validate');
-            });
+
+        var ReferenceList;
+        $(function () {
+
             $('#ContentDiv').jqxValidator({
                 rules: [
                        { input: '#OperatorIDInput', message: 'This field is required!', rule: 'required' },
@@ -34,9 +34,6 @@
                        { input: '#EndDateTimePickerInput', message: 'This field is required!',rule: 'required' }
                 ]
             });
-        });
-        var ReferenceList;
-        $(function () {
             //debugger;
             var ajx =  $.ajax({
                 url: '/Home/GetReferences/',
@@ -119,6 +116,8 @@
         $('#EndDateTimePickerDiv').jqxDateTimeInput({width:'100%',formatString:'dd/MM/yyyy hh:mm:ss', showTimeButton:true,value:null});
 
         $('#SaveButton').on("click", function () {
+
+            $('#ContentDiv').jqxValidator('validate');
             //debugger;
             var selectedReference = $("#ReferenceCombobox").jqxComboBox('getSelectedItem');
             var referenceId = selectedReference.value;
