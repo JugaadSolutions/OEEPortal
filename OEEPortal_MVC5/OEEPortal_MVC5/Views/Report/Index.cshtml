@@ -1,30 +1,17 @@
 ﻿
-@{
-    ViewBag.Title = "Index";
-}
 
-<h2>Index</h2>
-@section Styles{
-    <link href="~/Content/bootstrap.min.css" type="text/css" rel="stylesheet" />
-    <link href="~/Content/bootstrap-datetimepicker.min.css" type="text/css" rel="stylesheet" />
-    <link href="~/Content/bootstrap-datetimepicker.css" type="text/css" rel="stylesheet" />
 
-}
+
+
 @section Scripts{
     
-<script src="~/Scripts/JQWidgets/jqxtabs.js"></script>  
-<script src="~/Scripts/moment.js"></script>
-<script src="~/Scripts/bootstrap-datetimepicker.min.js"></script>
-<script src="~/Scripts/JQWidgets/jqxvalidator.js"></script>
-    @*<script src="~/Scripts/JQWidgets/jqxlistbox.js"></script>*@
     
     <script type="text/javascript">  
-     $(document).ready(function () {
-     $("#ReportTabs").jqxTabs({ width: '80%', height: 400, position: 'top'});
-    
-     });
+  
 
      $(document).ready(function () {
+         $("#ReportTabs").jqxTabs({ width: '80%', height: 400, position: 'top' });
+
          $("#JanCheckbox").jqxCheckBox({ width: 120, height: 25 });
          $("#FebCheckbox").jqxCheckBox({ width: 120, height: 25 });
          $("#MarCheckbox").jqxCheckBox({ width: 120, height: 25 });
@@ -57,20 +44,18 @@
 
          $('#LogStartDateTimePickerDiv').jqxDateTimeInput({ width: '100%', formatString: 'dd/MM/yyyy', showTimeButton: false, value: null });
          $('#LogEndDateTimePickerDiv').jqxDateTimeInput({ width: '100%', formatString: 'dd/MM/yyyy', showTimeButton: false, value: null });
-
-     });
-
-     $(document).ready(function () {
          var source = [
-                    "Ideonics",
-                    "Software",
-                    "Solution",
-                   
+                   "Ideonics",
+                   "Software",
+                   "Solution",
+
          ];
-         // Create a jqxListBox
+        
          $("#Machinelistbox").jqxListBox({ source: source, width: '200px', height: '200px' });
          $("#Machinelistbox").jqxListBox({ multiple: true });
      });
+
+    
     
      </script>
 }
