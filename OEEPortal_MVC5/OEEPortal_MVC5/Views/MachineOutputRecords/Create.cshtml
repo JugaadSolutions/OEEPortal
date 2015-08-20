@@ -20,9 +20,21 @@
 
     <script src="~/Scripts/moment.js"></script>
     <script src="~/Scripts/bootstrap-datetimepicker.min.js"></script>
-
+    <script src="~/Scripts/JQWidgets/jqxvalidator.js"></script>
 
     <script type="text/javascript">
+        $(document).ready(function(){
+            $('#SaveButton').on('click',function(){
+                $('#ContentDiv').jqxValidator('validate');
+            });
+            $('#ContentDiv').jqxValidator({
+                rules: [
+                       { input: '#OperatorIDInput', message: 'This field is required!', rule: 'required' },
+                       { input: '#StartDateTimePickerInput', message: 'This field is required!', rule: 'required' },
+                       { input: '#EndDateTimePickerInput', message: 'This field is required!',rule: 'required' }
+                ]
+            });
+        });
         var ReferenceList;
         $(function () {
             //debugger;
