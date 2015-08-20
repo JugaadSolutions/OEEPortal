@@ -1,13 +1,9 @@
-﻿
+﻿@section Scripts{
 
 
+    <script type="text/javascript">
 
 
-@section Scripts{
-    
-    
-    <script type="text/javascript">  
-  
 
      $(document).ready(function () {
          $("#ReportTabs").jqxTabs({ width: '100%', height: 450, position: 'top'});
@@ -50,14 +46,14 @@
                    "Solution",
 
          ];
-        
+
          $("#Machinelistbox").jqxListBox({ source: source, width: '200px', height: '200px' });
          $("#Machinelistbox").jqxListBox({ multiple: true });
      });
 
-    
-    
-     </script>
+
+
+    </script>
 }
 
 <div id="ContentDiv" class="roundedDiv text-center"
@@ -100,52 +96,52 @@
                             <div id="MayCheckbox">
                                 May
                             </div>
-                            </div>
+                        </div>
                         <div class="col-md-1">
                             <div id="JunCheckbox">
                                 June
                             </div>
-                            </div>
+                        </div>
                         <div class="col-md-1">
                             <div id="JulCheckbox">
                                 July
                             </div>
-                            </div>
+                        </div>
                         <div class="col-md-1">
                             <div id="AugCheckbox">
                                 August
                             </div>
-                            </div>
                         </div>
+                    </div>
                     <div class="row">
                         <div class="col-md-1">
                             <div id="SepCheckbox">
                                 September
                             </div>
-                            </div>
+                        </div>
                         <div class="col-md-1">
                             <div id="OctCheckbox">
                                 October
                             </div>
-                            </div>
+                        </div>
                         <div class="col-md-1">
                             <div id="NovCheckbox">
                                 November
                             </div>
-                            </div>
+                        </div>
                         <div class="col-md-1">
                             <div id="DecCheckbox">
                                 December
                             </div>
-                            </div>
-                        </div>
-
-                        <div class="row" style="padding-top:5px; margin:1% 0% 0% 10%">
-                            <button id="ShowMonthButton" class="btn btn-info btn-lg ">
-                                Show
-                            </button>
                         </div>
                     </div>
+
+                    <div class="row" style="padding-top:5px; margin:1% 0% 0% 10%">
+                        <button id="ShowMonthButton" class="btn btn-info btn-lg ">
+                            Show
+                        </button>
+                    </div>
+                </div>
             </div>
             <div>
 
@@ -179,54 +175,54 @@
                     </button>
                 </div>
             </div>
-                 <div>
-                     <div class="row" style="padding-top:5px;margin:1% 1% 0% -5%">
-                         <div class="col-md-2" style="text-align:right">
-                             <b> Start Date:</b>
-                         </div>
-                         <div class="col-md-4">
-                             <div class="input-group date" id="ShiftStartDateTimePickerDiv">
-                                 <input type='text' class="form-control" id="ShiftStartDatePickerInput" />
-                                 <span class="input-group-addon">
-                                     <span class="glyphicon glyphicon-calendar"></span>
-                                 </span>
-                             </div>
-                         </div>
-                         <div class="col-md-2" style="text-align:right">
-                             <b> End Date:</b>
-                         </div>
-                         <div class="col-md-4">
-                             <div class="input-group date" id="ShiftEndDateTimePickerDiv">
-                                 <input type='text' class="form-control" id="ShiftEndDatePickerInput" />
-                                 <span class="input-group-addon">
-                                     <span class="glyphicon glyphicon-calendar"></span>
-                                 </span>
-                             </div>
-                         </div>
-                     </div>
-                     <div class="row" style="margin:1% 0% 0% 5%">
-                         <div class="col-md-1">
-                             <div id="ShiftACheckbox">
-                                 ShiftA
-                             </div>
-                             </div>
-                         <div class="col-md-1">
-                             <div id="ShiftBCheckbox">
-                                 ShiftB
-                             </div>
-                             </div>
-                         <div class="col-md-1">
-                             <div id="ShiftCCheckbox">
-                                 ShiftC
-                             </div>
-                             </div>
-                         </div>
-                     <div class="row" style="padding-top:5px; margin:1% 0% 0% 48%">
-                         <button id="ShowShiftButton" class="btn btn-info btn-lg ">
-                             Show
-                         </button>
-                     </div>
-                 </div>
+            <div>
+                <div class="row" style="padding-top:5px;margin:1% 1% 0% -5%">
+                    <div class="col-md-2" style="text-align:right">
+                        <b> Start Date:</b>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="input-group date" id="ShiftStartDateTimePickerDiv">
+                            <input type='text' class="form-control" id="ShiftStartDatePickerInput" />
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-2" style="text-align:right">
+                        <b> End Date:</b>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="input-group date" id="ShiftEndDateTimePickerDiv">
+                            <input type='text' class="form-control" id="ShiftEndDatePickerInput" />
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin:1% 0% 0% 5%">
+                    <div class="col-md-1">
+                        <div id="ShiftACheckbox">
+                            ShiftA
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div id="ShiftBCheckbox">
+                            ShiftB
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div id="ShiftCCheckbox">
+                            ShiftC
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="padding-top:5px; margin:1% 0% 0% 48%">
+                    <button id="ShowShiftButton" class="btn btn-info btn-lg ">
+                        Show
+                    </button>
+                </div>
+            </div>
             <div>
                 <div class="row" style="padding-top:5px;margin:1% 1% 0% -5%">
                     <div class="col-md-2" style="text-align:right">
@@ -313,7 +309,7 @@
                 </div>
             </div>
 
-</div>
         </div>
+    </div>
 
-        </div>
+</div>

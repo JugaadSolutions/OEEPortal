@@ -172,6 +172,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\GraphsController.cs" />
     <Compile Include="Controllers\InputController.cs" />
     <Compile Include="Controllers\LinesController.cs" />
     <Compile Include="Controllers\MachineOutputRecordsController.cs" />
@@ -819,6 +820,7 @@
     <Content Include="Views\MachineOutputRecords\Edit.cshtml" />
     <Content Include="Views\MachineOutputRecords\Index.cshtml" />
     <Content Include="Views\Report\Index.cshtml" />
+    <Content Include="Views\Graphs\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
