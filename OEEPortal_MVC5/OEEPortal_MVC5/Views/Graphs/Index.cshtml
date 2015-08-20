@@ -5,50 +5,68 @@
 
 
 
-     $(document).ready(function () {
-         $("#ReportTabs").jqxTabs({ width: '100%', height: 450, position: 'top'});
+    $(document).ready(function () {
+        $("#ReportTabs").jqxTabs({ width: '100%', height: 450, position: 'top' });
 
-         $("#JanCheckbox").jqxCheckBox({ width: 120, height: 25 });
-         $("#FebCheckbox").jqxCheckBox({ width: 120, height: 25 });
-         $("#MarCheckbox").jqxCheckBox({ width: 120, height: 25 });
-         $("#AprCheckbox").jqxCheckBox({ width: 120, height: 25 });
-         $("#MayCheckbox").jqxCheckBox({ width: 120, height: 25 });
-         $("#JunCheckbox").jqxCheckBox({ width: 120, height: 25 });
-         $("#JulCheckbox").jqxCheckBox({ width: 120, height: 25 });
-         $("#AugCheckbox").jqxCheckBox({ width: 120, height: 25 });
-         $("#SepCheckbox").jqxCheckBox({ width: 120, height: 25 });
-         $("#OctCheckbox").jqxCheckBox({ width: 120, height: 25 });
-         $("#NovCheckbox").jqxCheckBox({ width: 120, height: 25 });
-         $("#DecCheckbox").jqxCheckBox({ width: 120, height: 25 });
-         $("#ShiftACheckbox").jqxCheckBox({ width: 120, height: 25 });
-         $("#ShiftBCheckbox").jqxCheckBox({ width: 120, height: 25 });
-         $("#ShiftCCheckbox").jqxCheckBox({ width: 120, height: 25 });
+        $("#JanCheckbox").jqxCheckBox({ width: 120, height: 25 });
+        $("#FebCheckbox").jqxCheckBox({ width: 120, height: 25 });
+        $("#MarCheckbox").jqxCheckBox({ width: 120, height: 25 });
+        $("#AprCheckbox").jqxCheckBox({ width: 120, height: 25 });
+        $("#MayCheckbox").jqxCheckBox({ width: 120, height: 25 });
+        $("#JunCheckbox").jqxCheckBox({ width: 120, height: 25 });
+        $("#JulCheckbox").jqxCheckBox({ width: 120, height: 25 });
+        $("#AugCheckbox").jqxCheckBox({ width: 120, height: 25 });
+        $("#SepCheckbox").jqxCheckBox({ width: 120, height: 25 });
+        $("#OctCheckbox").jqxCheckBox({ width: 120, height: 25 });
+        $("#NovCheckbox").jqxCheckBox({ width: 120, height: 25 });
+        $("#DecCheckbox").jqxCheckBox({ width: 120, height: 25 });
+        $("#ShiftACheckbox").jqxCheckBox({ width: 120, height: 25 });
+        $("#ShiftBCheckbox").jqxCheckBox({ width: 120, height: 25 });
+        $("#ShiftCCheckbox").jqxCheckBox({ width: 120, height: 25 });
 
-         $("#MachineShiftACheckbox").jqxCheckBox({ width: 120, height: 25 });
-         $("#MachineShiftBCheckbox").jqxCheckBox({ width: 120, height: 25 });
-         $("#MachineShiftCCheckbox").jqxCheckBox({ width: 120, height: 25 });
+        $("#MachineShiftACheckbox").jqxCheckBox({ width: 120, height: 25 });
+        $("#MachineShiftBCheckbox").jqxCheckBox({ width: 120, height: 25 });
+        $("#MachineShiftCCheckbox").jqxCheckBox({ width: 120, height: 25 });
 
 
 
-         $('#DailyStartDateTimePickerDiv').jqxDateTimeInput({ width: '100%', formatString: 'dd/MM/yyyy', showTimeButton: false, value: null });
-         $('#DailyEndDateTimePickerDiv').jqxDateTimeInput({ width: '100%', formatString: 'dd/MM/yyyy', showTimeButton: false, value: null });
-         $('#ShiftStartDateTimePickerDiv').jqxDateTimeInput({ width: '100%', formatString: 'dd/MM/yyyy', showTimeButton: false, value: null });
-         $('#ShiftEndDateTimePickerDiv').jqxDateTimeInput({ width: '100%', formatString: 'dd/MM/yyyy', showTimeButton: false, value: null });
+        $('#DailyStartDateTimePickerDiv').jqxDateTimeInput({ width: '100%', formatString: 'dd/MM/yyyy', showTimeButton: false, value: null });
+        $('#DailyEndDateTimePickerDiv').jqxDateTimeInput({ width: '100%', formatString: 'dd/MM/yyyy', showTimeButton: false, value: null });
+        $('#ShiftStartDateTimePickerDiv').jqxDateTimeInput({ width: '100%', formatString: 'dd/MM/yyyy', showTimeButton: false, value: null });
+        $('#ShiftEndDateTimePickerDiv').jqxDateTimeInput({ width: '100%', formatString: 'dd/MM/yyyy', showTimeButton: false, value: null });
 
-         $('#MachineStartDateTimePickerDiv').jqxDateTimeInput({ width: '100%', formatString: 'dd/MM/yyyy', showTimeButton: false, value: null });
-         $('#MachineEndDateTimePickerDiv').jqxDateTimeInput({ width: '100%', formatString: 'dd/MM/yyyy', showTimeButton: false, value: null });
+        $('#MachineStartDateTimePickerDiv').jqxDateTimeInput({ width: '100%', formatString: 'dd/MM/yyyy', showTimeButton: false, value: null });
+        $('#MachineEndDateTimePickerDiv').jqxDateTimeInput({ width: '100%', formatString: 'dd/MM/yyyy', showTimeButton: false, value: null });
 
-         $('#LogStartDateTimePickerDiv').jqxDateTimeInput({ width: '100%', formatString: 'dd/MM/yyyy', showTimeButton: false, value: null });
-         $('#LogEndDateTimePickerDiv').jqxDateTimeInput({ width: '100%', formatString: 'dd/MM/yyyy', showTimeButton: false, value: null });
-         var source = [
-                   "Ideonics",
-                   "Software",
-                   "Solution",
+        $('#LogStartDateTimePickerDiv').jqxDateTimeInput({ width: '100%', formatString: 'dd/MM/yyyy', showTimeButton: false, value: null });
+        $('#LogEndDateTimePickerDiv').jqxDateTimeInput({ width: '100%', formatString: 'dd/MM/yyyy', showTimeButton: false, value: null });
+        var source = [
+                  "Ideonics",
+                  "Software",
+                  "Solution",
 
-         ];
+        ];
 
-         $("#Machinelistbox").jqxListBox({ source: source, width: '200px', height: '200px' });
-         $("#Machinelistbox").jqxListBox({ multiple: true });
+        $("#Machinelistbox").jqxListBox({ source: source, width: '200px', height: '200px' });
+        $("#Machinelistbox").jqxListBox({ multiple: true });
+        $(function () {
+            $('#ShowMonthButton').click(function () {
+                document.location = '@Url.Action("ShowReport","Report")';
+            })
+            $('#ShowDailyButton').click(function () {
+                document.location = '@Url.Action("ShowReport","Report")';
+            })
+            $('#ShowShiftButton').click(function () {
+                document.location = '@Url.Action("ShowReport","Report")';
+             })
+            $('#ShowMachineButton').click(function () {
+                 document.location = '@Url.Action("ShowReport","Report")';
+        })
+            $('#ShowLineButton').click(function () {
+                document.location = '@Url.Action("ShowReport","Report")';
+            })
+         });
+
      });
 
 

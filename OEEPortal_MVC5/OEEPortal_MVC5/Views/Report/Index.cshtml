@@ -55,7 +55,23 @@
          $("#Machinelistbox").jqxListBox({ multiple: true });
      });
 
-    
+     $(function () {
+         $('#ShowMonthButton').click(function () {
+             document.location = '@Url.Action("ShowReport","Report")';
+         })
+         $('#ShowDailyButton').click(function () {
+             document.location = '@Url.Action("ShowReport","Report")';
+         })
+         $('#ShowShiftButton').click(function () {
+             document.location = '@Url.Action("ShowReport","Report")';
+         })
+         $('#ShowMachineButton').click(function () {
+             document.location = '@Url.Action("ShowReport","Report")';
+         })
+         $('#ShowLineButton').click(function () {
+             document.location = '@Url.Action("ShowReport","Report")';
+         })
+     });
     
      </script>
 }

@@ -13,5 +13,9 @@ namespace OEEPortal_MVC5.Controllers
         {
             return View();
         }
+        public ActionResult ShowReport()
+        {
+            return View();
+        }
     }
 }
