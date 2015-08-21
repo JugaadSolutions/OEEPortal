@@ -12,7 +12,7 @@
  */
 
 (function( window, undefined ) {
-
+    
 var Globalize;
 
 if ( typeof require !== "undefined" &&
