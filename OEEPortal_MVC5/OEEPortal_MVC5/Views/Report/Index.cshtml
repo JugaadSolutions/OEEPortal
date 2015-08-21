@@ -44,18 +44,55 @@
 
          $('#LogStartDateTimePickerDiv').jqxDateTimeInput({ width: '100%', formatString: 'dd/MM/yyyy', showTimeButton: false, value: null });
          $('#LogEndDateTimePickerDiv').jqxDateTimeInput({ width: '100%', formatString: 'dd/MM/yyyy', showTimeButton: false, value: null });
-         var source = [
-                   "Ideonics",
-                   "Software",
-                   "Solution",
+         debugger;
+         var MachineList;
 
-         ];
+         $.ajax({
+             url: '/Home/GetMachines',
+             type: "POST",
+             data: "{'id':"  + "0}",
+             contentType: "application/json",
+             error: function () { alert('GetMachines Failure'); },
+             success: function (machines) {
+
+                 MachineList = machines;
+                 var source = {
+                     localdata: MachineList,
+                     id: "id",
+                     datatype: "json",
+                     datafields: [{ name: "MachineId" }, { name: "Name" }, { name: "Icon" }]
+                 };
+                 var dataSource = new $.jqx.dataAdapter(source);
+
+
+                 $("#Machinelistbox").jqxListBox({ source: dataSource, displayMember: 'Name', valueMember: 'MachineId', width: '200px', height: '200px', multiple: true });
+             }
+         });
+
+
+
         
-         $("#Machinelistbox").jqxListBox({ source: source, width: '200px', height: '200px' });
-         $("#Machinelistbox").jqxListBox({ multiple: true });
+        
+        
      });
 
-    
+     $(function () {
+         $('#ShowMonthButton').click(function () {
+             document.location = '@Url.Action("ShowReport","Report")';
+         })
+         $('#ShowDailyButton').click(function () {
+             document.location = '@Url.Action("ShowReport","Report")';
+         })
+         $('#ShowShiftButton').click(function () {
+             document.location = '@Url.Action("ShowReport","Report")';
+         })
+         $('#ShowMachineButton').click(function () {
+             document.location = '@Url.Action("ShowReport","Report")';
+         })
+         $('#ShowLineButton').click(function () {
+             document.location = '@Url.Action("ShowReport","Report")';
+         })
+     });
     
      </script>
 }

@@ -70,7 +70,15 @@ namespace OEEPortal.Controllers
         {
             using(OEEPortalContext db = new OEEPortalContext())
             {
-                var machines = db.Machines.Where(m => m.LineId == id).ToList();
+                List<Machine> machines;
+                if (id == 0)
+                {
+                     machines = db.Machines.ToList();
+                }
+                else
+                {
+                     machines = db.Machines.Where(m => m.LineId == id).ToList();
+                }
 
                 MachineVM[] machinesList = new MachineVM[machines.Count];
 
@@ -107,6 +115,9 @@ namespace OEEPortal.Controllers
 
             }
         }
+
+
+      
 
     }
 }
