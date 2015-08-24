@@ -1,1 +1,130 @@
 ﻿
+@section scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var MachineOutputrecordList;
+            //debugger;
+            $.ajax({
+                url: '/Home/GetMachineOutputRecords',
+                type: "POST",
+                data: "{'id':" + "0}",
+                contentType: "application/json",
+                error: function () { alert('GetMachineOutputRecords Failure'); },
+                success: function (MachineOutputRecords) {
+
+                    MachineOutputrecordList = MachineOutputRecords;
+                    var source = {
+                        localdata: MachineOutputrecordList,
+                        id: "id",
+                        datatype: "json",
+                        datafields: [
+                    { name: 'MachineOutputRecordId', type: 'number' },
+                    { name: 'OperatorId', type: 'string' },
+                    { name: 'StartTime', type: 'date' },
+                    { name: 'EndTime', type: 'date' },
+                    { name: 'OutputQuantity', type: 'number' },
+                    { name: 'DefectQuantity', type: 'number' },
+                    { name: 'MachineId', type: 'number' },
+                    { name: 'ReferenceId', type: 'number' },
+                    { name: 'EquipmentBreakDownStart', type: 'date' },
+                    { name: 'EquipmentBreakDownEnd', type: 'date' },
+                    { name: 'ChangeOverStart', type: 'date' },
+                    { name: 'ChangeOverEnd', type: 'date' },
+                    { name: 'MaterialDownStart', type: 'date' },
+                    { name: 'MaterialDownEnd', type: 'date' },
+                    { name: 'QualityDownStart', type: 'date' },
+                    { name: 'QualityDownEnd', type: 'date' },
+                    { name: 'NonProductionStart', type: 'date' },
+                    { name: 'NonProductionEnd', type: 'date' },
+                    { name: 'PreventiveMaintenanceStart', type: 'date' },
+                    { name: 'PreventiveMaintenanceEnd', type: 'date' },
+                    { name: 'ManagementMeetingStartd', type: 'date' },
+                    { name: 'ManagementMeetingEnd', type: 'date' },
+                    { name: 'RegulatoryBreaksStart', type: 'date' },
+                    { name: 'RegulatoryBreaksEnd', type: 'date' },
+                    { name: 'PilotRunStart', type: 'date' },
+                    { name: 'PilotRunEnd', type: 'date' }
+                        ]
+                    };
+                    var dataAdapter = new $.jqx.dataAdapter(source);
+                    $("#grid").jqxGrid(
+           {
+               width: 1300,
+               height: 450,
+               source: dataAdapter,
+               sortable: true,
+               columns: [
+                 { text: 'MachineOutputRecordId', dataField: 'MachineOutputRecordId', width: 120 },
+                 { text: 'OperatorId', dataField: 'OperatorId', width: 100 },
+                 { text: 'StartTime', dataField: 'StartTime', cellsformat:'F',width: 250 },
+                 { text: 'EndTime', dataField: 'EndTime', cellsformat: 'F', width: 250 },
+                 { text: 'OutputQuantity', dataField: 'OutputQuantity',  width: 110 },
+                 { text: 'DefectQuantity', dataField: 'DefectQuantity', width: 120 },
+                 { text: 'MachineId', dataField: 'MachineId', width: 100 },
+                 { text: 'ReferenceId', dataField: 'ReferenceId' ,width:110},
+                 { text: 'EquipmentBreakDownStart', dataField: 'EquipmentBreakDownStart', cellsformat: 'F', width: 250 },
+                 { text: 'EquipmentBreakDownEnd', dataField: 'EquipmentBreakDownEnd', cellsformat: 'F', width: 250 },
+                 { text: 'ChangeOverStart', dataField: 'ChangeOverStart', cellsformat: 'F', width: 250 },
+                 { text: 'ChangeOverEnd', dataField: 'ChangeOverEnd', cellsformat: 'F', width: 120 },
+                 { text: 'MaterialDownStart', dataField: 'MaterialDownStart', cellsformat: 'F', width: 120 },
+                 { text: 'MaterialDownEnd', dataField: 'MaterialDownEnd', cellsformat: 'F', width: 120 },
+                 { text: 'PreventiveMaintenanceStart', dataField: 'PreventiveMaintenanceStart', cellsformat: 'F', width: 120 },
+                 { text: 'PreventiveMaintenanceEnd', dataField: 'PreventiveMaintenanceEnd', cellsformat: 'F', width: 120 },
+                 { text: 'ManagementMeetingStartd', dataField: 'ManagementMeetingStartd', cellsformat: 'F', width: 120 },
+                 { text: 'ManagementMeetingEnd', dataField: 'ManagementMeetingEnd', cellsformat: 'F', width: 120 },
+                 { text: 'RegulatoryBreaksStart', dataField: 'RegulatoryBreaksStart', cellsformat: 'F', width: 120 },
+                 { text: 'PilotRunStart', dataField: 'PilotRunStart', cellsformat: 'F', width: 120 },
+                 { text: 'PilotRunEnd', dataField: 'PilotRunEnd', cellsformat: 'F', width: 120 }
+               ]
+           });
+
+
+
+
+
+                }
+            });
+
+
+
+
+
+            //$("#pdfExport").jqxButton();
+            //$("#pdfExport").click(function () {
+            //    $("#grid").jqxGrid('exportdata', 'pdf', 'jqxGrid');
+            //});
+
+
+
+
+
+
+
+        });
+
+
+
+    </script>
+
+
+
+}
+
+<div id="grid" style="margin:1% 0% 0% -7%;width:100%;height:100%"></div>
+@*<div style='margin-left: 10px; float: left;'>
+        <input type="button" value="Export to PDF" id='pdfExport' />
+    </div>*@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
