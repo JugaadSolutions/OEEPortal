@@ -45,6 +45,10 @@ namespace OEEPortal.Controllers
             }
         }
 
+
+        #region AJAX_METHODS
+
+
         public JsonResult GetLines()
         {
             using (OEEPortalContext db = new OEEPortalContext())
@@ -118,11 +122,11 @@ namespace OEEPortal.Controllers
 
 
 
-        public JsonResult GetMachineOutputRecords()
+        public JsonResult GetMachineOutputRecords(LogFilter logFilter)
         {
             using (OEEPortalContext db = new OEEPortalContext())
             {
-                var MachineOutputRecords = db.MachineOutputRecords.ToArray();
+                var MachineOutputRecords = db.MachineOutputRecords.Where(m=>(m.StartTime>=logFilter.From) && (m.EndTime<=logFilter.To)).ToArray();
 
                 MachineOutputRecord[] MachineOutputRecordList = new MachineOutputRecord[MachineOutputRecords.Length];
 
@@ -163,6 +167,9 @@ namespace OEEPortal.Controllers
 
             }
         }
+
+
+        #endregion
 
 
     }
