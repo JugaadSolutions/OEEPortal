@@ -5,7 +5,7 @@
 
 
         $(document).ready(function () {
-            $("#ReportTabs").jqxTabs({ width: '100%', height: 450, position: 'top' });
+            $("#ReportTabs").jqxTabs({ width: '100%', height: 450, position: 'top', scrollable:false });
 
             $("#JanCheckbox").jqxCheckBox({ width: 120, height: 25 });
             $("#FebCheckbox").jqxCheckBox({ width: 120, height: 25 });
@@ -85,16 +85,16 @@
             $('#ShowMachineButton').click(function () {
                 document.location = '@Url.Action("ShowReport","Report")';
             })
-            $('#ShowLineButton').click(function () {
+            $('#ShowDailyButton').click(function () {
                 document.location = '@Url.Action("ShowReport","Report")';
             })
-            $('#ShowDailyButton').click(function () {
+            $('#ShowLineButton').click(function () {
                 
                 var MachineOutputrecordList;
 
                 var logfilter = {
-                    From: $('#DailyStartDateTimePickerDiv').jqxDateTimeInput('value'),
-                    To: $('#DailyEndDateTimePickerDiv').jqxDateTimeInput('value')
+                    From: $('#LogStartDateTimePickerDiv').jqxDateTimeInput('value'),
+                    To: $('#LogEndDateTimePickerDiv').jqxDateTimeInput('value')
                 };
 
 
@@ -107,11 +107,11 @@
                     contentType: "application/json",
                     error: function () { alert("Error While Saving. Please Verify") },
                     success: function (MachineOutputRecords) {
-                        debugger;
+                       // debugger;
 
 
-                        $('#BaseContentdiv').empty();
-                        $("<div id='ReportGrid'></div> <div id='ExportGrid'></div>").appendTo($('#BaseContentdiv'));
+                        $('#LogContentDiv').empty();
+                        $("<div id='ReportGrid'></div> <div id='ExportGrid'></div>").appendTo($('#LogContentDiv'));
                         $("<button id='ExportButton' class='btn btn-info btn-lg' >Export</button>").appendTo($('#ExportGrid'))
                         MachineOutputrecordList = MachineOutputRecords;
                         var source = {
@@ -150,8 +150,8 @@
                         var dataAdapter = new $.jqx.dataAdapter(source);
                         $('#ReportGrid').jqxGrid(
                {
-                   width: 1300,
-                   height: 450,
+                   width: 850,
+                   height: 350,
                    source: dataAdapter,
                    sortable: true,
                    columns: [
@@ -292,7 +292,7 @@
                     </div>
                 </div>
             </div>
-            <div id="BaseContentdiv">
+            <div>
 
                 <div class="row" style="padding-top:5px;margin:1% 1% 0% -5%">
                     <div class="col-md-2" style="text-align:right">
@@ -426,7 +426,7 @@
                 </div>
 
             </div>
-            <div>
+            <div id="LogContentDiv">
                 <div class="row" style="padding-top:5px;margin:1% 1% 0% -5%">
                     <div class="col-md-2" style="text-align:right">
                         <b> Start Date:</b>
