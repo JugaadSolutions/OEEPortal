@@ -126,7 +126,8 @@ namespace OEEPortal.Controllers
         {
             using (OEEPortalContext db = new OEEPortalContext())
             {
-                var MachineOutputRecords = db.MachineOutputRecords.Where(m=>(m.StartTime>=logFilter.From) && (m.EndTime<=logFilter.To)).ToArray();
+                logFilter.To = logFilter.To.AddDays(1);
+                var MachineOutputRecords = db.MachineOutputRecords.Where(m=>(m.StartTime>=logFilter.From) && (m.EndTime<logFilter.To)).ToArray();
 
                 MachineOutputRecord[] MachineOutputRecordList = new MachineOutputRecord[MachineOutputRecords.Length];
 
