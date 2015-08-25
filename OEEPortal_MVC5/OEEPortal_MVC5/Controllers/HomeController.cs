@@ -9,7 +9,7 @@ namespace OEEPortal.Controllers
 {
     public class HomeController : Controller
     {
-
+        OEEPortalContext db = new OEEPortalContext();
         public ActionResult Index()
         {
             
@@ -117,7 +117,53 @@ namespace OEEPortal.Controllers
         }
 
 
-      
+
+        public JsonResult GetMachineOutputRecords()
+        {
+            using (OEEPortalContext db = new OEEPortalContext())
+            {
+                var MachineOutputRecords = db.MachineOutputRecords.ToArray();
+
+                MachineOutputRecord[] MachineOutputRecordList = new MachineOutputRecord[MachineOutputRecords.Length];
+
+                int i = 0;
+                foreach (MachineOutputRecord m in MachineOutputRecords)
+                {
+                    MachineOutputRecordList[i++] = new MachineOutputRecord
+                    {
+                        MachineOutputRecordId = m.MachineOutputRecordId,
+                        OperatorId = m.OperatorId,
+                        StartTime = m.StartTime,
+                        EndTime = m.EndTime,
+                        OutputQuantity = m.OutputQuantity,
+                        DefectQuantity = m.DefectQuantity,
+                        MachineId = m.MachineId,
+                        ReferenceId = m.ReferenceId,
+                        EquipmentBreakDownStart = m.EquipmentBreakDownStart,
+                        EquipmentBreakDownEnd = m.EquipmentBreakDownEnd,
+                        ChangeOverStart = m.ChangeOverStart,
+                        ChangeOverEnd = m.ChangeOverEnd,
+                        MaterialDownStart = m.MaterialDownStart,
+                        MaterialDownEnd = m.MaterialDownEnd,
+                        QualityDownStart = m.QualityDownStart,
+                        QualityDownEnd = m.QualityDownEnd,
+                        PreventiveMaintenanceStart = m.PreventiveMaintenanceStart,
+                        PreventiveMaintenanceEnd = m.PreventiveMaintenanceEnd,
+                        ManagementMeetingStart = m.ManagementMeetingStart,
+                        ManagementMeetingEnd = m.ManagementMeetingEnd,
+                        RegulatoryBreaksStart = m.RegulatoryBreaksStart,
+                        RegulatoryBreaksEnd = m.RegulatoryBreaksEnd,
+                        PilotRunStart = m.PilotRunStart,
+                        PilotRunEnd = m.PilotRunEnd
+                    };
+                }
+
+                return Json(MachineOutputRecordList, JsonRequestBehavior.AllowGet);
+
+
+            }
+        }
+
 
     }
 }
