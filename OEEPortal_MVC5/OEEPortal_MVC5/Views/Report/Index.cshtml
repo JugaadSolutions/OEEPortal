@@ -1,209 +1,208 @@
-﻿
+﻿@section Scripts{
+
+
+    <script type="text/javascript">
+
+
+        $(document).ready(function () {
+            $("#ReportTabs").jqxTabs({ width: '100%', height: 450, position: 'top' });
+
+            $("#JanCheckbox").jqxCheckBox({ width: 120, height: 25 });
+            $("#FebCheckbox").jqxCheckBox({ width: 120, height: 25 });
+            $("#MarCheckbox").jqxCheckBox({ width: 120, height: 25 });
+            $("#AprCheckbox").jqxCheckBox({ width: 120, height: 25 });
+            $("#MayCheckbox").jqxCheckBox({ width: 120, height: 25 });
+            $("#JunCheckbox").jqxCheckBox({ width: 120, height: 25 });
+            $("#JulCheckbox").jqxCheckBox({ width: 120, height: 25 });
+            $("#AugCheckbox").jqxCheckBox({ width: 120, height: 25 });
+            $("#SepCheckbox").jqxCheckBox({ width: 120, height: 25 });
+            $("#OctCheckbox").jqxCheckBox({ width: 120, height: 25 });
+            $("#NovCheckbox").jqxCheckBox({ width: 120, height: 25 });
+            $("#DecCheckbox").jqxCheckBox({ width: 120, height: 25 });
+            $("#ShiftACheckbox").jqxCheckBox({ width: 120, height: 25 });
+            $("#ShiftBCheckbox").jqxCheckBox({ width: 120, height: 25 });
+            $("#ShiftCCheckbox").jqxCheckBox({ width: 120, height: 25 });
+
+            $("#MachineShiftACheckbox").jqxCheckBox({ width: 120, height: 25 });
+            $("#MachineShiftBCheckbox").jqxCheckBox({ width: 120, height: 25 });
+            $("#MachineShiftCCheckbox").jqxCheckBox({ width: 120, height: 25 });
+
+
+
+            $('#DailyStartDateTimePickerDiv').jqxDateTimeInput({ width: '100%', formatString: 'dd/MM/yyyy', showTimeButton: false, value: null });
+            $('#DailyEndDateTimePickerDiv').jqxDateTimeInput({ width: '100%', formatString: 'dd/MM/yyyy', showTimeButton: false, value: null });
+            $('#ShiftStartDateTimePickerDiv').jqxDateTimeInput({ width: '100%', formatString: 'dd/MM/yyyy', showTimeButton: false, value: null });
+            $('#ShiftEndDateTimePickerDiv').jqxDateTimeInput({ width: '100%', formatString: 'dd/MM/yyyy', showTimeButton: false, value: null });
+
+            $('#MachineStartDateTimePickerDiv').jqxDateTimeInput({ width: '100%', formatString: 'dd/MM/yyyy', showTimeButton: false, value: null });
+            $('#MachineEndDateTimePickerDiv').jqxDateTimeInput({ width: '100%', formatString: 'dd/MM/yyyy', showTimeButton: false, value: null });
+
+            $('#LogStartDateTimePickerDiv').jqxDateTimeInput({ width: '100%', formatString: 'dd/MM/yyyy', showTimeButton: false, value: null });
+            $('#LogEndDateTimePickerDiv').jqxDateTimeInput({ width: '100%', formatString: 'dd/MM/yyyy', showTimeButton: false, value: null });
+            // debugger;
+            var MachineList;
+
+            $.ajax({
+                url: '/Home/GetMachines',
+                type: "POST",
+                data: "{'id':" + "0}",
+                contentType: "application/json",
+                error: function () { alert('GetMachines Failure'); },
+                success: function (machines) {
+
+                    MachineList = machines;
+                    var source = {
+                        localdata: MachineList,
+                        id: "id",
+                        datatype: "json",
+                        datafields: [{ name: "MachineId" }, { name: "Name" }, { name: "Icon" }]
+                    };
+                    var dataSource = new $.jqx.dataAdapter(source);
+
+
+                    $("#Machinelistbox").jqxListBox({ source: dataSource, displayMember: 'Name', valueMember: 'MachineId', width: '200px', height: '200px', multiple: true });
+                }
+            });
 
 
 
 
-@section Scripts{
-    
-    
-    <script type="text/javascript">  
-  
-
-     $(document).ready(function () {
-         $("#ReportTabs").jqxTabs({ width: '100%', height: 450, position: 'top'});
-
-         $("#JanCheckbox").jqxCheckBox({ width: 120, height: 25 });
-         $("#FebCheckbox").jqxCheckBox({ width: 120, height: 25 });
-         $("#MarCheckbox").jqxCheckBox({ width: 120, height: 25 });
-         $("#AprCheckbox").jqxCheckBox({ width: 120, height: 25 });
-         $("#MayCheckbox").jqxCheckBox({ width: 120, height: 25 });
-         $("#JunCheckbox").jqxCheckBox({ width: 120, height: 25 });
-         $("#JulCheckbox").jqxCheckBox({ width: 120, height: 25 });
-         $("#AugCheckbox").jqxCheckBox({ width: 120, height: 25 });
-         $("#SepCheckbox").jqxCheckBox({ width: 120, height: 25 });
-         $("#OctCheckbox").jqxCheckBox({ width: 120, height: 25 });
-         $("#NovCheckbox").jqxCheckBox({ width: 120, height: 25 });
-         $("#DecCheckbox").jqxCheckBox({ width: 120, height: 25 });
-         $("#ShiftACheckbox").jqxCheckBox({ width: 120, height: 25 });
-         $("#ShiftBCheckbox").jqxCheckBox({ width: 120, height: 25 });
-         $("#ShiftCCheckbox").jqxCheckBox({ width: 120, height: 25 });
-
-         $("#MachineShiftACheckbox").jqxCheckBox({ width: 120, height: 25 });
-         $("#MachineShiftBCheckbox").jqxCheckBox({ width: 120, height: 25 });
-         $("#MachineShiftCCheckbox").jqxCheckBox({ width: 120, height: 25 });
 
 
+        });
 
-         $('#DailyStartDateTimePickerDiv').jqxDateTimeInput({ width: '100%', formatString: 'dd/MM/yyyy', showTimeButton: false, value: null });
-         $('#DailyEndDateTimePickerDiv').jqxDateTimeInput({ width: '100%', formatString: 'dd/MM/yyyy', showTimeButton: false, value: null });
-         $('#ShiftStartDateTimePickerDiv').jqxDateTimeInput({ width: '100%', formatString: 'dd/MM/yyyy', showTimeButton: false, value: null });
-         $('#ShiftEndDateTimePickerDiv').jqxDateTimeInput({ width: '100%', formatString: 'dd/MM/yyyy', showTimeButton: false, value: null });
-
-         $('#MachineStartDateTimePickerDiv').jqxDateTimeInput({ width: '100%', formatString: 'dd/MM/yyyy', showTimeButton: false, value: null });
-         $('#MachineEndDateTimePickerDiv').jqxDateTimeInput({ width: '100%', formatString: 'dd/MM/yyyy', showTimeButton: false, value: null });
-
-         $('#LogStartDateTimePickerDiv').jqxDateTimeInput({ width: '100%', formatString: 'dd/MM/yyyy', showTimeButton: false, value: null });
-         $('#LogEndDateTimePickerDiv').jqxDateTimeInput({ width: '100%', formatString: 'dd/MM/yyyy', showTimeButton: false, value: null });
-        // debugger;
-         var MachineList;
-
-         $.ajax({
-             url: '/Home/GetMachines',
-             type: "POST",
-             data: "{'id':"  + "0}",
-             contentType: "application/json",
-             error: function () { alert('GetMachines Failure'); },
-             success: function (machines) {
-
-                 MachineList = machines;
-                 var source = {
-                     localdata: MachineList,
-                     id: "id",
-                     datatype: "json",
-                     datafields: [{ name: "MachineId" }, { name: "Name" }, { name: "Icon" }]
-                 };
-                 var dataSource = new $.jqx.dataAdapter(source);
-
-
-                 $("#Machinelistbox").jqxListBox({ source: dataSource, displayMember: 'Name', valueMember: 'MachineId', width: '200px', height: '200px', multiple: true });
-             }
-         });
-
-
-
-        
-        
-        
-     });
-
-     $(function () {
-         $('#ShowMonthButton').click(function () {
-             document.location = '@Url.Action("ShowReport","Report")';
-         })
-       
-             @*document.location = '@Url.Action("ShowReport","Report")';*@
-            
-       
-         $('#ShowShiftButton').click(function () {
-             document.location = '@Url.Action("ShowReport","Report")';
-         })
-         $('#ShowMachineButton').click(function () {
-             document.location = '@Url.Action("ShowReport","Report")';
-         })
-         $('#ShowLineButton').click(function () {
-             document.location = '@Url.Action("ShowReport","Report")';
-         })
-         $('#ShowDailyButton').click(function () {
-             debbuger;
-             var MachineOutputrecordList;
-             
-             var logfilter = {
-                From: $('#DailyStartDateTimePickerDiv').jqxDateTimeInput('value'),
-                 To: $('#DailyEndDateTimePickerDiv').jqxDateTimeInput('value')
-             }
-        
-            
-         
-             $.ajax({
-                 
-                 url:'/Home/GetMachineOutputRecords',
-                 data: "{'LogFilter':" + JSON.stringify(logfilter) + "}",
-                 type: "POST",
-                 contentType: "application/json",
-                 error: function () { alert("Error While Saving. Please Verify") },
-                 success: function (machineOutputRecords) {            
-                     $('#BaseContentdiv').empty();
-                     $('<div id="grid"></div>').appendTo('#BaseContentdiv');
-                     $('#grid').append("<button id='excelExport'>Export to Excel</button>")
-                     MachineOutputrecordList = MachineOutputRecords;
-                     var source = {
-                         localdata: MachineOutputrecordList,
-                         id: "id",
-                         datatype: "json",
-                         datafields: [
-                     { name: 'MachineOutputRecordId', type: 'number' },
-                     { name: 'OperatorId', type: 'string' },
-                     { name: 'StartTime', type: 'date' },
-                     { name: 'EndTime', type: 'date' },
-                     { name: 'OutputQuantity', type: 'number' },
-                     { name: 'DefectQuantity', type: 'number' },
-                     { name: 'MachineId', type: 'number' },
-                     { name: 'ReferenceId', type: 'number' },
-                     { name: 'EquipmentBreakDownStart', type: 'date' },
-                     { name: 'EquipmentBreakDownEnd', type: 'date' },
-                     { name: 'ChangeOverStart', type: 'date' },
-                     { name: 'ChangeOverEnd', type: 'date' },
-                     { name: 'MaterialDownStart', type: 'date' },
-                     { name: 'MaterialDownEnd', type: 'date' },
-                     { name: 'QualityDownStart', type: 'date' },
-                     { name: 'QualityDownEnd', type: 'date' },
-                     { name: 'NonProductionStart', type: 'date' },
-                     { name: 'NonProductionEnd', type: 'date' },
-                     { name: 'PreventiveMaintenanceStart', type: 'date' },
-                     { name: 'PreventiveMaintenanceEnd', type: 'date' },
-                     { name: 'ManagementMeetingStartd', type: 'date' },
-                     { name: 'ManagementMeetingEnd', type: 'date' },
-                     { name: 'RegulatoryBreaksStart', type: 'date' },
-                     { name: 'RegulatoryBreaksEnd', type: 'date' },
-                     { name: 'PilotRunStart', type: 'date' },
-                     { name: 'PilotRunEnd', type: 'date' }
-                         ]
-                     };
-                     var dataAdapter = new $.jqx.dataAdapter(source);
-                     $("#grid").jqxGrid(
-            {
-                width: 1300,
-                height: 450,
-                source: dataAdapter,
-                sortable: true,
-                columns: [
-                  { text: 'MachineOutputRecordId', dataField: 'MachineOutputRecordId', width: 120 },
-                  { text: 'OperatorId', dataField: 'OperatorId', width: 100 },
-                  { text: 'StartTime', dataField: 'StartTime', cellsformat: 'F', width: 250 },
-                  { text: 'EndTime', dataField: 'EndTime', cellsformat: 'F', width: 250 },
-                  { text: 'OutputQuantity', dataField: 'OutputQuantity', width: 110 },
-                  { text: 'DefectQuantity', dataField: 'DefectQuantity', width: 120 },
-                  { text: 'MachineId', dataField: 'MachineId', width: 100 },
-                  { text: 'ReferenceId', dataField: 'ReferenceId', width: 110 },
-                  { text: 'EquipmentBreakDownStart', dataField: 'EquipmentBreakDownStart', cellsformat: 'F', width: 250 },
-                  { text: 'EquipmentBreakDownEnd', dataField: 'EquipmentBreakDownEnd', cellsformat: 'F', width: 250 },
-                  { text: 'ChangeOverStart', dataField: 'ChangeOverStart', cellsformat: 'F', width: 250 },
-                  { text: 'ChangeOverEnd', dataField: 'ChangeOverEnd', cellsformat: 'F', width: 120 },
-                  { text: 'MaterialDownStart', dataField: 'MaterialDownStart', cellsformat: 'F', width: 120 },
-                  { text: 'MaterialDownEnd', dataField: 'MaterialDownEnd', cellsformat: 'F', width: 120 },
-                  { text: 'PreventiveMaintenanceStart', dataField: 'PreventiveMaintenanceStart', cellsformat: 'F', width: 120 },
-                  { text: 'PreventiveMaintenanceEnd', dataField: 'PreventiveMaintenanceEnd', cellsformat: 'F', width: 120 },
-                  { text: 'ManagementMeetingStartd', dataField: 'ManagementMeetingStartd', cellsformat: 'F', width: 120 },
-                  { text: 'ManagementMeetingEnd', dataField: 'ManagementMeetingEnd', cellsformat: 'F', width: 120 },
-                  { text: 'RegulatoryBreaksStart', dataField: 'RegulatoryBreaksStart', cellsformat: 'F', width: 120 },
-                  { text: 'PilotRunStart', dataField: 'PilotRunStart', cellsformat: 'F', width: 120 },
-                  { text: 'PilotRunEnd', dataField: 'PilotRunEnd', cellsformat: 'F', width: 120 }
-                ]
-             
-
+        $(function () {
+            $('#ShowMonthButton').click(function () {
+                document.location = '@Url.Action("ShowReport","Report")';
             })
+
+            @*document.location = '@Url.Action("ShowReport","Report")';*@
+
+
+            $('#ShowShiftButton').click(function () {
+                document.location = '@Url.Action("ShowReport","Report")';
+            })
+            $('#ShowMachineButton').click(function () {
+                document.location = '@Url.Action("ShowReport","Report")';
+            })
+            $('#ShowLineButton').click(function () {
+                document.location = '@Url.Action("ShowReport","Report")';
+            })
+            $('#ShowDailyButton').click(function () {
                 
-                 
-         
-                 }
-             })
+                var MachineOutputrecordList;
 
-                 
-    
-                  $("#excelExport").jqxButton();
-             $("#excelExport").click(function () {
-                 $("#grid").jqxGrid('exportdata', 'xls', 'jqxGrid');
-        
-                    })
-        
-         });
+                var logfilter = {
+                    From: $('#DailyStartDateTimePickerDiv').jqxDateTimeInput('value'),
+                    To: $('#DailyEndDateTimePickerDiv').jqxDateTimeInput('value')
+                };
 
 
 
-     });
+                $.ajax({
 
-    
-     </script>
+                    url: '/Home/GetMachineOutputRecords',
+                    data: "{'LogFilter':" + JSON.stringify(logfilter) + "}",
+                    type: "POST",
+                    contentType: "application/json",
+                    error: function () { alert("Error While Saving. Please Verify") },
+                    success: function (MachineOutputRecords) {
+                        debugger;
+
+
+                        $('#BaseContentdiv').empty();
+                        $("<div id='ReportGrid'></div> <div id='ExportGrid'></div>").appendTo($('#BaseContentdiv'));
+                        $("<button id='ExportButton' class='btn btn-info btn-lg' >Export</button>").appendTo($('#ExportGrid'))
+                        MachineOutputrecordList = MachineOutputRecords;
+                        var source = {
+                            localdata: MachineOutputrecordList,
+                            id: "id",
+                            datatype: "json",
+                            datafields: [
+                        { name: 'MachineOutputRecordId', type: 'number' },
+                        { name: 'OperatorId', type: 'string' },
+                        { name: 'StartTime', type: 'date' },
+                        { name: 'EndTime', type: 'date' },
+                        { name: 'OutputQuantity', type: 'number' },
+                        { name: 'DefectQuantity', type: 'number' },
+                        { name: 'MachineId', type: 'number' },
+                        { name: 'ReferenceId', type: 'number' },
+                        { name: 'EquipmentBreakDownStart', type: 'date' },
+                        { name: 'EquipmentBreakDownEnd', type: 'date' },
+                        { name: 'ChangeOverStart', type: 'date' },
+                        { name: 'ChangeOverEnd', type: 'date' },
+                        { name: 'MaterialDownStart', type: 'date' },
+                        { name: 'MaterialDownEnd', type: 'date' },
+                        { name: 'QualityDownStart', type: 'date' },
+                        { name: 'QualityDownEnd', type: 'date' },
+                        { name: 'NonProductionStart', type: 'date' },
+                        { name: 'NonProductionEnd', type: 'date' },
+                        { name: 'PreventiveMaintenanceStart', type: 'date' },
+                        { name: 'PreventiveMaintenanceEnd', type: 'date' },
+                        { name: 'ManagementMeetingStartd', type: 'date' },
+                        { name: 'ManagementMeetingEnd', type: 'date' },
+                        { name: 'RegulatoryBreaksStart', type: 'date' },
+                        { name: 'RegulatoryBreaksEnd', type: 'date' },
+                        { name: 'PilotRunStart', type: 'date' },
+                        { name: 'PilotRunEnd', type: 'date' }
+                            ]
+                        };
+                        var dataAdapter = new $.jqx.dataAdapter(source);
+                        $('#ReportGrid').jqxGrid(
+               {
+                   width: 1300,
+                   height: 450,
+                   source: dataAdapter,
+                   sortable: true,
+                   columns: [
+                     { text: 'MachineOutputRecordId', dataField: 'MachineOutputRecordId', width: 120 },
+                     { text: 'OperatorId', dataField: 'OperatorId', width: 100 },
+                     { text: 'StartTime', dataField: 'StartTime', cellsformat: 'F', width: 250 },
+                     { text: 'EndTime', dataField: 'EndTime', cellsformat: 'F', width: 250 },
+                     { text: 'OutputQuantity', dataField: 'OutputQuantity', width: 110 },
+                     { text: 'DefectQuantity', dataField: 'DefectQuantity', width: 120 },
+                     { text: 'MachineId', dataField: 'MachineId', width: 100 },
+                     { text: 'ReferenceId', dataField: 'ReferenceId', width: 110 },
+                     { text: 'EquipmentBreakDownStart', dataField: 'EquipmentBreakDownStart', cellsformat: 'F', width: 250 },
+                     { text: 'EquipmentBreakDownEnd', dataField: 'EquipmentBreakDownEnd', cellsformat: 'F', width: 250 },
+                     { text: 'ChangeOverStart', dataField: 'ChangeOverStart', cellsformat: 'F', width: 250 },
+                     { text: 'ChangeOverEnd', dataField: 'ChangeOverEnd', cellsformat: 'F', width: 120 },
+                     { text: 'MaterialDownStart', dataField: 'MaterialDownStart', cellsformat: 'F', width: 120 },
+                     { text: 'MaterialDownEnd', dataField: 'MaterialDownEnd', cellsformat: 'F', width: 120 },
+                     { text: 'PreventiveMaintenanceStart', dataField: 'PreventiveMaintenanceStart', cellsformat: 'F', width: 120 },
+                     { text: 'PreventiveMaintenanceEnd', dataField: 'PreventiveMaintenanceEnd', cellsformat: 'F', width: 120 },
+                     { text: 'ManagementMeetingStartd', dataField: 'ManagementMeetingStartd', cellsformat: 'F', width: 120 },
+                     { text: 'ManagementMeetingEnd', dataField: 'ManagementMeetingEnd', cellsformat: 'F', width: 120 },
+                     { text: 'RegulatoryBreaksStart', dataField: 'RegulatoryBreaksStart', cellsformat: 'F', width: 120 },
+                     { text: 'PilotRunStart', dataField: 'PilotRunStart', cellsformat: 'F', width: 120 },
+                     { text: 'PilotRunEnd', dataField: 'PilotRunEnd', cellsformat: 'F', width: 120 }
+                   ]
+
+
+               });
+
+                        
+                        $("#ExportButton").on("click",function () {
+                            $('#ReportGrid').jqxGrid('exportdata', 'xls', 'jqxGrid');
+
+                        });
+
+                    }
+
+                });
+
+
+
+
+
+            });
+
+
+
+        });
+
+
+    </script>
 }
 
 <div id="ContentDiv" class="roundedDiv text-center"
@@ -246,52 +245,52 @@
                             <div id="MayCheckbox">
                                 May
                             </div>
-                            </div>
+                        </div>
                         <div class="col-md-1">
                             <div id="JunCheckbox">
                                 June
                             </div>
-                            </div>
+                        </div>
                         <div class="col-md-1">
                             <div id="JulCheckbox">
                                 July
                             </div>
-                            </div>
+                        </div>
                         <div class="col-md-1">
                             <div id="AugCheckbox">
                                 August
                             </div>
-                            </div>
                         </div>
+                    </div>
                     <div class="row">
                         <div class="col-md-1">
                             <div id="SepCheckbox">
                                 September
                             </div>
-                            </div>
+                        </div>
                         <div class="col-md-1">
                             <div id="OctCheckbox">
                                 October
                             </div>
-                            </div>
+                        </div>
                         <div class="col-md-1">
                             <div id="NovCheckbox">
                                 November
                             </div>
-                            </div>
+                        </div>
                         <div class="col-md-1">
                             <div id="DecCheckbox">
                                 December
                             </div>
-                            </div>
-                        </div>
-
-                        <div class="row" style="padding-top:5px; margin:1% 0% 0% 10%">
-                            <button id="ShowMonthButton" class="btn btn-info btn-lg ">
-                                Show
-                            </button>
                         </div>
                     </div>
+
+                    <div class="row" style="padding-top:5px; margin:1% 0% 0% 10%">
+                        <button id="ShowMonthButton" class="btn btn-info btn-lg ">
+                            Show
+                        </button>
+                    </div>
+                </div>
             </div>
             <div id="BaseContentdiv">
 
@@ -325,54 +324,54 @@
                     </button>
                 </div>
             </div>
-                 <div>
-                     <div class="row" style="padding-top:5px;margin:1% 1% 0% -5%">
-                         <div class="col-md-2" style="text-align:right">
-                             <b> Start Date:</b>
-                         </div>
-                         <div class="col-md-4">
-                             <div class="input-group date" id="ShiftStartDateTimePickerDiv">
-                                 <input type='text' class="form-control" id="ShiftStartDatePickerInput" />
-                                 <span class="input-group-addon">
-                                     <span class="glyphicon glyphicon-calendar"></span>
-                                 </span>
-                             </div>
-                         </div>
-                         <div class="col-md-2" style="text-align:right">
-                             <b> End Date:</b>
-                         </div>
-                         <div class="col-md-4">
-                             <div class="input-group date" id="ShiftEndDateTimePickerDiv">
-                                 <input type='text' class="form-control" id="ShiftEndDatePickerInput" />
-                                 <span class="input-group-addon">
-                                     <span class="glyphicon glyphicon-calendar"></span>
-                                 </span>
-                             </div>
-                         </div>
-                     </div>
-                     <div class="row" style="margin:1% 0% 0% 5%">
-                         <div class="col-md-1">
-                             <div id="ShiftACheckbox">
-                                 ShiftA
-                             </div>
-                             </div>
-                         <div class="col-md-1">
-                             <div id="ShiftBCheckbox">
-                                 ShiftB
-                             </div>
-                             </div>
-                         <div class="col-md-1">
-                             <div id="ShiftCCheckbox">
-                                 ShiftC
-                             </div>
-                             </div>
-                         </div>
-                     <div class="row" style="padding-top:5px; margin:1% 0% 0% 48%">
-                         <button id="ShowShiftButton" class="btn btn-info btn-lg ">
-                             Show
-                         </button>
-                     </div>
-                 </div>
+            <div>
+                <div class="row" style="padding-top:5px;margin:1% 1% 0% -5%">
+                    <div class="col-md-2" style="text-align:right">
+                        <b> Start Date:</b>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="input-group date" id="ShiftStartDateTimePickerDiv">
+                            <input type='text' class="form-control" id="ShiftStartDatePickerInput" />
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-2" style="text-align:right">
+                        <b> End Date:</b>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="input-group date" id="ShiftEndDateTimePickerDiv">
+                            <input type='text' class="form-control" id="ShiftEndDatePickerInput" />
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin:1% 0% 0% 5%">
+                    <div class="col-md-1">
+                        <div id="ShiftACheckbox">
+                            ShiftA
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div id="ShiftBCheckbox">
+                            ShiftB
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div id="ShiftCCheckbox">
+                            ShiftC
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="padding-top:5px; margin:1% 0% 0% 48%">
+                    <button id="ShowShiftButton" class="btn btn-info btn-lg ">
+                        Show
+                    </button>
+                </div>
+            </div>
             <div>
                 <div class="row" style="padding-top:5px;margin:1% 1% 0% -5%">
                     <div class="col-md-2" style="text-align:right">
@@ -459,11 +458,11 @@
                 </div>
             </div>
 
-</div>
-       
         </div>
+
+    </div>
     @*<div id="grid" style="margin:1% 0% 0% -7%;width:100%;height:100%"></div>
-    <div style='margin-left: 10px; float: left;'>
-        <input type="button" value="Export to Excel" id='excelExport' />
-    </div>*@
-        </div>
+        <div style='margin-left: 10px; float: left;'>
+            <input type="button" value="Export to Excel" id='excelExport' />
+        </div>*@
+</div>
