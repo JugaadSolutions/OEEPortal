@@ -122,7 +122,7 @@
             //debugger;
             var selectedReference = $("#ReferenceCombobox").jqxComboBox('getSelectedItem');
             var referenceId = selectedReference.value;
-            debugger;
+           // debugger;
             var record = {
 
                 OperatorID: document.getElementById("OperatorIDInput").value,
@@ -173,7 +173,7 @@
                 contentType: "application/json",
                 error: function () { alert("Error While Saving. Please Verify") },
                 success: function (SaveResult) {
-                    debugger;
+                    //debugger;
                     alert(SaveResult.result ? "Data Saved" : "Failed to Save Data" );
 
                 }
