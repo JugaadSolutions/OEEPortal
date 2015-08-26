@@ -41,75 +41,75 @@
                     SEPFC - OEEPortal
                     <a href='@Url.Action("Index", "Home")' style="float:right;">
                         <img src="~/Images/green-home-icon.png" style="width:50px;height:40px;padding:1px 9px 3px 1px" />
-                    </a> 
+                    </a>
                 </p>
-             
+
             </div>
         </div>
-        
+
         <div class="row" style="height:100%">
-@if (IsSectionDefined("Menu"))
-{
-    <div class="col-md-2 text-center">
-        <div class="menu1" style="align-self:center">
+            @if (IsSectionDefined("Menu"))
+            {
+                <div class="col-md-2 text-center">
+                    <div class="menu1" style="align-self:center">
 
-            @RenderSection("Menu", required: false);
-        </div>
-    </div>
-    <div class="col-md-10">
-        @RenderBody()
-    </div>
-}
-else
-{ 
-                    <div class="col-md-12" style="height:100%;position:absolute;">
-                        @RenderBody()
+                        @RenderSection("Menu", required: false);
                     </div>
-}
-
                 </div>
+                <div class="col-md-10">
+                    @RenderBody()
+                </div>
+            }
+            else
+            {
+                <div class="col-md-12" style="height:100%;">
+                    @RenderBody()
+                </div>
+            }
 
-                <footer class="footer">
+        </div>
 
-                    <div class="col-md-10 text-center">
-                        <p class="roundedDiv"
-                           style="margin:0px 50px 0px 20px;width:100%;color:white;font-family:'Arial Rounded MT';font-size:small;background-color:green;border:green medium solid">
-                            &copy; SEPFC
-                        </p>
-                    </div>
+        <footer class="footer">
 
-                </footer>
+            <div class="col-md-10 text-center">
+                <p class="roundedDiv"
+                   style="margin:0px 50px 0px 20px;width:100%;color:white;font-family:'Arial Rounded MT';font-size:small;background-color:green;border:green medium solid">
+                    &copy; SEPFC
+                </p>
             </div>
 
-            @Scripts.Render("~/bundles/jquery")
-            @Scripts.Render("~/bundles/bootstrap")
-            @Scripts.Render("~/bundles/JQWidgets")
-            @Styles.Render("~/Content/JQStyles")
-   
+        </footer>
+    </div>
 
-            <script src="~/Scripts/ie10-viewport-bug-workaround.js"></script>
-            <script type="text/javascript">
-                $(function () {
-                   
-                   
-                    $('.roundedDiv').corner('keep 10px');
-                    $('#inputbtn').click(function () {
-                        document.location = '@Url.Action("Index","MachineOutputRecords")';
-                    })
-                    $('#reprtbtn').click(function () {
-                        document.location = '@Url.Action("Index","Report")';
-                    })
-                    $('#grpbtn').click(function () {
-                        document.location = '@Url.Action("Index","Graphs")';
-                    })
-                    $('#Mngbtn').click(function () {
-                        document.location='@Url.Action("Index", "Lines")';
-                    })
-                });
-            </script>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/JQWidgets")
+    @Styles.Render("~/Content/JQStyles")
 
-            @RenderSection("scripts", required: false)
+
+    <script src="~/Scripts/ie10-viewport-bug-workaround.js"></script>
+    <script type="text/javascript">
+        $(function () {
+
+
+            $('.roundedDiv').corner('keep 10px');
+            $('#inputbtn').click(function () {
+                document.location = '@Url.Action("Index","MachineOutputRecords")';
+            })
+            $('#reprtbtn').click(function () {
+                document.location = '@Url.Action("Index","Report")';
+            })
+            $('#grpbtn').click(function () {
+                document.location = '@Url.Action("Index","Graphs")';
+            })
+            $('#Mngbtn').click(function () {
+                document.location = '@Url.Action("Index", "Lines")';
+            })
+        });
+    </script>
+
+    @RenderSection("scripts", required: false)
 
 
 </body>
-        </html>
+</html>

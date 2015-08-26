@@ -54,6 +54,8 @@ namespace OEEPortal_MVC5
             bundles.Add(new StyleBundle("~/Content/JQStyles")
                 .IncludeDirectory("~/Content/JQWidgets", "*.css", true)
                 );
+
+            BundleTable.EnableOptimizations = false;
         }
     }
 }
