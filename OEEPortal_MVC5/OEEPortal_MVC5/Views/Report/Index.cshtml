@@ -1,6 +1,6 @@
 ﻿@section Scripts{
-
-
+    <script type="text/javascript" src="~/Scripts/JQWidgets/jqxdata.export.js"></script>
+<script type="text/javascript" src="~/Scripts/JQWidgets/jqxgrid.export.js"></script>
     <script type="text/javascript">
 
 
@@ -113,6 +113,7 @@
                         $('#LogContentDiv').empty();
                         $("<div id='ReportGrid'></div> <div id='ExportGrid'></div>").appendTo($('#LogContentDiv'));
                         $("<button id='ExportButton' class='btn btn-info btn-lg' >Export</button>").appendTo($('#ExportGrid'))
+                        $('#ExportButton').css({ 'margin': "1% 0% 0% 48%" });
                         MachineOutputrecordList = MachineOutputRecords;
                         var source = {
                             localdata: MachineOutputrecordList,
@@ -147,22 +148,40 @@
                         { name: 'PilotRunEnd', type: 'date' }
                             ]
                         };
+                        var pagerrenderer = function () {
+                            var element = $("<div style='margin-top: 5px; width: 100%; height: 100%;'></div>");
+                            var paginginfo = $("#ReportGrid").jqxGrid('getpaginginformation');
+                            for (i = 0; i < paginginfo.pagescount; i++) {
+                                // add anchor tag with the page number for each page.
+                                var anchor = $("<a style='padding: 5px;' href='#" + i + "'>" + i + "</a>");
+                                anchor.appendTo(element);
+                                anchor.click(function (event) {
+                                    // go to a page.
+                                    var pagenum = parseInt($(event.target).text());
+                                    $("#ReportGrid").jqxGrid('gotopage', pagenum);
+                                });
+                            }
+                            return element;
+                        }
                         var dataAdapter = new $.jqx.dataAdapter(source);
                         $('#ReportGrid').jqxGrid(
                {
-                   width: 850,
-                   height: 350,
+                  width: 1100,
+                   height: 600,
                    source: dataAdapter,
                    sortable: true,
+                   pageable: true,
+                   autoheight: true,
+                   pagerrenderer: pagerrenderer,
                    columns: [
-                     { text: 'MachineOutputRecordId', dataField: 'MachineOutputRecordId', width: 120 },
+                    // { text: 'MachineOutputRecordId', dataField: 'MachineOutputRecordId', width: 120 },
                      { text: 'OperatorId', dataField: 'OperatorId', width: 100 },
                      { text: 'StartTime', dataField: 'StartTime', cellsformat: 'F', width: 250 },
                      { text: 'EndTime', dataField: 'EndTime', cellsformat: 'F', width: 250 },
                      { text: 'OutputQuantity', dataField: 'OutputQuantity', width: 110 },
                      { text: 'DefectQuantity', dataField: 'DefectQuantity', width: 120 },
-                     { text: 'MachineId', dataField: 'MachineId', width: 100 },
-                     { text: 'ReferenceId', dataField: 'ReferenceId', width: 110 },
+                    // { text: 'MachineId', dataField: 'MachineId', width: 100 },
+                   //  { text: 'ReferenceId', dataField: 'ReferenceId', width: 110 },
                      { text: 'EquipmentBreakDownStart', dataField: 'EquipmentBreakDownStart', cellsformat: 'F', width: 250 },
                      { text: 'EquipmentBreakDownEnd', dataField: 'EquipmentBreakDownEnd', cellsformat: 'F', width: 250 },
                      { text: 'ChangeOverStart', dataField: 'ChangeOverStart', cellsformat: 'F', width: 250 },
@@ -183,7 +202,8 @@
 
                         
                         $("#ExportButton").on("click",function () {
-                            $('#ReportGrid').jqxGrid('exportdata', 'xls', 'jqxGrid');
+                           // $('#ReportGrid').jqxGrid('exportdata', 'xls', 'jqxGrid');
+                            $("#ReportGrid").jqxGrid('exportdata', 'xls', 'jqxGrid');
 
                         });
 
