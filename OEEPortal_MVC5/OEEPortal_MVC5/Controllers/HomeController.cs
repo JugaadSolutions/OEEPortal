@@ -169,7 +169,52 @@ namespace OEEPortal.Controllers
             }
         }
 
+        public JsonResult GetMachineCumulativeRecords(MachineCumulativeFilter machineCumulativeRecord)
+        {
+            using (OEEPortalContext db = new OEEPortalContext())
+            {
+                machineCumulativeRecord.To = machineCumulativeRecord.To.AddDays(1);
+                var MachineOutputRecords = db.MachineOutputRecords.Where(m => (m.StartTime >= machineCumulativeRecord.From) && (m.EndTime < machineCumulativeRecord.To)).ToArray();
 
+                MachineOutputRecord[] MachineOutputRecordList = new MachineOutputRecord[MachineOutputRecords.Length];
+
+                int i = 0;
+                foreach (MachineOutputRecord m in MachineOutputRecords)
+                {
+                    MachineOutputRecordList[i++] = new MachineOutputRecord
+                    {
+                        MachineOutputRecordId = m.MachineOutputRecordId,
+                        OperatorId = m.OperatorId,
+                        StartTime = m.StartTime,
+                        EndTime = m.EndTime,
+                        OutputQuantity = m.OutputQuantity,
+                        DefectQuantity = m.DefectQuantity,
+                        MachineId = m.MachineId,
+                        ReferenceId = m.ReferenceId,
+                        EquipmentBreakDownStart = m.EquipmentBreakDownStart,
+                        EquipmentBreakDownEnd = m.EquipmentBreakDownEnd,
+                        ChangeOverStart = m.ChangeOverStart,
+                        ChangeOverEnd = m.ChangeOverEnd,
+                        MaterialDownStart = m.MaterialDownStart,
+                        MaterialDownEnd = m.MaterialDownEnd,
+                        QualityDownStart = m.QualityDownStart,
+                        QualityDownEnd = m.QualityDownEnd,
+                        PreventiveMaintenanceStart = m.PreventiveMaintenanceStart,
+                        PreventiveMaintenanceEnd = m.PreventiveMaintenanceEnd,
+                        ManagementMeetingStart = m.ManagementMeetingStart,
+                        ManagementMeetingEnd = m.ManagementMeetingEnd,
+                        RegulatoryBreaksStart = m.RegulatoryBreaksStart,
+                        RegulatoryBreaksEnd = m.RegulatoryBreaksEnd,
+                        PilotRunStart = m.PilotRunStart,
+                        PilotRunEnd = m.PilotRunEnd
+                    };
+                }
+
+                return Json(MachineOutputRecordList, JsonRequestBehavior.AllowGet);
+
+
+            }
+        }
         #endregion
 
 

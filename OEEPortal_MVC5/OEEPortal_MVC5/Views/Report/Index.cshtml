@@ -88,12 +88,38 @@
                 document.location = '@Url.Action("ShowReport","Report")';
             })
             $('#ShowMachineButton').click(function () {
-                document.location = '@Url.Action("ShowReport","Report")';
-            })
-            $('#ShowDailyButton').click(function () {
-                document.location = '@Url.Action("ShowReport","Report")';
-            })
+                var items = $("#jqxListBox").jqxListBox('getSelectedItems');
+                if (items.length > 0) {
+                    var labels;
+                    for (var i = 0; i < items.length; i++) {
+                        labels = items[i];
+                       
+                    }
+                   
+                }
+                var machineCumulativeFilter = {
+                    From: $('#LogStartDateTimePickerDiv').jqxDateTimeInput('value'),
+                    To: $('#LogEndDateTimePickerDiv').jqxDateTimeInput('value'),
+                    ShiftA: $('#MachineShiftACheckbox').jqxCheckBox('value'),
+                    ShiftB: $('#MachineShiftBCheckbox').jqxCheckBox('value'),
+                    ShiftC: $('#MachineShiftCCheckbox').jqxCheckBox('value'),
+                    Machines: $('#Machinelistbox').jqxListBox(labels)
+                };
 
+                $.ajax({
+
+                    url: '/Home/GetMachineCumulativeRecords',
+                    data: "{'LogFilter':" + JSON.stringify(machineCumulativeFilter) + "}",
+                    type: "POST",
+                    contentType: "application/json",
+                    error: function () { alert("Error While Saving. Please Verify") },
+                    success: function (MachineCumulativeRecord) {
+                        // debugger;
+                        alert(MachineCumulativeRecord.result ? "Sucess" : "Unsuccess");
+                    }
+                    });
+            });
+          
             $('#ShowLogButton').click(function () {
 
 
@@ -330,22 +356,16 @@
                     <b> Start Date:</b>
                 </div>
                 <div class="col-md-4">
-                    <div class="input-group date" id="DailyStartDateTimePickerDiv">
-                        <input type='text' class="form-control" id="DailyStartDatePickerInput" />
-                        <span class="input-group-addon">
-                            <span class="glyphicon glyphicon-calendar"></span>
-                        </span>
+                    <div id="DailyStartDateTimePickerDiv">
+                      
                     </div>
                 </div>
                 <div class="col-md-2" style="text-align:right">
                     <b> End Date:</b>
                 </div>
                 <div class="col-md-4">
-                    <div class="input-group date" id="DailyEndDateTimePickerDiv">
-                        <input type='text' class="form-control" id="DailyEndDatePickerInput" />
-                        <span class="input-group-addon">
-                            <span class="glyphicon glyphicon-calendar"></span>
-                        </span>
+                    <div id="DailyEndDateTimePickerDiv">
+                      
                     </div>
                 </div>
             </div>
@@ -361,22 +381,16 @@
                     <b> Start Date:</b>
                 </div>
                 <div class="col-md-4">
-                    <div class="input-group date" id="ShiftStartDateTimePickerDiv">
-                        <input type='text' class="form-control" id="ShiftStartDatePickerInput" />
-                        <span class="input-group-addon">
-                            <span class="glyphicon glyphicon-calendar"></span>
-                        </span>
+                    <div  id="ShiftStartDateTimePickerDiv">
+                        
                     </div>
                 </div>
                 <div class="col-md-2" style="text-align:right">
                     <b> End Date:</b>
                 </div>
                 <div class="col-md-4">
-                    <div class="input-group date" id="ShiftEndDateTimePickerDiv">
-                        <input type='text' class="form-control" id="ShiftEndDatePickerInput" />
-                        <span class="input-group-addon">
-                            <span class="glyphicon glyphicon-calendar"></span>
-                        </span>
+                    <div  id="ShiftEndDateTimePickerDiv">
+                       
                     </div>
                 </div>
             </div>
@@ -409,11 +423,8 @@
                     <b> Start Date:</b>
                 </div>
                 <div class="col-md-4">
-                    <div class="input-group date" id="MachineStartDateTimePickerDiv">
-                        <input type='text' class="form-control" id="MachineStartDatePickerInput" />
-                        <span class="input-group-addon">
-                            <span class="glyphicon glyphicon-calendar"></span>
-                        </span>
+                    <div  id="MachineStartDateTimePickerDiv">
+                       
                     </div>
                 </div>
                 <div class="col-md-2" style="text-align:right">
@@ -421,12 +432,8 @@
                 </div>
 
                 <div class="col-md-4">
-                    <div class="input-group date" id="MachineEndDateTimePickerDiv">
-                        <input type='text' class="form-control" id="MachineEndDatePickerInput" />
-                        <span class="input-group-addon">
-                            <span class="glyphicon glyphicon-calendar"></span>
-                        </span>
-
+                    <div id="MachineEndDateTimePickerDiv">
+                        
                     </div>
                 </div>
             </div>
