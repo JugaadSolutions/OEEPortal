@@ -88,28 +88,31 @@
                 document.location = '@Url.Action("ShowReport","Report")';
             })
             $('#ShowMachineButton').click(function () {
-                var items = $("#jqxListBox").jqxListBox('getSelectedItems');
+
+                debugger;
+                var items = $("#Machinelistbox").jqxListBox('getSelectedItems');
+                var machines = [];
                 if (items.length > 0) {
-                    var labels;
+                    
                     for (var i = 0; i < items.length; i++) {
-                        labels = items[i];
+                        machines.push(items[i]['value']);
                        
                     }
                    
                 }
                 var machineCumulativeFilter = {
-                    From: $('#LogStartDateTimePickerDiv').jqxDateTimeInput('value'),
-                    To: $('#LogEndDateTimePickerDiv').jqxDateTimeInput('value'),
-                    ShiftA: $('#MachineShiftACheckbox').jqxCheckBox('value'),
-                    ShiftB: $('#MachineShiftBCheckbox').jqxCheckBox('value'),
-                    ShiftC: $('#MachineShiftCCheckbox').jqxCheckBox('value'),
-                    Machines: $('#Machinelistbox').jqxListBox(labels)
+                    From: $('#MachineStartDateTimePickerDiv').jqxDateTimeInput('value'),
+                    To: $('#MachineEndDateTimePickerDiv').jqxDateTimeInput('value'),
+                    ShiftA: $('#MachineShiftACheckbox').jqxCheckBox('checked'),
+                    ShiftB: $('#MachineShiftBCheckbox').jqxCheckBox('checked'),
+                    ShiftC: $('#MachineShiftCCheckbox').jqxCheckBox('checked'),
+                    Machines: machines
                 };
 
                 $.ajax({
 
                     url: '/Home/GetMachineCumulativeRecords',
-                    data: "{'LogFilter':" + JSON.stringify(machineCumulativeFilter) + "}",
+                    data: "{'MachineCumulativeFilter':" + JSON.stringify(machineCumulativeFilter) + "}",
                     type: "POST",
                     contentType: "application/json",
                     error: function () { alert("Error While Saving. Please Verify") },

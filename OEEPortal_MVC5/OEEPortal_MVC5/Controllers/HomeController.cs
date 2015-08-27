@@ -169,12 +169,12 @@ namespace OEEPortal.Controllers
             }
         }
 
-        public JsonResult GetMachineCumulativeRecords(MachineCumulativeFilter machineCumulativeRecord)
+        public JsonResult GetMachineCumulativeRecords(MachineCumulativeFilter machineCumulativeFilter)
         {
             using (OEEPortalContext db = new OEEPortalContext())
             {
-                machineCumulativeRecord.To = machineCumulativeRecord.To.AddDays(1);
-                var MachineOutputRecords = db.MachineOutputRecords.Where(m => (m.StartTime >= machineCumulativeRecord.From) && (m.EndTime < machineCumulativeRecord.To)).ToArray();
+                machineCumulativeFilter.To = machineCumulativeFilter.To.AddDays(1);
+                var MachineOutputRecords = db.MachineOutputRecords.Where(m => (m.StartTime >= machineCumulativeFilter.From) && (m.EndTime < machineCumulativeFilter.To)).ToArray();
 
                 MachineOutputRecord[] MachineOutputRecordList = new MachineOutputRecord[MachineOutputRecords.Length];
 
