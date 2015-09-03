@@ -14,9 +14,7 @@ namespace OEEPortal_MVC5.Models
     {
         public DateTime From { get; set; }
         public DateTime To { get; set; }
-        public bool ShiftA { get; set; }
-        public bool ShiftB { get; set; }
-        public bool ShiftC { get; set; }
+       
         public int[] Machines { get; set; }
     }
 }

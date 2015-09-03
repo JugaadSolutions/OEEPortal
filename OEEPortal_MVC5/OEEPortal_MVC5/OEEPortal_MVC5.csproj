@@ -196,6 +196,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Line.cs" />
     <Compile Include="Models\Machine.cs" />
+    <Compile Include="Models\MachineCumulativeRecord.cs" />
     <Compile Include="Models\MachineOutputRecord.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\OEEPortalContext.cs" />

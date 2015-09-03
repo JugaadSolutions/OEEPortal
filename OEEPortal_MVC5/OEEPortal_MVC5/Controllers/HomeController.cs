@@ -173,7 +173,11 @@ namespace OEEPortal.Controllers
         {
             using (OEEPortalContext db = new OEEPortalContext())
             {
-                machineCumulativeFilter.To = machineCumulativeFilter.To.AddDays(1);
+                if( machineCumulativeFilter.To == machineCumulativeFilter.From)
+                    machineCumulativeFilter.To = machineCumulativeFilter.To.AddDays(1);
+
+
+
                 var MachineOutputRecords = db.MachineOutputRecords.Where(m => (m.StartTime >= machineCumulativeFilter.From) && (m.EndTime < machineCumulativeFilter.To)).ToArray();
 
                 MachineOutputRecord[] MachineOutputRecordList = new MachineOutputRecord[MachineOutputRecords.Length];
