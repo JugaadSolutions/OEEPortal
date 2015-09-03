@@ -1,0 +1,60 @@
+﻿
+@section menu{
+    @Html.Partial("Menu")
+}
+
+@section scripts{
+    <script type="text/javascript">
+        
+        $(function () {
+            //$.ajax({
+            //    url: '/Home/GetMachines',
+            //    type: "POST",
+            //    data: "{'id':" +0+"}",
+            //    contentType: "application/json",
+            //    error: function () { alert('GetMachines Failure'); },
+            //    success: function (machines) {
+
+            //        
+            //        var noOfMachines = machines.length;
+            //        for (var i = 0; i < noOfMachines; i++) {
+            //            var MachineName = machines[i]["Name"];
+            //            var Machine = machines[i]["MachineId"];
+
+                        $('#loginbtn').click(function () {
+                            var Operator = $('#OperatorId').val();
+                            location.href = "/MachineOutputRecord/Create/?Machine=1&Operator="+ Operator;
+                        })
+
+                    }
+                //}
+            });
+                  
+
+                
+            
+       
+
+
+    });
+    </script>
+}
+<div class="container">
+    <div class="row">
+        <div class="col-md-4" style="margin:4% 0% 0% 20%">
+            <label>Operator Id:</label>
+            <input type="text" class="form-control" id="OperatorId">
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4" style="margin-top:1%;margin-left:30%">
+
+            <button type="button" class="btn btn-info" id="loginbtn">
+                <span>Login</span>
+            </button>
+
+        </div>
+
+    </div>
+</div>

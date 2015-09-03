@@ -38,7 +38,7 @@ namespace OEEPortal_MVC5.Controllers
         }
 
         // GET: MachineOutputRecords/Create
-        public ActionResult Create(int Machine)
+        public ActionResult Create(int Machine,string Operator)
         {
             ViewBag.Title = "Data Input";
             ViewBag.Machine = Machine;
@@ -138,6 +138,11 @@ namespace OEEPortal_MVC5.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+        public ActionResult OperatorLogin()
+        {
+            
+            return View();
         }
       
 

@@ -125,7 +125,7 @@
            // debugger;
             var record = {
 
-                OperatorID: document.getElementById("OperatorIDInput").value,
+            //    OperatorID: document.getElementById("OperatorIDInput").value,
                 StartTime: $('#StartDateTimePickerDiv').jqxDateTimeInput('value'),
                 EndTime: $('#EndDateTimePickerDiv').jqxDateTimeInput('value'),
                 OutputQuantity: document.getElementById("OutputQuantityInput").value,
@@ -187,19 +187,19 @@
     <div id="ContentDiv" class="roundedDiv text-center" style="border:green medium solid;border-width:2px;margin:2px 10px 60px 15px;">
 
         <div class="container-fluid" style="margin-left:5%;">
-            <div class="row">
+            @*<div class="row">
                 <div class="col-md-2" style="text-align:right;text-anchor:middle">
                     <label for="inputdefault"> Operator ID:</label>
                 </div>
                 <div class="col-md-4" style="text-align:left;">
                     <input class="form-control" id="OperatorIDInput" type="text">
                 </div>
-            </div>
+            </div>*@
             <div class="row">
-                <div class="col-md-2" style="text-align:right;text-anchor:middle">
-                    <label for="inputdefault"> Reference:</label>
+                <div class="col-md-2" style="text-align:right;text-anchor:middle;margin:1% 0% 0% 0%">
+                    <label for="inputdefault" style=""> Reference:</label>
                 </div>
-                <div class="col-md-4" id="ReferenceCombobox" style="text-align:left;">
+                <div class="col-md-4" id="ReferenceCombobox" style="text-align:left;margin:1% 0% 0% 2%">
 
                 </div>
 

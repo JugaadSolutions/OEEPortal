@@ -27,9 +27,11 @@
 
         $("#" + rowId).append(MachineCol);
         MachineCol.append(MachineButton);
-
+      
         MachineButton.on("click", function (e) {
-            location.href = '/MachineOutputRecords/Create/?Machine=' + Machine.toString();
+           // location.href = '/MachineOutputRecords/OperatorLogin/?Machine=' + Machine.toString();
+            location.href = '/MachineOutputRecords/OperatorLogin/';
         });
+       
     }
 }
