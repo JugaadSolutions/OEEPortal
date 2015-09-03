@@ -1,356 +1,482 @@
-﻿
+﻿@section Scripts{
 
 
+    <script src="~/Scripts/JQWidgets/jqxgrid.columnsresize.js"></script>
+<script src="~/Scripts/JQWidgets/jqxdata.export.js"></script>
+<script src="~/Scripts/JQWidgets/jqxgrid.export.js"></script>
 
-
-@section Scripts{
-    
-    
-    <script type="text/javascript">  
-  
-
-     $(document).ready(function () {
-         $("#ReportTabs").jqxTabs({ width: '100%', height: 450, position: 'top'});
-
-         $("#JanCheckbox").jqxCheckBox({ width: 120, height: 25 });
-         $("#FebCheckbox").jqxCheckBox({ width: 120, height: 25 });
-         $("#MarCheckbox").jqxCheckBox({ width: 120, height: 25 });
-         $("#AprCheckbox").jqxCheckBox({ width: 120, height: 25 });
-         $("#MayCheckbox").jqxCheckBox({ width: 120, height: 25 });
-         $("#JunCheckbox").jqxCheckBox({ width: 120, height: 25 });
-         $("#JulCheckbox").jqxCheckBox({ width: 120, height: 25 });
-         $("#AugCheckbox").jqxCheckBox({ width: 120, height: 25 });
-         $("#SepCheckbox").jqxCheckBox({ width: 120, height: 25 });
-         $("#OctCheckbox").jqxCheckBox({ width: 120, height: 25 });
-         $("#NovCheckbox").jqxCheckBox({ width: 120, height: 25 });
-         $("#DecCheckbox").jqxCheckBox({ width: 120, height: 25 });
-         $("#ShiftACheckbox").jqxCheckBox({ width: 120, height: 25 });
-         $("#ShiftBCheckbox").jqxCheckBox({ width: 120, height: 25 });
-         $("#ShiftCCheckbox").jqxCheckBox({ width: 120, height: 25 });
-
-         $("#MachineShiftACheckbox").jqxCheckBox({ width: 120, height: 25 });
-         $("#MachineShiftBCheckbox").jqxCheckBox({ width: 120, height: 25 });
-         $("#MachineShiftCCheckbox").jqxCheckBox({ width: 120, height: 25 });
-
-
-
-         $('#DailyStartDateTimePickerDiv').jqxDateTimeInput({ width: '100%', formatString: 'dd/MM/yyyy', showTimeButton: false, value: null });
-         $('#DailyEndDateTimePickerDiv').jqxDateTimeInput({ width: '100%', formatString: 'dd/MM/yyyy', showTimeButton: false, value: null });
-         $('#ShiftStartDateTimePickerDiv').jqxDateTimeInput({ width: '100%', formatString: 'dd/MM/yyyy', showTimeButton: false, value: null });
-         $('#ShiftEndDateTimePickerDiv').jqxDateTimeInput({ width: '100%', formatString: 'dd/MM/yyyy', showTimeButton: false, value: null });
-
-         $('#MachineStartDateTimePickerDiv').jqxDateTimeInput({ width: '100%', formatString: 'dd/MM/yyyy', showTimeButton: false, value: null });
-         $('#MachineEndDateTimePickerDiv').jqxDateTimeInput({ width: '100%', formatString: 'dd/MM/yyyy', showTimeButton: false, value: null });
-
-         $('#LogStartDateTimePickerDiv').jqxDateTimeInput({ width: '100%', formatString: 'dd/MM/yyyy', showTimeButton: false, value: null });
-         $('#LogEndDateTimePickerDiv').jqxDateTimeInput({ width: '100%', formatString: 'dd/MM/yyyy', showTimeButton: false, value: null });
-         debugger;
-         var MachineList;
-
-         $.ajax({
-             url: '/Home/GetMachines',
-             type: "POST",
-             data: "{'id':"  + "0}",
-             contentType: "application/json",
-             error: function () { alert('GetMachines Failure'); },
-             success: function (machines) {
-
-                 MachineList = machines;
-                 var source = {
-                     localdata: MachineList,
-                     id: "id",
-                     datatype: "json",
-                     datafields: [{ name: "MachineId" }, { name: "Name" }, { name: "Icon" }]
-                 };
-                 var dataSource = new $.jqx.dataAdapter(source);
-
-
-                 $("#Machinelistbox").jqxListBox({ source: dataSource, displayMember: 'Name', valueMember: 'MachineId', width: '200px', height: '200px', multiple: true });
-             }
-         });
-
-
-
+    <script type="text/javascript">
         
-        
-        
-     });
 
-     $(function () {
-         $('#ShowMonthButton').click(function () {
-             document.location = '@Url.Action("ShowReport","Report")';
-         })
-         $('#ShowDailyButton').click(function () {
-             document.location = '@Url.Action("ShowReport","Report")';
-         })
-         $('#ShowShiftButton').click(function () {
-             document.location = '@Url.Action("ShowReport","Report")';
-         })
-         $('#ShowMachineButton').click(function () {
-             document.location = '@Url.Action("ShowReport","Report")';
-         })
-         $('#ShowLineButton').click(function () {
-             document.location = '@Url.Action("ShowReport","Report")';
-         })
-     });
-    
-     </script>
+
+        $(document).ready(function () {
+            $("#ReportTabs").jqxTabs({ width: '100%', height: 450, position: 'top', scrollable:false });
+
+            $("#JanCheckbox").jqxCheckBox({ width: 120, height: 25 });
+            $("#FebCheckbox").jqxCheckBox({ width: 120, height: 25 });
+            $("#MarCheckbox").jqxCheckBox({ width: 120, height: 25 });
+            $("#AprCheckbox").jqxCheckBox({ width: 120, height: 25 });
+            $("#MayCheckbox").jqxCheckBox({ width: 120, height: 25 });
+            $("#JunCheckbox").jqxCheckBox({ width: 120, height: 25 });
+            $("#JulCheckbox").jqxCheckBox({ width: 120, height: 25 });
+            $("#AugCheckbox").jqxCheckBox({ width: 120, height: 25 });
+            $("#SepCheckbox").jqxCheckBox({ width: 120, height: 25 });
+            $("#OctCheckbox").jqxCheckBox({ width: 120, height: 25 });
+            $("#NovCheckbox").jqxCheckBox({ width: 120, height: 25 });
+            $("#DecCheckbox").jqxCheckBox({ width: 120, height: 25 });
+            $("#ShiftACheckbox").jqxCheckBox({ width: 120, height: 25 });
+            $("#ShiftBCheckbox").jqxCheckBox({ width: 120, height: 25 });
+            $("#ShiftCCheckbox").jqxCheckBox({ width: 120, height: 25 });
+
+           
+
+
+
+            $('#DailyStartDateTimePickerDiv').jqxDateTimeInput({ width: '100%', formatString: 'dd/MM/yyyy', showTimeButton: false, value: null });
+            $('#DailyEndDateTimePickerDiv').jqxDateTimeInput({ width: '100%', formatString: 'dd/MM/yyyy', showTimeButton: false, value: null });
+            $('#ShiftStartDateTimePickerDiv').jqxDateTimeInput({ width: '100%', formatString: 'dd/MM/yyyy', showTimeButton: false, value: null });
+            $('#ShiftEndDateTimePickerDiv').jqxDateTimeInput({ width: '100%', formatString: 'dd/MM/yyyy', showTimeButton: false, value: null });
+
+            $('#MachineStartDateTimePickerDiv').jqxDateTimeInput({ width: '100%', formatString: 'dd/MM/yyyy', showTimeButton: false, value: null });
+            $('#MachineEndDateTimePickerDiv').jqxDateTimeInput({ width: '100%', formatString: 'dd/MM/yyyy', showTimeButton: false, value: null });
+
+            $('#LogStartDateTimePickerDiv').jqxDateTimeInput({ width: '100%', formatString: 'dd/MM/yyyy', showTimeButton: false, value: null });
+            $('#LogEndDateTimePickerDiv').jqxDateTimeInput({ width: '100%', formatString: 'dd/MM/yyyy', showTimeButton: false, value: null });
+            // debugger;
+            var MachineList;
+
+            $.ajax({
+                url: '/Home/GetMachines',
+                type: "POST",
+                data: "{'id':" + "0}",
+                contentType: "application/json",
+                error: function () { alert('GetMachines Failure'); },
+                success: function (machines) {
+
+                    MachineList = machines;
+                    var source = {
+                        localdata: MachineList,
+                        id: "id",
+                        datatype: "json",
+                        datafields: [{ name: "MachineId" }, { name: "Name" }, { name: "Icon" }]
+                    };
+                    var dataSource = new $.jqx.dataAdapter(source);
+
+
+                    $("#Machinelistbox").jqxListBox({ source: dataSource, displayMember: 'Name', valueMember: 'MachineId', width: '200px', height: '200px', multiple: true });
+                }
+            });
+
+
+
+
+
+
+        });
+
+        $(function () {
+            $('#ShowMonthButton').click(function () {
+                document.location = '@Url.Action("ShowReport","Report")';
+            })
+
+            @*document.location = '@Url.Action("ShowReport","Report")';*@
+
+
+            $('#ShowShiftButton').click(function () {
+                document.location = '@Url.Action("ShowReport","Report")';
+            })
+            $('#ShowMachineButton').click(function () {
+
+                debugger;
+                var items = $("#Machinelistbox").jqxListBox('getSelectedItems');
+                var machines = [];
+                if (items.length > 0) {
+                    
+                    for (var i = 0; i < items.length; i++) {
+                        machines.push(items[i]['value']);
+                       
+                    }
+                   
+                }
+                var machineCumulativeFilter = {
+                    From: $('#MachineStartDateTimePickerDiv').jqxDateTimeInput('value'),
+                    To: $('#MachineEndDateTimePickerDiv').jqxDateTimeInput('value'),
+                   
+                    Machines: machines
+                };
+
+                $.ajax({
+
+                    url: '/Home/GetMachineCumulativeRecords',
+                    data: "{'MachineCumulativeFilter':" + JSON.stringify(machineCumulativeFilter) + "}",
+                    type: "POST",
+                    contentType: "application/json",
+                    error: function () { alert("Error While Saving. Please Verify") },
+                    success: function (MachineCumulativeRecord) {
+                        // debugger;
+                        alert(MachineCumulativeRecord.result ? "Sucess" : "Unsuccess");
+                    }
+                    });
+            });
+          
+            $('#ShowLogButton').click(function () {
+
+
+                var MachineOutputrecordList;
+
+                var logfilter = {
+                    From: $('#LogStartDateTimePickerDiv').jqxDateTimeInput('value'),
+                    To: $('#LogEndDateTimePickerDiv').jqxDateTimeInput('value')
+                };
+
+
+
+                $.ajax({
+
+                    url: '/Home/GetMachineOutputRecords',
+                    data: "{'LogFilter':" + JSON.stringify(logfilter) + "}",
+                    type: "POST",
+                    contentType: "application/json",
+                    error: function () { alert("Error While Saving. Please Verify") },
+                    success: function (MachineOutputRecords) {
+                       // debugger;
+
+
+
+                        $('#LogDiv').empty();
+                        $("<div class='container-fluid'><div class='row' > <div class='col-md-12'> <div id='ReportGrid'></div></div></div> <div class='row'> <div class='col-md-1 col-md-offset-6'> <button style='margin-top:3px' id='ExportButton' class='btn btn-info btn-lg' >Export</button></div> </div></div>")
+                            .appendTo($('#LogDiv'));
+
+
+                        MachineOutputrecordList = MachineOutputRecords;
+                        var source = {
+                            localdata: MachineOutputrecordList,
+                            id: "id",
+                            datatype: "json",
+                           
+         
+                            datafields: [
+                        { name: 'MachineOutputRecordId', type: 'number' },
+                        { name: 'OperatorId', type: 'string' },
+                        { name: 'StartTime', type: 'date' },
+                        { name: 'EndTime', type: 'date' },
+                        { name: 'OutputQuantity', type: 'number' },
+                        { name: 'DefectQuantity', type: 'number' },
+                        { name: 'MachineId', type: 'number' },
+                        { name: 'ReferenceId', type: 'number' },
+                        { name: 'EquipmentBreakDownStart', type: 'date' },
+                        { name: 'EquipmentBreakDownEnd', type: 'date' },
+                        { name: 'ChangeOverStart', type: 'date' },
+                        { name: 'ChangeOverEnd', type: 'date' },
+                        { name: 'MaterialDownStart', type: 'date' },
+                        { name: 'MaterialDownEnd', type: 'date' },
+                        { name: 'QualityDownStart', type: 'date' },
+                        { name: 'QualityDownEnd', type: 'date' },
+                        { name: 'NonProductionStart', type: 'date' },
+                        { name: 'NonProductionEnd', type: 'date' },
+                        { name: 'PreventiveMaintenanceStart', type: 'date' },
+                        { name: 'PreventiveMaintenanceEnd', type: 'date' },
+                        { name: 'ManagementMeetingStartd', type: 'date' },
+                        { name: 'ManagementMeetingEnd', type: 'date' },
+                        { name: 'RegulatoryBreaksStart', type: 'date' },
+                        { name: 'RegulatoryBreaksEnd', type: 'date' },
+                        { name: 'PilotRunStart', type: 'date' },
+                        { name: 'PilotRunEnd', type: 'date' }
+                            ]
+                        };
+                        var pagerrenderer = function () {
+                            var element = $("<div style='margin-top: 5px; width: 100%; height: 100%;'></div>");
+                            var paginginfo = $("#ReportGrid").jqxGrid('getpaginginformation');
+                            for (i = 0; i < paginginfo.pagescount; i++) {
+                                // add anchor tag with the page number for each page.
+                                var anchor = $("<a style='padding: 5px;' href='#" + i + "'>" + i + "</a>");
+                                anchor.appendTo(element);
+                                anchor.click(function (event) {
+                                    // go to a page.
+                                    var pagenum = parseInt($(event.target).text());
+                                    $("#ReportGrid").jqxGrid('gotopage', pagenum);
+                                });
+                            }
+                            return element;
+                        }
+                       
+                        var dataAdapter = new $.jqx.dataAdapter(source);
+
+                        $('#ReportGrid').jqxGrid({
+
+                            width: '100%',
+                            height: 300,
+                            source: dataAdapter,
+                            pageable: true,
+                            autoheight: true,
+                            pagerrenderer: pagerrenderer,
+                            columnsresize:true,
+                            columns: [
+                              { text: 'Operator', dataField: 'OperatorId' },
+                              { text: 'Start Time', dataField: 'StartTime', cellsformat: 'dd/MM/yyyy hh:mm:ss tt' },
+                              { text: 'End Time', dataField: 'EndTime', cellsformat: 'F' },
+                              { text: 'Output Quantity', dataField: 'OutputQuantity' },
+                              { text: 'Defect Quantity', dataField: 'DefectQuantity' },
+                              { text: 'EquipmentBreakDownStart', dataField: 'EquipmentBreakDownStart', cellsformat: 'F' },
+                              { text: 'EquipmentBreakDownEnd', dataField: 'EquipmentBreakDownEnd', cellsformat: 'F' },
+                              { text: 'ChangeOverStart', dataField: 'ChangeOverStart', cellsformat: 'F' },
+                              { text: 'ChangeOverEnd', dataField: 'ChangeOverEnd', cellsformat: 'F' },
+                              { text: 'MaterialDownStart', dataField: 'MaterialDownStart', cellsformat: 'F' },
+                              { text: 'MaterialDownEnd', dataField: 'MaterialDownEnd', cellsformat: 'F' },
+                              { text: 'PreventiveMaintenanceStart', dataField: 'PreventiveMaintenanceStart', cellsformat: 'F' },
+                              { text: 'PreventiveMaintenanceEnd', dataField: 'PreventiveMaintenanceEnd', cellsformat: 'F' },
+                              { text: 'ManagementMeetingStartd', dataField: 'ManagementMeetingStartd', cellsformat: 'F' },
+                              { text: 'ManagementMeetingEnd', dataField: 'ManagementMeetingEnd', cellsformat: 'F' },
+                              { text: 'RegulatoryBreaksStart', dataField: 'RegulatoryBreaksStart', cellsformat: 'F' },
+                              { text: 'PilotRunStart', dataField: 'PilotRunStart', cellsformat: 'F' },
+                              { text: 'PilotRunEnd', dataField: 'PilotRunEnd', cellsformat: 'F' }
+                            ]
+
+
+                        });
+                        $('#ReportGrid').jqxGrid('autoresizecolumns');
+                        $('#ReportGrid').jqxGrid({ pagesize: 10 });
+                        $("#ExportButton").on("click", function () {
+                        $('#ReportGrid').jqxGrid('exportdata', 'csv', 'LogReport');
+
+
+                        });
+
+                    }
+
+                });
+
+
+
+
+
+            });
+
+
+
+        });
+
+
+    </script>
 }
 
-<div id="ContentDiv" class="roundedDiv text-center"
-     style="border:green medium solid;border-width:2px;margin:20px 10px 300px 0px; padding:5px 2px 5px 2px;min-height:450px;width:85%;">
-    <div id='jqxWidget'>
-        <div id='ReportTabs'>
-            <ul>
-                <li>Monthly Cumulative</li>
-                <li>Daily Cumulative</li>
-                <li>Shift Cumulative</li>
-                <li>Machine Cumulative</li>
-                <li>Log</li>
-            </ul>
-            <div>
-                <div class="container" style="margin-top:2%">
-                    <div class="row">
-                        <div class="col-md-1">
-                            <div id="JanCheckbox">
-                                January
-                            </div>
-                        </div>
-                        <div class="col-md-1">
-                            <div id="FebCheckbox">
-                                February
-                            </div>
-                        </div>
-                        <div class="col-md-1">
-                            <div id="MarCheckbox">
-                                March
-                            </div>
-                        </div>
-                        <div class="col-md-1">
-                            <div id="AprCheckbox">
-                                April
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-1">
-                            <div id="MayCheckbox">
-                                May
-                            </div>
-                            </div>
-                        <div class="col-md-1">
-                            <div id="JunCheckbox">
-                                June
-                            </div>
-                            </div>
-                        <div class="col-md-1">
-                            <div id="JulCheckbox">
-                                July
-                            </div>
-                            </div>
-                        <div class="col-md-1">
-                            <div id="AugCheckbox">
-                                August
-                            </div>
-                            </div>
-                        </div>
-                    <div class="row">
-                        <div class="col-md-1">
-                            <div id="SepCheckbox">
-                                September
-                            </div>
-                            </div>
-                        <div class="col-md-1">
-                            <div id="OctCheckbox">
-                                October
-                            </div>
-                            </div>
-                        <div class="col-md-1">
-                            <div id="NovCheckbox">
-                                November
-                            </div>
-                            </div>
-                        <div class="col-md-1">
-                            <div id="DecCheckbox">
-                                December
-                            </div>
-                            </div>
-                        </div>
+<div id="ContentDiv" class="roundedDiv container-fluid"
+     style="border:green medium solid;border-width:2px;">
 
-                        <div class="row" style="padding-top:5px; margin:1% 0% 0% 10%">
-                            <button id="ShowMonthButton" class="btn btn-info btn-lg ">
-                                Show
-                            </button>
+    <div id='ReportTabs'>
+        <ul>
+            <li>Monthly Cumulative</li>
+            <li>Daily Cumulative</li>
+            <li>Shift Cumulative</li>
+            <li>Machine Cumulative</li>
+            <li>Log</li>
+        </ul>
+        <div>
+            <div class="container-fluid" style="margin-top:1%">
+                <div class="row">
+                    <div class="col-md-1">
+                        <div id="JanCheckbox">
+                            January
                         </div>
                     </div>
-            </div>
-            <div>
-
-                <div class="row" style="padding-top:5px;margin:1% 1% 0% -5%">
-                    <div class="col-md-2" style="text-align:right">
-                        <b> Start Date:</b>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="input-group date" id="DailyStartDateTimePickerDiv">
-                            <input type='text' class="form-control" id="DailyStartDatePickerInput" />
-                            <span class="input-group-addon">
-                                <span class="glyphicon glyphicon-calendar"></span>
-                            </span>
+                    <div class="col-md-1">
+                        <div id="FebCheckbox">
+                            February
                         </div>
                     </div>
-                    <div class="col-md-2" style="text-align:right">
-                        <b> End Date:</b>
+                    <div class="col-md-1">
+                        <div id="MarCheckbox">
+                            March
+                        </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="input-group date" id="DailyEndDateTimePickerDiv">
-                            <input type='text' class="form-control" id="DailyEndDatePickerInput" />
-                            <span class="input-group-addon">
-                                <span class="glyphicon glyphicon-calendar"></span>
-                            </span>
+                    <div class="col-md-1">
+                        <div id="AprCheckbox">
+                            April
                         </div>
                     </div>
                 </div>
-                <div class="row" style="padding-top:5px; margin:1% 0% 0% 48%">
-                    <button id="ShowDailyButton" class="btn btn-info btn-lg ">
+                <div class="row">
+                    <div class="col-md-1">
+                        <div id="MayCheckbox">
+                            May
+
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div id="JunCheckbox">
+                            June
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div id="JulCheckbox">
+                            July
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div id="AugCheckbox">
+                            August
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-1">
+                        <div id="SepCheckbox">
+                            September
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div id="OctCheckbox">
+                            October
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div id="NovCheckbox">
+                            November
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div id="DecCheckbox">
+                            December
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" style="padding-top:5px; margin:1% 0% 0% 10%">
+                    <button id="ShowMonthButton" class="btn btn-info btn-lg ">
                         Show
                     </button>
                 </div>
             </div>
-                 <div>
-                     <div class="row" style="padding-top:5px;margin:1% 1% 0% -5%">
-                         <div class="col-md-2" style="text-align:right">
-                             <b> Start Date:</b>
-                         </div>
-                         <div class="col-md-4">
-                             <div class="input-group date" id="ShiftStartDateTimePickerDiv">
-                                 <input type='text' class="form-control" id="ShiftStartDatePickerInput" />
-                                 <span class="input-group-addon">
-                                     <span class="glyphicon glyphicon-calendar"></span>
-                                 </span>
-                             </div>
-                         </div>
-                         <div class="col-md-2" style="text-align:right">
-                             <b> End Date:</b>
-                         </div>
-                         <div class="col-md-4">
-                             <div class="input-group date" id="ShiftEndDateTimePickerDiv">
-                                 <input type='text' class="form-control" id="ShiftEndDatePickerInput" />
-                                 <span class="input-group-addon">
-                                     <span class="glyphicon glyphicon-calendar"></span>
-                                 </span>
-                             </div>
-                         </div>
-                     </div>
-                     <div class="row" style="margin:1% 0% 0% 5%">
-                         <div class="col-md-1">
-                             <div id="ShiftACheckbox">
-                                 ShiftA
-                             </div>
-                             </div>
-                         <div class="col-md-1">
-                             <div id="ShiftBCheckbox">
-                                 ShiftB
-                             </div>
-                             </div>
-                         <div class="col-md-1">
-                             <div id="ShiftCCheckbox">
-                                 ShiftC
-                             </div>
-                             </div>
-                         </div>
-                     <div class="row" style="padding-top:5px; margin:1% 0% 0% 48%">
-                         <button id="ShowShiftButton" class="btn btn-info btn-lg ">
-                             Show
-                         </button>
-                     </div>
-                 </div>
-            <div>
-                <div class="row" style="padding-top:5px;margin:1% 1% 0% -5%">
-                    <div class="col-md-2" style="text-align:right">
-                        <b> Start Date:</b>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="input-group date" id="MachineStartDateTimePickerDiv">
-                            <input type='text' class="form-control" id="MachineStartDatePickerInput" />
-                            <span class="input-group-addon">
-                                <span class="glyphicon glyphicon-calendar"></span>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="col-md-2" style="text-align:right">
-                        <b> End Date:</b>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="input-group date" id="MachineEndDateTimePickerDiv">
-                            <input type='text' class="form-control" id="MachineEndDatePickerInput" />
-                            <span class="input-group-addon">
-                                <span class="glyphicon glyphicon-calendar"></span>
-                            </span>
-                        </div>
+        </div>
+        <div id="BaseContentdiv">
+
+            <div class="row" style="padding-top:5px;margin:1% 1% 0% -5%">
+                <div class="col-md-2" style="text-align:right">
+                    <b> Start Date:</b>
+                </div>
+                <div class="col-md-4">
+                    <div id="DailyStartDateTimePickerDiv">
+                      
                     </div>
                 </div>
-                <div class="row" style="margin:1% 0% 0% 5%">
-                    <div class="col-md-1">
-                        <div id="MachineShiftACheckbox">
-                            ShiftA
-                        </div>
-                    </div>
-                    <div class="col-md-1">
-                        <div id="MachineShiftBCheckbox">
-                            ShiftB
-                        </div>
-                    </div>
-                    <div class="col-md-1">
-                        <div id="MachineShiftCCheckbox">
-                            ShiftC
-                        </div>
+                <div class="col-md-2" style="text-align:right">
+                    <b> End Date:</b>
+                </div>
+                <div class="col-md-4">
+                    <div id="DailyEndDateTimePickerDiv">
+                      
                     </div>
                 </div>
-                <div class="row" style="margin:1% 0% 0% 5%">
-                    <div id="Machinelistbox">
+            </div>
+            <div class="row" style="padding-top:5px; margin:1% 0% 0% 48%">
+                <button id="ShowDailyButton" class="btn btn-info btn-lg ">
+                    Show
+                </button>
+            </div>
+        </div>
+        <div>
+            <div class="row" style="padding-top:5px;margin:1% 1% 0% -5%">
+                <div class="col-md-2" style="text-align:right">
+                    <b> Start Date:</b>
+                </div>
+                <div class="col-md-4">
+                    <div  id="ShiftStartDateTimePickerDiv">
+                        
+                    </div>
+                </div>
+                <div class="col-md-2" style="text-align:right">
+                    <b> End Date:</b>
+                </div>
+                <div class="col-md-4">
+                    <div  id="ShiftEndDateTimePickerDiv">
+                       
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin:1% 0% 0% 5%">
+                <div class="col-md-1">
+                    <div id="ShiftACheckbox">
+                        ShiftA
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <div id="ShiftBCheckbox">
+                        ShiftB
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <div id="ShiftCCheckbox">
+                        ShiftC
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="padding-top:5px; margin:1% 0% 0% 48%">
+                <button id="ShowShiftButton" class="btn btn-info btn-lg ">
+                    Show
+                </button>
+            </div>
+        </div>
+        <div>
+            <div class="row" style="padding-top:5px;margin:1% 1% 0% -5%">
+                <div class="col-md-2" style="text-align:right">
+                    <b> Start Date:</b>
+                </div>
+                <div class="col-md-4">
+                    <div  id="MachineStartDateTimePickerDiv">
+                       
+                    </div>
+                </div>
+                <div class="col-md-2" style="text-align:right">
+                    <b> End Date:</b>
+                </div>
+
+                <div class="col-md-4">
+                    <div id="MachineEndDateTimePickerDiv">
+                        
+                    </div>
+                </div>
+            </div>
+           
+            <div class="row" style="margin:1% 0% 0% 5%">
+                <div id="Machinelistbox">
+
+                </div>
+            </div>
+            <div class="row" style="padding-top:5px; margin:1% 0% 0% 48%">
+                <button id="ShowMachineButton" class="btn btn-info btn-lg ">
+                    Show
+                </button>
+            </div>
+
+        </div>
+        <div id="LogDiv">
+            <div class="row" style="padding-top:5px;margin:1% 1% 0% -5%">
+                <div class="col-md-2" style="text-align:right">
+                    <b> Start Date:</b>
+                </div>
+                <div class="col-md-4">
+                    <div id="LogStartDateTimePickerDiv">
 
                     </div>
                 </div>
-                <div class="row" style="padding-top:5px; margin:1% 0% 0% 48%">
-                    <button id="ShowMachineButton" class="btn btn-info btn-lg ">
-                        Show
-                    </button>
+                <div class="col-md-2" style="text-align:right">
+                    <b> End Date:</b>
                 </div>
+                <div class="col-md-4">
+                    <div id="LogEndDateTimePickerDiv">
 
-            </div>
-            <div>
-                <div class="row" style="padding-top:5px;margin:1% 1% 0% -5%">
-                    <div class="col-md-2" style="text-align:right">
-                        <b> Start Date:</b>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="input-group date" id="LogStartDateTimePickerDiv">
-                            <input type='text' class="form-control" id="LogStartDatePickerInput" />
-                            <span class="input-group-addon">
-                                <span class="glyphicon glyphicon-calendar"></span>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="col-md-2" style="text-align:right">
-                        <b> End Date:</b>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="input-group date" id="LogEndDateTimePickerDiv">
-                            <input type='text' class="form-control" id="LogEndDatePickerInput" />
-                            <span class="input-group-addon">
-                                <span class="glyphicon glyphicon-calendar"></span>
-                            </span>
-                        </div>
+
                     </div>
                 </div>
-                <div class="row" style="padding-top:5px; margin:1% 0% 0% 48%">
-                    <button id="ShowLineButton" class="btn btn-info btn-lg ">
-                        Show
-                    </button>
-                </div>
             </div>
+            <div class="row" style="padding-top:5px; margin:1% 0% 0% 48%">
+                <button id="ShowLogButton" class="btn btn-info btn-lg ">
+                    Show
+                </button>
+            </div>
+        </div>
+
+    </div>
+
 
 </div>
-        </div>
-
-        </div>
