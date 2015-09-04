@@ -184,15 +184,17 @@
                             columnsresize: true,
                             columns: [
                               { text: 'Machine', dataField: 'Machine' },
+                              { text: 'OEE', dataField: 'OEE', cellsformat: 'p2' },
+                              { text: 'NEE', dataField: 'NEE', cellsformat: 'p2' },
                               { text: 'Total Quantity', dataField: 'TotalQuantity', cellsformat:'d' },
                               { text: 'Defect Quantity', dataField: 'DefectQuantity', cellsformat: 'd' },
                               { text: 'Good Quantity', dataField: 'GoodQuantity', cellsformat: 'd' },
                               { text: 'Quality Rate', dataField: 'QualityRate', cellsformat: 'p2' },
                               { text: 'Performance Rate', dataField: 'PerformanceRate', cellsformat: 'p2' },
                               { text: 'Availability Rate', dataField: 'AvailabilityRate', cellsformat: 'p2' },
-                              { text: 'OEE', dataField: 'OEE', cellsformat: 'p2' },
+                            
                               { text: 'Utilization Rate', dataField: 'UtilizationRate', cellsformat: 'p2' },
-                              { text: 'NEE', dataField: 'NEE', cellsformat: 'p2' },
+                             
                               { text: 'POT', dataField: 'POT', cellsformat: 'd' },
                               { text: 'SPT', dataField: 'SPT', cellsformat: 'd' },
                               { text: 'UPT', dataField: 'UPT', cellsformat: 'd' },
@@ -220,7 +222,8 @@
 
 
                         });
-
+                        $("#columntableReportGrid").children("div:eq(1)").css("background-color", "orange");
+                        $("#columntableReportGrid").children("div:eq(2)").css("background-color", "red");
                     }
                 });
             });
