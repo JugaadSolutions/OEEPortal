@@ -63,7 +63,7 @@ namespace OEEPortal_MVC5.Models
     public class MachineOutput
     {
         public String Machine { get; set; }
-        public String Shift { get; set; }
+      
         public double UsefullTime { get; set; }
 
         public Nullable<DateTime> StartTime { get; set; }

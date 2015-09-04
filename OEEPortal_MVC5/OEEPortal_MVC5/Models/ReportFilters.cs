@@ -25,4 +25,15 @@ namespace OEEPortal_MVC5.Models
 
         public int[] Shifts { get; set; }
     }
+
+    public class DailyCumulativeFilter
+    {
+        public DateTime From { get; set; }
+        public DateTime To { get; set; }
+    }
+
+    public class MonthlyCumulativeFilter
+    {
+        public int[] Months { get; set; }
+    }
 }

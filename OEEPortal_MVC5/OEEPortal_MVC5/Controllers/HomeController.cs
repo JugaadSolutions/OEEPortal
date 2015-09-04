@@ -522,8 +522,350 @@ namespace OEEPortal.Controllers
 
             }
         }
+
+        public JsonResult GetDailyCumulativeRecords(DailyCumulativeFilter dailyCumulativeFilter)
+        {
+            List<DailyCumulativeRecord> DailyCumulativeRecords = new List<DailyCumulativeRecord>();
+
+            List<MachineOutput> MachineOutputRecords = new List<MachineOutput>();
+
+            Dictionary<String, List<MachineOutput>> MachineOutputRecordGroup =
+                new Dictionary<string, List<MachineOutput>>();
+
+            using (OEEPortalContext db = new OEEPortalContext())
+            {
+
+                List<Shift> Shifts = db.Shifts.ToList();
+
+
+                DateTime rangeStart = DateTime.MaxValue;
+                DateTime rangeEnd = DateTime.MinValue;
+                foreach (Shift s in Shifts)
+                {
+                    DateTime Start = s.GetShiftStart(dailyCumulativeFilter.From);
+                    DateTime End = s.GetShiftEnd(dailyCumulativeFilter.To);
+                    if (Start < rangeStart)
+                    {
+                        rangeStart = Start;
+                    }
+
+                    if (End > rangeEnd)
+                        rangeEnd = End;
+
+                }
+
+                MachineOutputRecords = (from m in db.MachineOutputRecords
+                                        join rm in db.ReferenceMachines on new { mId = m.MachineId, rId = m.ReferenceId } equals new { mId = rm.MachineId, rId = rm.ReferenceId }
+                                        join mc in db.Machines on m.MachineId equals mc.MachineId
+                                        where ((m.StartTime <= rangeStart) && (m.EndTime < rangeEnd) && (m.StartTime < rangeEnd) && (m.EndTime > rangeStart)
+                                   || (m.StartTime >= rangeStart) && (m.EndTime < rangeEnd) && (m.StartTime < rangeEnd) && (m.EndTime > rangeStart)
+                                   || (m.StartTime <= rangeEnd) && (m.EndTime > rangeEnd) && (m.StartTime < rangeEnd) && (m.EndTime > rangeStart))
+
+                                        select new MachineOutput
+                                        {
+                                            Machine = mc.Name,
+                                            UsefullTime = rm.UsefullTime,
+                                            StartTime = m.StartTime,
+                                            EndTime = m.EndTime,
+                                            OutputQuantity = m.OutputQuantity,
+                                            DefectQuantity = m.DefectQuantity,
+                                            EquipmentBreakDownStart = m.EquipmentBreakDownStart,
+                                            EquipmentBreakDownEnd = m.EquipmentBreakDownEnd,
+                                            ChangeOverStart = m.ChangeOverStart,
+                                            ChangeOverEnd = m.ChangeOverEnd,
+                                            MaterialDownStart = m.MaterialDownStart,
+                                            MaterialDownEnd = m.MaterialDownEnd,
+                                            QualityDownStart = m.QualityDownStart,
+                                            QualityDownEnd = m.QualityDownEnd,
+                                            NonProductionStart = m.NonProductionStart,
+                                            NonProductionEnd = m.NonProductionEnd,
+                                            PreventiveMaintenanceStart = m.PreventiveMaintenanceStart,
+                                            PreventiveMaintenanceEnd = m.PreventiveMaintenanceEnd,
+                                            ManagementMeetingStart = m.ManagementMeetingStart,
+                                            ManagementMeetingEnd = m.ManagementMeetingEnd,
+                                            RegulatoryBreaksStart = m.RegulatoryBreaksStart,
+                                            RegulatoryBreaksEnd = m.RegulatoryBreaksEnd,
+                                            PilotRunStart = m.PilotRunStart,
+                                            PilotRunEnd = m.PilotRunEnd
+                                        }).ToList();
+
+
+             
+                while (rangeStart < rangeEnd)
+                {
+                    DateTime Start = rangeStart;
+                    DateTime End = rangeStart.AddDays(1);
+                    foreach (MachineOutput r in MachineOutputRecords)
+                    {
+                        if (!r.Normalize(Start, End)) continue;
+                        if (MachineOutputRecordGroup.ContainsKey(rangeStart.ToString("dd/MM/yyyy")))
+                        {
+                            MachineOutputRecordGroup[rangeStart.ToString("dd/MM/yyyy")].Add(r);
+                        }
+                        else
+                        {
+                            var sublist = new List<MachineOutput>();
+                            sublist.Add(r);
+                            MachineOutputRecordGroup.Add(rangeStart.ToString("dd/MM/yyyy"), sublist);
+                        }
+
+
+                    }
+                    rangeStart = rangeStart.AddDays(1);
+                }
+
+                foreach (KeyValuePair<String, List<MachineOutput>> kv in MachineOutputRecordGroup)
+                {
+                    DailyCumulativeRecord mc = new DailyCumulativeRecord();
+                    mc.Date = kv.Key;
+
+                    foreach (MachineOutput o in kv.Value)
+                    {
+                        mc.POT += (o.EndTime.Value - o.StartTime.Value).TotalSeconds;
+                        mc.UsefulTime += o.UsefullTime;
+                        mc.TotalQuantity += o.OutputQuantity;
+                        mc.DefectQuantity += o.DefectQuantity;
+                        if (o.EquipmentBreakDownStart != null)
+                        {
+                            mc.EquipmentBreakdown += (o.EquipmentBreakDownEnd.Value - o.EquipmentBreakDownStart.Value).TotalSeconds;
+                        }
+
+                        if (o.ChangeOverStart != null)
+                            mc.ChangeOver += (o.ChangeOverEnd.Value - o.ChangeOverStart.Value).TotalSeconds;
+
+                        if (o.MaterialDownStart != null)
+                            mc.MaterialShortage += (o.MaterialDownEnd.Value - o.MaterialDownStart.Value).TotalSeconds;
+
+                        if (o.QualityDownStart != null)
+                            mc.QualityDowntime += (o.QualityDownEnd.Value - o.QualityDownStart.Value).TotalSeconds;
+
+                        if (o.NonProductionStart != null)
+                            mc.NonProductionTime += (o.NonProductionEnd.Value - o.NonProductionStart.Value).TotalSeconds;
+
+                        if (o.PreventiveMaintenanceStart != null)
+                            mc.PreventiveMaintenance += (o.PreventiveMaintenanceEnd.Value - o.PreventiveMaintenanceStart.Value).TotalSeconds;
+
+                        if (o.ManagementMeetingStart != null)
+                            mc.ManagementMeeting += (o.ManagementMeetingEnd.Value - o.ManagementMeetingStart.Value).TotalSeconds;
+
+                        if (o.RegulatoryBreaksStart != null)
+                            mc.RegulatoryBreaks += (o.RegulatoryBreaksEnd.Value - o.RegulatoryBreaksStart.Value).TotalSeconds;
+
+                        if (o.PilotRunStart != null)
+                            mc.PilotRun += (o.PilotRunEnd.Value - o.PilotRunStart.Value).TotalSeconds;
+                    }
+
+                    mc.GoodQuantity = mc.TotalQuantity - mc.DefectQuantity;
+                    mc.QualityDefectTime = mc.DefectQuantity * mc.UsefulTime;
+                    mc.RT = mc.UsefulTime + mc.QualityDefectTime;
+                    mc.QualityRate = (mc.UsefulTime / mc.RT) * 100;
+
+                    mc.SPT = mc.POT - (mc.PreventiveMaintenance + mc.ManagementMeeting + mc.RegulatoryBreaks + mc.PilotRun);
+
+                    mc.UPT = mc.POT - (mc.EquipmentBreakdown + mc.ChangeOver + mc.MaterialShortage + mc.QualityDowntime + mc.NonProductionTime);
+
+                    mc.PerformanceLossTime = mc.UPT - mc.RT;
+                    mc.PerformanceRate = (mc.RT / mc.UPT) * 100;
+                    mc.AvailabilityRate = (mc.UPT / mc.SPT) * 100;
+                    mc.UtilizationRate = (mc.SPT / mc.POT) * 100;
+
+
+
+                    mc.OEE = (mc.QualityRate * mc.PerformanceRate * mc.AvailabilityRate) / 1000;
+
+                    mc.NEE = (mc.OEE * mc.UtilizationRate) / 100;
+
+                    DailyCumulativeRecords.Add(mc);
+                }
+
+
+
+
+                return Json(DailyCumulativeRecords, JsonRequestBehavior.AllowGet);
+
+
+            }
+        }
+
+
+
+
+
+        public JsonResult GetMonthlyCumulativeRecords(MonthlyCumulativeFilter monthlyCumulativeFilter)
+        {
+            List<MonthlyCumulativeRecord> MonthlyCumulativeRecords = new List<MonthlyCumulativeRecord>();
+
+            List<MachineOutput> MachineOutputRecords = new List<MachineOutput>();
+
+            Dictionary<String, List<MachineOutput>> MachineOutputRecordGroup =
+                new Dictionary<string, List<MachineOutput>>();
+
+            using (OEEPortalContext db = new OEEPortalContext())
+            {
+
+                List<Shift> Shifts = db.Shifts.ToList();
+
+
+                DateTime rangeStart = DateTime.MaxValue;
+                DateTime rangeEnd = DateTime.MinValue;
+
+                DateTime From = new DateTime(DateTime.Now.Year, monthlyCumulativeFilter.Months.Min(), 1);
+                DateTime To ;
+                if (monthlyCumulativeFilter.Months.Max() == 12)
+                    To = new DateTime(DateTime.Now.Year, monthlyCumulativeFilter.Months.Max(), 31);
+                else
+                {
+                    To = new DateTime(DateTime.Now.Year, monthlyCumulativeFilter.Months.Max() + 1, 1);
+                    To = To.AddDays(-1);
+                }
+                foreach (Shift s in Shifts)
+                {
+                    DateTime Start = s.GetShiftStart(From);
+                    DateTime End = s.GetShiftEnd(To);
+                    if (Start < rangeStart)
+                    {
+                        rangeStart = Start;
+                    }
+
+                    if (End > rangeEnd)
+                        rangeEnd = End;
+
+                }
+
+                MachineOutputRecords = (from m in db.MachineOutputRecords
+                                        join rm in db.ReferenceMachines on new { mId = m.MachineId, rId = m.ReferenceId } equals new { mId = rm.MachineId, rId = rm.ReferenceId }
+                                        join mc in db.Machines on m.MachineId equals mc.MachineId
+                                        where ((m.StartTime <= rangeStart) && (m.EndTime < rangeEnd) && (m.StartTime < rangeEnd) && (m.EndTime > rangeStart)
+                                   || (m.StartTime >= rangeStart) && (m.EndTime < rangeEnd) && (m.StartTime < rangeEnd) && (m.EndTime > rangeStart)
+                                   || (m.StartTime <= rangeEnd) && (m.EndTime > rangeEnd) && (m.StartTime < rangeEnd) && (m.EndTime > rangeStart))
+
+                                        select new MachineOutput
+                                        {
+                                            Machine = mc.Name,
+                                            UsefullTime = rm.UsefullTime,
+                                            StartTime = m.StartTime,
+                                            EndTime = m.EndTime,
+                                            OutputQuantity = m.OutputQuantity,
+                                            DefectQuantity = m.DefectQuantity,
+                                            EquipmentBreakDownStart = m.EquipmentBreakDownStart,
+                                            EquipmentBreakDownEnd = m.EquipmentBreakDownEnd,
+                                            ChangeOverStart = m.ChangeOverStart,
+                                            ChangeOverEnd = m.ChangeOverEnd,
+                                            MaterialDownStart = m.MaterialDownStart,
+                                            MaterialDownEnd = m.MaterialDownEnd,
+                                            QualityDownStart = m.QualityDownStart,
+                                            QualityDownEnd = m.QualityDownEnd,
+                                            NonProductionStart = m.NonProductionStart,
+                                            NonProductionEnd = m.NonProductionEnd,
+                                            PreventiveMaintenanceStart = m.PreventiveMaintenanceStart,
+                                            PreventiveMaintenanceEnd = m.PreventiveMaintenanceEnd,
+                                            ManagementMeetingStart = m.ManagementMeetingStart,
+                                            ManagementMeetingEnd = m.ManagementMeetingEnd,
+                                            RegulatoryBreaksStart = m.RegulatoryBreaksStart,
+                                            RegulatoryBreaksEnd = m.RegulatoryBreaksEnd,
+                                            PilotRunStart = m.PilotRunStart,
+                                            PilotRunEnd = m.PilotRunEnd
+                                        }).ToList();
+
+
+
+                while (rangeStart < rangeEnd)
+                {
+                    DateTime Start = rangeStart;
+                    DateTime End = rangeStart.AddMonths(1);
+                    foreach (MachineOutput r in MachineOutputRecords)
+                    {
+                        if (!r.Normalize(Start, End)) continue;
+                        if (MachineOutputRecordGroup.ContainsKey(rangeStart.ToString("MMMM")))
+                        {
+                            MachineOutputRecordGroup[rangeStart.ToString("MMMM")].Add(r);
+                        }
+                        else
+                        {
+                            var sublist = new List<MachineOutput>();
+                            sublist.Add(r);
+                            MachineOutputRecordGroup.Add(rangeStart.ToString("MMMM"), sublist);
+                        }
+
+
+                    }
+                    rangeStart = rangeStart.AddMonths(1);
+                }
+
+                foreach (KeyValuePair<String, List<MachineOutput>> kv in MachineOutputRecordGroup)
+                {
+                    MonthlyCumulativeRecord mc = new MonthlyCumulativeRecord();
+                    mc.Month = kv.Key;
+
+                    foreach (MachineOutput o in kv.Value)
+                    {
+                        mc.POT += (o.EndTime.Value - o.StartTime.Value).TotalSeconds;
+                        mc.UsefulTime += o.UsefullTime;
+                        mc.TotalQuantity += o.OutputQuantity;
+                        mc.DefectQuantity += o.DefectQuantity;
+                        if (o.EquipmentBreakDownStart != null)
+                        {
+                            mc.EquipmentBreakdown += (o.EquipmentBreakDownEnd.Value - o.EquipmentBreakDownStart.Value).TotalSeconds;
+                        }
+
+                        if (o.ChangeOverStart != null)
+                            mc.ChangeOver += (o.ChangeOverEnd.Value - o.ChangeOverStart.Value).TotalSeconds;
+
+                        if (o.MaterialDownStart != null)
+                            mc.MaterialShortage += (o.MaterialDownEnd.Value - o.MaterialDownStart.Value).TotalSeconds;
+
+                        if (o.QualityDownStart != null)
+                            mc.QualityDowntime += (o.QualityDownEnd.Value - o.QualityDownStart.Value).TotalSeconds;
+
+                        if (o.NonProductionStart != null)
+                            mc.NonProductionTime += (o.NonProductionEnd.Value - o.NonProductionStart.Value).TotalSeconds;
+
+                        if (o.PreventiveMaintenanceStart != null)
+                            mc.PreventiveMaintenance += (o.PreventiveMaintenanceEnd.Value - o.PreventiveMaintenanceStart.Value).TotalSeconds;
+
+                        if (o.ManagementMeetingStart != null)
+                            mc.ManagementMeeting += (o.ManagementMeetingEnd.Value - o.ManagementMeetingStart.Value).TotalSeconds;
+
+                        if (o.RegulatoryBreaksStart != null)
+                            mc.RegulatoryBreaks += (o.RegulatoryBreaksEnd.Value - o.RegulatoryBreaksStart.Value).TotalSeconds;
+
+                        if (o.PilotRunStart != null)
+                            mc.PilotRun += (o.PilotRunEnd.Value - o.PilotRunStart.Value).TotalSeconds;
+                    }
+
+                    mc.GoodQuantity = mc.TotalQuantity - mc.DefectQuantity;
+                    mc.QualityDefectTime = mc.DefectQuantity * mc.UsefulTime;
+                    mc.RT = mc.UsefulTime + mc.QualityDefectTime;
+                    mc.QualityRate = (mc.UsefulTime / mc.RT) * 100;
+
+                    mc.SPT = mc.POT - (mc.PreventiveMaintenance + mc.ManagementMeeting + mc.RegulatoryBreaks + mc.PilotRun);
+
+                    mc.UPT = mc.POT - (mc.EquipmentBreakdown + mc.ChangeOver + mc.MaterialShortage + mc.QualityDowntime + mc.NonProductionTime);
+
+                    mc.PerformanceLossTime = mc.UPT - mc.RT;
+                    mc.PerformanceRate = (mc.RT / mc.UPT) * 100;
+                    mc.AvailabilityRate = (mc.UPT / mc.SPT) * 100;
+                    mc.UtilizationRate = (mc.SPT / mc.POT) * 100;
+
+
+
+                    mc.OEE = (mc.QualityRate * mc.PerformanceRate * mc.AvailabilityRate) / 1000;
+
+                    mc.NEE = (mc.OEE * mc.UtilizationRate) / 100;
+
+                    MonthlyCumulativeRecords.Add(mc);
+                }
+
+
+
+
+                return Json(MonthlyCumulativeRecords, JsonRequestBehavior.AllowGet);
+
+
+            }
+        }
+
+
         #endregion
-
-
     }
 }

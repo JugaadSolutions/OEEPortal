@@ -19,16 +19,20 @@ namespace OEEPortal_MVC5.Models
 
         public DateTime GetShiftStart(DateTime dt)
         {
-            DateTime shiftStart = new DateTime(dt.Year, dt.Month, dt.Day + StartDay,
+            DateTime shiftStart = new DateTime(dt.Year, dt.Month, dt.Day ,
                       Start.Hours, Start.Minutes, Start.Seconds);
+
+            shiftStart = shiftStart.AddDays(StartDay);
 
             return shiftStart;
         }
 
         public DateTime GetShiftEnd(DateTime dt)
         {
-            DateTime shiftEnd = new DateTime(dt.Year, dt.Month, dt.Day + EndDay,
+            DateTime shiftEnd = new DateTime(dt.Year, dt.Month, dt.Day ,
                       End.Hours, End.Minutes, End.Seconds);
+
+            shiftEnd = shiftEnd.AddDays(EndDay);
 
             return shiftEnd;
         }
