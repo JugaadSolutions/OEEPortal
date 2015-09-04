@@ -24,6 +24,8 @@ namespace OEEPortal_MVC5.Models
         public double PerformanceRate {get;set;}
         public double UPT {get;set;}
 
+       
+
         public double EquipmentBreakdown {get;set;}
         public double ChangeOver {get;set;}
         public double MaterialShortage {get;set;}
