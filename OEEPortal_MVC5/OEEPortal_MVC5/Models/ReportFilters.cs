@@ -17,4 +17,12 @@ namespace OEEPortal_MVC5.Models
        
         public int[] Machines { get; set; }
     }
+
+    public class ShiftCumulativeFilter
+    {
+        public DateTime From { get; set; }
+        public DateTime To { get; set; }
+
+        public int[] Shifts { get; set; }
+    }
 }

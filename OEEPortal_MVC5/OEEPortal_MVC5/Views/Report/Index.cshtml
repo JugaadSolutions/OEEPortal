@@ -12,22 +12,7 @@
         $(document).ready(function () {
             $("#ReportTabs").jqxTabs({ width: '100%', height: 450, position: 'top', scrollable: false });
 
-            $("#JanCheckbox").jqxCheckBox({ width: 120, height: 25 });
-            $("#FebCheckbox").jqxCheckBox({ width: 120, height: 25 });
-            $("#MarCheckbox").jqxCheckBox({ width: 120, height: 25 });
-            $("#AprCheckbox").jqxCheckBox({ width: 120, height: 25 });
-            $("#MayCheckbox").jqxCheckBox({ width: 120, height: 25 });
-            $("#JunCheckbox").jqxCheckBox({ width: 120, height: 25 });
-            $("#JulCheckbox").jqxCheckBox({ width: 120, height: 25 });
-            $("#AugCheckbox").jqxCheckBox({ width: 120, height: 25 });
-            $("#SepCheckbox").jqxCheckBox({ width: 120, height: 25 });
-            $("#OctCheckbox").jqxCheckBox({ width: 120, height: 25 });
-            $("#NovCheckbox").jqxCheckBox({ width: 120, height: 25 });
-            $("#DecCheckbox").jqxCheckBox({ width: 120, height: 25 });
-            $("#ShiftACheckbox").jqxCheckBox({ width: 120, height: 25 });
-            $("#ShiftBCheckbox").jqxCheckBox({ width: 120, height: 25 });
-            $("#ShiftCCheckbox").jqxCheckBox({ width: 120, height: 25 });
-
+           
 
 
 
@@ -67,6 +52,27 @@
                 }
             });
 
+            $.ajax({
+                url: '/Home/GetShifts',
+                type: "POST",
+                data: "{'id':" + "0}",
+                contentType: "application/json",
+                error: function () { alert('Get Shifts Failure'); },
+                success: function (Shifts) {
+
+                    var source = {
+                        localdata: Shifts,
+                        id: "id",
+                        datatype: "json",
+                        datafields: [{ name: "ShiftId" }, { name: "Name" }]
+                    };
+                    var dataSource = new $.jqx.dataAdapter(source);
+
+
+                    $("#Shiftlistbox").jqxListBox({ source: dataSource, displayMember: 'Name', valueMember: 'ShiftId', width: '200px', height: '200px', multiple: true });
+                }
+            });
+
 
 
 
@@ -83,8 +89,148 @@
 
 
             $('#ShowShiftButton').click(function () {
-                document.location = '@Url.Action("ShowReport","Report")';
-            })
+                debugger;
+                var items = $("#Shiftlistbox").jqxListBox('getSelectedItems');
+                var shifts = [];
+                if (items.length > 0) {
+
+                    for (var i = 0; i < items.length; i++) {
+                        shifts.push(items[i]['value']);
+
+                    }
+
+                    var shiftCumulativeFilter = {
+                        From: $('#ShiftStartDateTimePickerDiv').jqxDateTimeInput('value'),
+                        To: $('#ShiftEndDateTimePickerDiv').jqxDateTimeInput('value'),
+
+                        Shifts: shifts
+                    };
+                    var RecordList;
+                    $.ajax({
+
+                        url: '/Home/GetShiftCumulativeRecords',
+                        data: "{'ShiftCumulativeFilter':" + JSON.stringify(shiftCumulativeFilter) + "}",
+                        type: "POST",
+                        contentType: "application/json",
+                        error: function () { alert("Error While Loading. Please Verify") },
+                        success: function (records) {
+                            $('#ShiftCumulativeDiv').empty();
+                            $("<div class='container-fluid'><div class='row' > <div class='col-md-12'> <div id='ReportGrid'></div></div></div> <div class='row'> <div class='col-md-1 col-md-offset-6'> <button style='margin-top:3px' id='ExportButton' class='btn btn-info btn-lg' >Export</button></div> </div></div>")
+                                .appendTo($('#ShiftCumulativeDiv'));
+
+
+                            RecordList = records;
+                            var source = {
+                                localdata: RecordList,
+                                id: "id",
+                                datatype: "json",
+
+
+                                datafields: [
+                            { name: 'Shift', type: 'string' },
+                            { name: 'UsefulTime', type: 'number' },
+                            { name: 'TotalQuantity', type: 'number' },
+                            { name: 'DefectQuantity', type: 'number' },
+                            { name: 'GoodQuantity', type: 'number' },
+                            { name: 'QualityRate', type: 'number' },
+                            { name: 'PerformanceRate', type: 'number' },
+                            { name: 'AvailabilityRate', type: 'number' },
+                            { name: 'OEE', type: 'number' },
+                            { name: 'UtilizationRate', type: 'number' },
+                            { name: 'NEE', type: 'number' },
+                            { name: 'POT', type: 'number' },
+                            { name: 'SPT', type: 'number' },
+                            { name: 'UPT', type: 'number' },
+                            { name: 'RT', type: 'number' },
+                            { name: 'PerformanceLossTime', type: 'number' },
+                            { name: 'QualityDefectTime', type: 'number' },
+                            { name: 'EquipmentBreakdown', type: 'number' },
+                            { name: 'ChangeOver', type: 'number' },
+                            { name: 'MaterialShortage', type: 'number' },
+                            { name: 'QualityDowntime', type: 'number' },
+                            { name: 'NonProductionTime', type: 'number' },
+                            { name: 'PreventiveMaintenance', type: 'number' },
+                            { name: 'ManagementMeeting', type: 'number' },
+                            { name: 'RegulatoryBreaks', type: 'number' },
+                            { name: 'PilotRun', type: 'number' },
+
+                                ]
+                            };
+                            var pagerrenderer = function () {
+                                var element = $("<div style='margin-top: 5px; width: 100%; height: 100%;'></div>");
+                                var paginginfo = $("#ReportGrid").jqxGrid('getpaginginformation');
+                                for (i = 0; i < paginginfo.pagescount; i++) {
+                                    // add anchor tag with the page number for each page.
+                                    var anchor = $("<a style='padding: 5px;' href='#" + i + "'>" + i + "</a>");
+                                    anchor.appendTo(element);
+                                    anchor.click(function (event) {
+                                        // go to a page.
+                                        var pagenum = parseInt($(event.target).text());
+                                        $("#ReportGrid").jqxGrid('gotopage', pagenum);
+                                    });
+                                }
+                                return element;
+                            }
+
+                            var dataAdapter = new $.jqx.dataAdapter(source);
+
+                            $('#ReportGrid').jqxGrid({
+
+                                width: '100%',
+                                height: 300,
+                                source: dataAdapter,
+                                pageable: true,
+                                autoheight: true,
+                                pagerrenderer: pagerrenderer,
+                                columnsresize: true,
+                                columns: [
+                                  { text: 'Shift', dataField: 'Shift' },
+                                  { text: 'OEE', dataField: 'OEE', cellsformat: 'p2' },
+                                  { text: 'NEE', dataField: 'NEE', cellsformat: 'p2' },
+                                  { text: 'Total Quantity', dataField: 'TotalQuantity', cellsformat: 'd' },
+                                  { text: 'Defect Quantity', dataField: 'DefectQuantity', cellsformat: 'd' },
+                                  { text: 'Good Quantity', dataField: 'GoodQuantity', cellsformat: 'd' },
+                                  { text: 'Quality Rate', dataField: 'QualityRate', cellsformat: 'p2' },
+                                  { text: 'Performance Rate', dataField: 'PerformanceRate', cellsformat: 'p2' },
+                                  { text: 'Availability Rate', dataField: 'AvailabilityRate', cellsformat: 'p2' },
+
+                                  { text: 'Utilization Rate', dataField: 'UtilizationRate', cellsformat: 'p2' },
+
+                                  { text: 'POT', dataField: 'POT', cellsformat: 'd' },
+                                  { text: 'SPT', dataField: 'SPT', cellsformat: 'd' },
+                                  { text: 'UPT', dataField: 'UPT', cellsformat: 'd' },
+                                  { text: 'UT', dataField: 'UsefulTime', cellsformat: 'd' },
+                                  { text: 'RT', dataField: 'RT', cellsformat: 'd' },
+                                  { text: 'PLT', dataField: 'PerformanceLossTime', cellsformat: 'd' },
+                                  { text: 'QDT', dataField: 'QualityDefectTime', cellsformat: 'd' },
+                                  { text: 'Equipment Breakdown', dataField: 'EquipmentBreakdown', cellsformat: 'd' },
+                                  { text: 'Change Over', dataField: 'ChangeOver', cellsformat: 'd' },
+                                   { text: 'Material Shortage', dataField: 'MaterialShortage', cellsformat: 'd' },
+                                  { text: 'Quality Downtime', dataField: 'QualityDowntime', cellsformat: 'd' },
+                                  { text: 'Non-ProductionTime', dataField: 'NonProductionTime', cellsformat: 'd' },
+                                  { text: 'Preventive Maintenance', dataField: 'PreventiveMaintenance', cellsformat: 'd' },
+                                   { text: 'Management Meeting', dataField: 'ManagementMeeting', cellsformat: 'd' },
+                                  { text: 'Regulatory Breaks', dataField: 'RegulatoryBreaks', cellsformat: 'd' },
+                                  { text: 'PilotRun/Excess WIP', dataField: 'PilotRun', cellsformat: 'd' }
+                                ]
+
+
+                            });
+                            $('#ReportGrid').jqxGrid('autoresizecolumns');
+                            $('#ReportGrid').jqxGrid({ pagesize: 10 });
+                            $("#ExportButton").on("click", function () {
+                                $('#ReportGrid').jqxGrid('exportdata', 'csv', 'MachineCumulativeReport');
+
+
+                            });
+                            $("#columntableReportGrid").children("div:eq(1)").css("background-color", "orange");
+                            $("#columntableReportGrid").children("div:eq(2)").css("background-color", "red");
+                        }
+                    });
+                }
+            });
+
+
             $('#ShowMachineButton').click(function () {
 
                 debugger;
@@ -355,13 +501,7 @@
 
                 });
 
-
-
-
-
             });
-
-
 
         });
 
@@ -380,73 +520,11 @@
             <li>Machine Cumulative</li>
             <li>Log</li>
         </ul>
-        <div>
+        <div id="MonthlyCumulativeDiv">
             <div class="container-fluid" style="margin-top:1%">
-                <div class="row">
-                    <div class="col-md-1">
-                        <div id="JanCheckbox">
-                            January
-                        </div>
-                    </div>
-                    <div class="col-md-1">
-                        <div id="FebCheckbox">
-                            February
-                        </div>
-                    </div>
-                    <div class="col-md-1">
-                        <div id="MarCheckbox">
-                            March
-                        </div>
-                    </div>
-                    <div class="col-md-1">
-                        <div id="AprCheckbox">
-                            April
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-1">
-                        <div id="MayCheckbox">
-                            May
+                <div class="row" style="margin:1% 0% 0% 5%">
+                    <div id="Monthlistbox">
 
-                        </div>
-                    </div>
-                    <div class="col-md-1">
-                        <div id="JunCheckbox">
-                            June
-                        </div>
-                    </div>
-                    <div class="col-md-1">
-                        <div id="JulCheckbox">
-                            July
-                        </div>
-                    </div>
-                    <div class="col-md-1">
-                        <div id="AugCheckbox">
-                            August
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-1">
-                        <div id="SepCheckbox">
-                            September
-                        </div>
-                    </div>
-                    <div class="col-md-1">
-                        <div id="OctCheckbox">
-                            October
-                        </div>
-                    </div>
-                    <div class="col-md-1">
-                        <div id="NovCheckbox">
-                            November
-                        </div>
-                    </div>
-                    <div class="col-md-1">
-                        <div id="DecCheckbox">
-                            December
-                        </div>
                     </div>
                 </div>
 
@@ -457,7 +535,7 @@
                 </div>
             </div>
         </div>
-        <div id="BaseContentdiv">
+        <div id="DailyCumulativeDiv">
 
             <div class="row" style="padding-top:5px;margin:1% 1% 0% -5%">
                 <div class="col-md-2" style="text-align:right">
@@ -483,7 +561,7 @@
                 </button>
             </div>
         </div>
-        <div>
+        <div id="ShiftCumulativeDiv">
             <div class="row" style="padding-top:5px;margin:1% 1% 0% -5%">
                 <div class="col-md-2" style="text-align:right">
                     <b> Start Date:</b>
@@ -503,20 +581,8 @@
                 </div>
             </div>
             <div class="row" style="margin:1% 0% 0% 5%">
-                <div class="col-md-1">
-                    <div id="ShiftACheckbox">
-                        ShiftA
-                    </div>
-                </div>
-                <div class="col-md-1">
-                    <div id="ShiftBCheckbox">
-                        ShiftB
-                    </div>
-                </div>
-                <div class="col-md-1">
-                    <div id="ShiftCCheckbox">
-                        ShiftC
-                    </div>
+                <div id="Shiftlistbox">
+
                 </div>
             </div>
             <div class="row" style="padding-top:5px; margin:1% 0% 0% 48%">

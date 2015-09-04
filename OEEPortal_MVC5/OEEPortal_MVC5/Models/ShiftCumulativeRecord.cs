@@ -5,9 +5,9 @@ using System.Web;
 
 namespace OEEPortal_MVC5.Models
 {
-    public class MachineCumulativeRecord
+    public class ShiftCumulativeRecord
     {
-        public String Machine { get; set; }
+        public String Shift { get; set; }
         public double UsefulTime { get; set; }
 
 
@@ -45,10 +45,8 @@ namespace OEEPortal_MVC5.Models
         public double POT { get; set; }
         public double NEE { get; set; }
 
-
-        public MachineCumulativeRecord()
+        public ShiftCumulativeRecord()
         {
-
             UsefulTime = 0;
 
 
@@ -83,9 +81,6 @@ namespace OEEPortal_MVC5.Models
             UtilizationRate = 0;
             POT = 0;
             NEE = 0;
-
-
         }
-
     }
 }

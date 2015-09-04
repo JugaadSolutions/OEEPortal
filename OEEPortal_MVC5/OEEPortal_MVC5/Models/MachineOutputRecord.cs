@@ -63,6 +63,7 @@ namespace OEEPortal_MVC5.Models
     public class MachineOutput
     {
         public String Machine { get; set; }
+        public String Shift { get; set; }
         public double UsefullTime { get; set; }
 
         public Nullable<DateTime> StartTime { get; set; }
@@ -99,18 +100,29 @@ namespace OEEPortal_MVC5.Models
         public Nullable<DateTime> PilotRunStart { get; set; }
         public Nullable<DateTime> PilotRunEnd { get; set; }
 
-        public void Normalize(DateTime rangeStart, DateTime rangeEnd)
+        public bool Normalize(DateTime rangeStart, DateTime rangeEnd)
         {
+            bool result = false;
             if ((StartTime <= rangeStart) && (EndTime < rangeEnd) && (StartTime < rangeEnd) && (EndTime > rangeStart))
             {
                 StartTime = rangeStart;
+                result = true;
             }
 
-            if ((StartTime <= rangeEnd) && (EndTime > rangeEnd) && (StartTime < rangeEnd) && (EndTime > rangeStart))
+            else if ((StartTime <= rangeEnd) && (EndTime > rangeEnd) && (StartTime < rangeEnd) && (EndTime > rangeStart))
             {
                 EndTime = rangeEnd;
+                result = true;
+
             }
 
+            else if ((StartTime >= rangeStart) && (EndTime < rangeEnd) && (StartTime < rangeEnd) && (EndTime > rangeStart))
+            {
+                result = true;
+
+            }
+            else
+                return result;
 
             if ((EquipmentBreakDownStart <= rangeStart) && (EquipmentBreakDownEnd < rangeEnd) &&
                 (EquipmentBreakDownStart < rangeEnd) && (EquipmentBreakDownEnd > rangeStart))
@@ -231,6 +243,7 @@ namespace OEEPortal_MVC5.Models
                 PilotRunEnd = rangeEnd;
             }
 
+            return result;
         }
 
     }
