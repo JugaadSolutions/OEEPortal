@@ -23,8 +23,8 @@
           //  $('#DailyMonthlistbox').jqxListBox({ source: monthsDataAdpater, displayMember: 'name', valueMember: 'value', width: '200px', height: '200px', multiple: false });
            
             // debugger;
-            var MachineList;
-
+            var MachineList=[];
+           
             $.ajax({
                 url: '/Home/GetMachines',
                 type: "POST",
@@ -32,8 +32,16 @@
                 contentType: "application/json",
                 error: function () { alert('GetMachines Failure'); },
                 success: function (machines) {
-
+                  
                     MachineList = machines;
+                    var id = 0;
+                    var name = 'All';
+                    data = {
+                        'Id': id,
+                        'Name': name
+                    };
+                    MachineList.push(data);
+                  
                     var source = {
                         localdata: MachineList,
                         id: "id",
