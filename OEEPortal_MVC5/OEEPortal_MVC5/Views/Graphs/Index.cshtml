@@ -9,6 +9,9 @@
 
         $(document).ready(function () {
             $("#ReportTabs").jqxTabs({ width: '100%', height: 450, position: 'top', scrollable: false });
+            $('#DailyStartDatePickerDiv').jqxDateTimeInput({ width: '100%', formatString: 'dd/MM/yyyy', showTimeButton: false, value: null });
+            $('#MTTRMTBFFromDatePickerDiv').jqxDateTimeInput({ width: '100%', formatString: 'dd/MM/yyyy', showTimeButton: false, value: null });
+            $('#MTTRMTBFToDatePickerDiv').jqxDateTimeInput({ width: '100%', formatString: 'dd/MM/yyyy', showTimeButton: false, value: null });
 
             var months = [{ name: 'Jan', value: 1 }, { name: 'Feb', value: 2 }, { name: 'Mar', value: 3 }, { name: 'Apr', value: 4 },
                 { name: 'May', value: 5 }, { name: 'Jun', value: 6 }, { name: 'July', value: 7 }, { name: 'August', value: 8 },
@@ -16,8 +19,9 @@
 
             var monthsDataAdpater = new $.jqx.dataAdapter(months);
             $('#Monthlistbox').jqxListBox({ source: monthsDataAdpater, displayMember: 'name', valueMember: 'value', width: '200px', height: '200px', multiple: false });
-            $('#MTTRMonthlistbox').jqxListBox({ source: monthsDataAdpater, displayMember: 'name', valueMember: 'value', width: '200px', height: '200px', multiple: false });
-          
+            $('#OverallMachinelistbox').jqxListBox({ source: monthsDataAdpater, displayMember: 'name', valueMember: 'value', width: '200px', height: '200px', multiple: false });
+          //  $('#DailyMonthlistbox').jqxListBox({ source: monthsDataAdpater, displayMember: 'name', valueMember: 'value', width: '200px', height: '200px', multiple: false });
+           
             // debugger;
             var MachineList;
 
@@ -39,7 +43,10 @@
                     var dataSource = new $.jqx.dataAdapter(source);
 
 
-                    $("#Machinelistbox").jqxListBox({ source: dataSource, displayMember: 'Name', valueMember: 'MachineId', width: '200px', height: '200px', multiple: true });
+                    $("#Machinelistbox").jqxListBox({ source: dataSource, displayMember: 'Name', valueMember: 'MachineId', width: '200px', height: '200px', multiple: false});
+                    $('#OverallMachinelistbox').jqxListBox({ source: dataSource, displayMember: 'Name', valueMember: 'MachineId', width: '200px', height: '200px', multiple: false });
+                    $('#MachineMonthlistbox').jqxListBox({ source: dataSource, displayMember: 'Name', valueMember: 'MachineId', width: '200px', height: '200px', multiple: false });
+                    $('#MachineDailylistbox').jqxListBox({ source: dataSource, displayMember: 'Name', valueMember: 'MachineId', width: '200px', height: '200px', multiple: false });
                 }
             });
 
@@ -628,10 +635,10 @@
 
     <div id='ReportTabs'>
         <ul>
-            <li>Cumulative Waste Waterfall</li>
-            <li>Monthly Waste Waterfall</li>
-            <li>Daily OEE - NEE Trend</li>
-            <li>MTTR MTBF Trend</li>
+            <li>Overall</li>
+            <li>Monthly</li>
+            <li>Daily</li>
+            <li>MTTR-MTBF</li>
 
         </ul>
         <div id="CumulativeWaterfallDiv">
@@ -639,65 +646,100 @@
               
 
                 <div class="row" style="padding-top:5px; margin:1% 0% 0% 10%">
-                    <button id="ShowMonthButton" class="btn btn-info btn-lg ">
-                        Show
-                    </button>
+                    <div class="col-md-3" style="margin:1% 0% 0% 3%">
+                        <div id="OverallMachinelistbox">
+
+                        </div>
+
+
+                        <button id="ShowMonthButton" class="btn btn-info btn-lg" style="margin:2% 0% 0% 20%">
+                            Show
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
         <div id="MonthlyWaterfallDiv">
             <div class="row" style="margin:1% 0% 0% 5%">
-                <div id="Monthlistbox">
-
-                </div>
-            </div>
-          
-        </div>
-        <div id="DailyTrendDiv">
-            <div class="row" style="padding-top:5px;margin:1% 1% 0% -5%">
-                <div class="row" style="margin:1% 0% 0% 5%">
+                <div class="col-md-3">
                     <div id="Monthlistbox">
 
                     </div>
                 </div>
-               
+                <div class="col-md-3">
+                    <div id="MachineMonthlistbox">
+
+                    </div>
+                    <button id="ShowMonthButton" class="btn btn-info btn-lg" style="margin:3% 0% 0% -23%">
+                        Show
+                    </button>
+                </div>
+                
             </div>
-           
-            <div class="row" style="padding-top:5px; margin:1% 0% 0% 48%">
-                <button id="ShowShiftButton" class="btn btn-info btn-lg ">
-                    Show
-                </button>
+          
+        </div>
+        <div id="DailyTrendDiv">
+
+            <div class="row" style="margin:1% 0% 0% 5%">
+                <div class="col-md-2" style="text-align:right">
+                    <b> Select Date:</b>
+                </div>
+                <div class="col-md-4">
+                    <div id="DailyStartDatePickerDiv">
+
+                    </div>
+                </div>
+                <div class="col-md-4" style="margin:3% 0% 0% -26%">
+                    <div id="MachineDailylistbox">
+
+                    </div>
+
+                    <button id="ShowShiftButton" class="btn btn-info btn-lg " style="margin:3% 0% 0% 12%">
+                        Show
+                    </button>
+                </div>
             </div>
         </div>
         <div id="MTTRMTBFDiv">
-            <div class="row" style="padding-top:5px;margin:1% 1% 0% -5%">
-                <div class="col-md-6" >
-                    <div class="row" style="margin:1% 0% 0% 5%">
-                        <div id="MTTRMonthlistbox">
+           
+                <div class="row" style="padding-top:5px;margin:1% 1% 0% -5%">
+                    <div class="col-md-2" style="text-align:right">
+                        <b> From:</b>
+                    </div>
+                    <div class="col-md-4">
+                        <div id="MTTRMTBFFromDatePickerDiv">
 
                         </div>
                     </div>
-                </div>
-                <div class="col-md-6">
-                    <div id="Machinelistbox">
+                    <div class="col-md-2" style="text-align:right">
+                        <b> To:</b>
+                    </div>
+                    <div class="col-md-4">
+                        <div id="MTTRMTBFToDatePickerDiv">
 
+                        </div>
                     </div>
 
-               
+                    <div class="col-md-3" style="margin:3% 0% 0% 45%">
+                        <div id="Machinelistbox">
+
+                        </div>
+
+                        <button id="ShowMachineButton" class="btn btn-info btn-lg " style="margin:3% 0% 0% 16%">
+                            Show
+                        </button>
+                    </div>
+
+                    
                 </div>
-            </div>
 
+
+          
            
-            <div class="row" style="padding-top:5px; margin:1% 0% 0% 48%">
-                <button id="ShowMachineButton" class="btn btn-info btn-lg ">
-                    Show
-                </button>
-            </div>
-
         </div>
      
 
-    </div>
+    
 
 
 </div>
