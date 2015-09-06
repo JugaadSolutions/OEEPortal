@@ -865,7 +865,10 @@ namespace OEEPortal.Controllers
             }
         }
 
+     public JsonResult GetMachineCumulative(MachineFilter machineFilter)
+        {
 
+        }
         #endregion
     }
 }

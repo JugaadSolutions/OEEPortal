@@ -36,4 +36,9 @@ namespace OEEPortal_MVC5.Models
     {
         public int[] Months { get; set; }
     }
+
+   public class MachineFilter
+   {
+       public int[] Machines { get; set; }
+   }
 }
