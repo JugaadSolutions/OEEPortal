@@ -519,18 +519,31 @@
         </ul>
         <div id="CumulativeWaterfallDiv">
             <div class="container-fluid" style="margin-top:1%">
-
-
-                <div class="row" style="padding-top:5px; margin:1% 0% 0% 10%">
-                    <div class="col-md-3" style="margin:1% 0% 0% 3%">
-                        <div id="OverallMachinelistbox">
-
+                <div class="row" style="margin-top:1%;">
+                    <div class="col-md-10">
+                        <div class="col-md-offset-6">
+                            <label id="cumulativemachinelbl">Select Machine:</label>
                         </div>
+                    </div>
+                </div>
 
+                <div class="row" style="padding-top:5px; margin:1% 0% 0% 0%">
+                    <div class="col-md-10" style="margin:1% 0% 0% 0%">
+                        <div class="col-md-offset-6">
+                            <div id="OverallMachinelistbox">
 
-                        <button id="ShowCumulativeWaterfallBtn" class="btn btn-info btn-lg" style="margin:2% 0% 0% 20%">
-                            Show
-                        </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-top:1%">
+
+                    <div class="col-md-10">
+                        <div class="col-md-offset-7">
+                            <button id="ShowCumulativeWaterfallBtn" class="btn btn-info btn-lg">
+                                Show
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -539,6 +552,18 @@
                 </div>*@
         </div>
         <div id="MonthlyWaterfallDiv">
+            <div class="row" style="margin-top:2%;">
+                <div class="col-md-3">
+                    <div class="col-md-offset-3">
+                        <label id="monthlbl">Select Month:</label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="col-md-offset-3">
+                        <label id="monthlbl">Select Machine:</label>
+                    </div>
+                </div>
+            </div>
             <div class="row" style="margin:1% 0% 0% 5%">
                 <div class="col-md-3">
                     <div id="Monthlistbox">
@@ -558,67 +583,100 @@
 
         </div>
         <div id="DailyTrendDiv">
+            <div class="container-fluid" style="margin-top:1%">
+                <div class="row" style="margin:1% 0% 0% 0%">
+                    <div class="col-md-2" style="text-align:right">
+                        <b> Select Date:</b>
+                    </div>
+                    <div class="col-md-4">
+                        <div id="DailyStartDatePickerDiv">
 
-            <div class="row" style="margin:1% 0% 0% 5%">
-                <div class="col-md-2" style="text-align:right">
-                    <b> Select Date:</b>
-                </div>
-                <div class="col-md-4">
-                    <div id="DailyStartDatePickerDiv">
-
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-4" style="margin:3% 0% 0% -26%">
-                    <div id="MachineDailylistbox">
-
+                <div class="row" style="margin-top:1%;">
+                    <div class="col-md-6">
+                        <div class="col-md-offset-5">
+                            <label id="dailylbl">Select Machine:</label>
+                        </div>
                     </div>
+                </div>
+                <div class="row" style="margin-top:1%;">
+                    <div class="col-md-6">
+                        <div class="col-md-offset-5">
+                            <div id="MachineDailylistbox">
 
-                    <button id="ShowDailyTrendBtn" class="btn btn-info btn-lg " style="margin:3% 0% 0% 12%">
-                        Show
-                    </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-top:1%;">
+                    <div class="col-md-7">
+                        <div class="col-md-offset-6">
+                            <button id="ShowDailyTrendBtn" class="btn btn-info btn-lg ">
+                                Show
+                            </button>
+                        </div>
+                    </div>
+                </div>
                 </div>
             </div>
-        </div>
         <div id="MTTRMTBFDiv">
+            <div class="container-fluid" style="margin-top:1%">
+                <div class="row" style="padding-top:5px;margin:1% 1% 0% -5%">
+                    <div class="col-md-2" style="text-align:right">
+                        <b> From:</b>
+                    </div>
+                    <div class="col-md-4">
+                        <div id="MTTRMTBFFromDatePickerDiv">
 
-            <div class="row" style="padding-top:5px;margin:1% 1% 0% -5%">
-                <div class="col-md-2" style="text-align:right">
-                    <b> From:</b>
-                </div>
-                <div class="col-md-4">
-                    <div id="MTTRMTBFFromDatePickerDiv">
+                        </div>
+                    </div>
+                    <div class="col-md-2" style="text-align:right">
+                        <b> To:</b>
+                    </div>
+                    <div class="col-md-4">
+                        <div id="MTTRMTBFToDatePickerDiv">
 
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-2" style="text-align:right">
-                    <b> To:</b>
+                <div class="row" style="margin-top:1%;">
+                    <div class="col-md-10">
+                        <div class="col-md-offset-6">
+                            <label id="MttrMtbflbl">Select Machine:</label>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-4">
-                    <div id="MTTRMTBFToDatePickerDiv">
+                <div class="row" style="margin-top:1%;">
+                    <div class="col-md-10">
+                        <div class="col-md-offset-6">
+                            <div id="Machinelistbox">
 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-top:1%">
+                    <div class="col-md-10">
+                        <div class="col-md-offset-6">
+                            <button id="ShowMTTRMTBFBtn" class="btn btn-info btn-lg " style="margin:3% 0% 0% 16%">
+                                Show
+                            </button>
+                        </div>
                     </div>
                 </div>
 
-                <div class="col-md-3" style="margin:3% 0% 0% 45%">
-                    <div id="Machinelistbox">
 
-                    </div>
+               
 
-                    <button id="ShowMTTRMTBFBtn" class="btn btn-info btn-lg " style="margin:3% 0% 0% 16%">
-                        Show
-                    </button>
-                </div>
+
 
 
             </div>
 
 
-
-
-        </div>
-
-
-
+            </div>
 
 
     </div>
