@@ -42,6 +42,13 @@
                 success: function (machines) {
 
                     MachineList = machines;
+                 
+                    var All = {
+                        'Icon': null,
+                        'MachineId': 0,
+                        'Name': "All"
+                    }
+                    MachineList.unshift(All);
                     var source = {
                         localdata: MachineList,
                         id: "id",
@@ -51,7 +58,11 @@
                     var dataSource = new $.jqx.dataAdapter(source);
 
 
-                    $("#Machinelistbox").jqxListBox({ source: dataSource, displayMember: 'Name', valueMember: 'MachineId', width: '200px', height: '200px', multiple: true });
+                    $("#MachineCumulativelistbox").jqxListBox({ source: dataSource, displayMember: 'Name', valueMember: 'MachineId', width: '200px', height: '200px', multiple: true });
+                    $("#MonthlyMachinelistbox").jqxListBox({ source: dataSource, displayMember: 'Name', valueMember: 'MachineId', width: '200px', height: '200px', multiple: true });
+                    $("#DailyMachinelistbox").jqxListBox({ source: dataSource, displayMember: 'Name', valueMember: 'MachineId', width: '200px', height: '200px', multiple: true });
+                    $("#ShiftMachinelistbox").jqxListBox({ source: dataSource, displayMember: 'Name', valueMember: 'MachineId', width: '200px', height: '200px', multiple: true });
+                    $("#LogMachinelistbox").jqxListBox({ source: dataSource, displayMember: 'Name', valueMember: 'MachineId', width: '200px', height: '200px', multiple: true });
                 }
             });
 
@@ -791,13 +802,34 @@
         </ul>
         <div id="MonthlyCumulativeDiv">
             <div class="container-fluid" style="margin-top:1%">
-                <div class="row" style="margin:1% 0% 0% 5%">
-                    <div id="Monthlistbox">
-
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="col-md-offset-3">
+                            <lable id="monthlbl">Select Month:</lable>
+                        </div>
+                      </div>
+                    <div class="col-md-3">
+                        <div class="col-md-offset-3">
+                            <lable id="monthlbl">Select Machine:</lable>
+                        </div>
                     </div>
                 </div>
+                <div class="row" style="margin:1% 0% 0% 5%">
+                  
+                    <div class="col-md-3">
+                        <div id="Monthlistbox">
 
-                <div class="row" style="padding-top:5px; margin:1% 0% 0% 10%">
+                        </div>
+                    </div>
+                   
+                    <div class="col-md-3">
+                        <div id="MonthlyMachinelistbox">
+
+                        </div>
+                    </div>
+                </div>
+              
+                <div class="row" style="padding-top:5px; margin:1% 0% 0% 25%">
                     <button id="ShowMonthButton" class="btn btn-info btn-lg ">
                         Show
                     </button>
@@ -821,6 +853,22 @@
                 <div class="col-md-4">
                     <div id="DailyEndDateTimePickerDiv">
 
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-top:1%;">
+                <div class="col-md-10">
+                    <div class="col-md-offset-6">
+                        <lable id="dailymachinelbl">Select Machine:</lable>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-top:1%">
+                <div class="col-md-10">
+                    <div class="col-md-offset-6">
+                        <div id="DailyMachinelistbox">
+
+                        </div>
                     </div>
                 </div>
             </div>
@@ -849,11 +897,35 @@
                     </div>
                 </div>
             </div>
-            <div class="row" style="margin:1% 0% 0% 5%">
-                <div id="Shiftlistbox">
-
+            <div class="row" style="margin-top:1%">
+                <div class="col-md-6">
+                    <div class="col-md-offset-6">
+                        <lable id="monthlbl">Select Shift:</lable>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="col-md-offset-1">
+                        <lable id="monthlbl">Select Machine:</lable>
+                    </div>
                 </div>
             </div>
+            <div class="row" style="margin:1% 0% 0% 5%">
+                <div class="col-md-6">
+                    <div class="col-lg-offset-5">
+                        <div id="Shiftlistbox">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="col-lg-offset-1">
+                        <div id="ShiftMachinelistbox">
+
+                        </div>
+                        </div>
+                    </div>
+            </div>
+           
             <div class="row" style="padding-top:5px; margin:1% 0% 0% 48%">
                 <button id="ShowShiftButton" class="btn btn-info btn-lg ">
                     Show
@@ -880,11 +952,23 @@
                     </div>
                 </div>
             </div>
-
-            <div class="row" style="margin:1% 0% 0% 5%">
-                <div id="Machinelistbox">
-
+            <div class="row" style="margin-top:1%;">
+                <div class="col-md-10">
+                    <div class="col-md-offset-6">
+                        <lable id="dailymachinelbl">Select Machine:</lable>
+                    </div>
                 </div>
+            </div>
+            <div class="row" style="margin:1% 0% 0% 0%">
+                <div class="col-md-10">
+                    <div class="col-md-offset-6">
+                        <div id="MachineCumulativelistbox">
+
+
+                        </div>
+                    </div>
+                </div>
+
             </div>
             <div class="row" style="padding-top:5px; margin:1% 0% 0% 48%">
                 <button id="ShowMachineButton" class="btn btn-info btn-lg ">
@@ -910,6 +994,22 @@
                     <div id="LogEndDateTimePickerDiv">
 
 
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-top:1%;">
+                <div class="col-md-10">
+                    <div class="col-md-offset-6">
+                        <lable id="dailymachinelbl">Select Machine:</lable>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-top:1%">
+                <div class="col-md-10">
+                    <div class="col-md-offset-6">
+                    <div id="LogMachinelistbox">
+
+                    </div>
                     </div>
                 </div>
             </div>
