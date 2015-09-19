@@ -387,7 +387,7 @@ namespace OEEPortal.Controllers
                                         where ((m.StartTime <= rangeStart) && (m.EndTime < rangeEnd) && (m.StartTime < rangeEnd) && (m.EndTime > rangeStart)
                                    || (m.StartTime >= rangeStart) && (m.EndTime < rangeEnd) && (m.StartTime < rangeEnd) && (m.EndTime > rangeStart)
                                    || (m.StartTime <= rangeEnd) && (m.EndTime > rangeEnd) && (m.StartTime < rangeEnd) && (m.EndTime > rangeStart))
-
+                                    && (shiftCumulativeFilter.Machines.Contains(m.MachineId))
                                         select new MachineOutput
                                         {
                                             Machine = mc.Name,
@@ -560,7 +560,7 @@ namespace OEEPortal.Controllers
                                         where ((m.StartTime <= rangeStart) && (m.EndTime < rangeEnd) && (m.StartTime < rangeEnd) && (m.EndTime > rangeStart)
                                    || (m.StartTime >= rangeStart) && (m.EndTime < rangeEnd) && (m.StartTime < rangeEnd) && (m.EndTime > rangeStart)
                                    || (m.StartTime <= rangeEnd) && (m.EndTime > rangeEnd) && (m.StartTime < rangeEnd) && (m.EndTime > rangeStart))
-
+                                   && (dailyCumulativeFilter.Machines.Contains(m.MachineId))
                                         select new MachineOutput
                                         {
                                             Machine = mc.Name,
@@ -738,7 +738,7 @@ namespace OEEPortal.Controllers
                                         where ((m.StartTime <= rangeStart) && (m.EndTime < rangeEnd) && (m.StartTime < rangeEnd) && (m.EndTime > rangeStart)
                                    || (m.StartTime >= rangeStart) && (m.EndTime < rangeEnd) && (m.StartTime < rangeEnd) && (m.EndTime > rangeStart)
                                    || (m.StartTime <= rangeEnd) && (m.EndTime > rangeEnd) && (m.StartTime < rangeEnd) && (m.EndTime > rangeStart))
-
+                                   && (monthlyCumulativeFilter.Machines.Contains(m.MachineId))
                                         select new MachineOutput
                                         {
                                             Machine = mc.Name,

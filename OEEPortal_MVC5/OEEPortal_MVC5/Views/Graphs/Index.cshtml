@@ -63,46 +63,44 @@
 
             $('#ShowMonthlyWaterfallBtn').click(function () {
                 debugger;
-               
-                var chartData={
+                var newvalues = [420, 210, -170, 'SUM', 600, 500, 400, -300, 200, 123, 524, 'SUM'];
+                var chartData = {
                     "type": "waterfall3d",
                     "title": {
                         "text": "Waterfall3d for sample data"
                     },
                     "scale-x": {
-                        "values": ["January", "February", "March", "April", "May",
-                            "June", "July", "August", "September",
-                            "October", "November", "December"],
+                        "values": ["Jan", "Feb", "March", "April", "May",
+                            "June", "July", "August", "Sep",
+                            "Oct", "Nov", "Dec"],
                     },
-                    "plot": {
-
-                    },
+                   
                     "scale-y": {
 
                     },
-                    "series":[
+                    "series": [
                         {
-                            "values": [420,210,-170,-140,600,500,400,300,200,123,524,"SUM"]
+                            "values": newvalues
                         }
                     ]
                 }
+
                
-                           
-              window.onclick=function(){  // Render Method[2]
-                    zingchart.render({ 
-                        id:'waterfallDiv',
-                        data: chartData,
-                        height:400,
-                        width:600
-                    });
-                         
-              
-                };
+
+
                 $('#MonthlyWaterfallDiv').empty();
-                $("<div id='waterfallDiv'></div>").appendTo($('#MonthlyWaterfallDiv'));
+                $("<div><div id='waterfallDiv'></div>").appendTo($('#MonthlyWaterfallDiv'));
+
+                zingchart.render({
+                    id: 'waterfallDiv',
+                    data: chartData,
+                    height: 400
+                   
                 });
 
+              
 
+            });
 
 
 
@@ -111,65 +109,65 @@
 
 
             $('#ShowCumulativeWaterfallBtn').click(function () {
-                   // debugger;
+                // debugger;
 
-                    var chartsdata = {
-                        "type": "pareto",
-                        "title": {
-                            "text": "pareto graph for sample data"
-                        },
-                        "options": {
-                            "line-plot": {
-                                "line-color": "#f00",
-                                "line-width": 4
-                            }
-                        },
-                        "scale-x": {
-                            "values": ["January", "Feb", "March", "April", "May",
-                                "June", "July", "August", "Sept",
-                                "October", "November", "December"],
-                        },
-                        "plot": {
+                var chartsdata = {
+                    "type": "pareto",
+                    "title": {
+                        "text": "pareto graph for sample data"
+                    },
+                    "options": {
+                        "line-plot": {
+                            "line-color": "#f00",
+                            "line-width": 4
+                        }
+                    },
+                    "scale-x": {
+                        "values": ["January", "Feb", "March", "April", "May",
+                            "June", "July", "August", "Sept",
+                            "October", "November", "December"],
+                    },
+                    "plot": {
 
-                        },
-                        "scale-y": {
+                    },
+                    "scale-y": {
 
-                        },
-                       
-                        "series": [
-                          {
-                              "values": [
-                                4642,
-                                4345,
-                                2350,
-                                1251,
-                                5252,
-                                6464,
-                                1234,
-                                4567,
-                                8907,
-                                5678,
-                                6515,
-                                1556
-                              ]
-                          }
-                        ]
-                    }
-                    window.onclick = function () {  // Render Method[2]
-                        zingchart.render({
-                            id: 'paretoDiv',
-                            data: chartsdata,
-                            height: 400,
-                            width: 600
-                        });
-                    };
-                    $('#CumulativeWaterfallDiv').empty();
-                    $("<div id='paretoDiv'></div>").appendTo($('#CumulativeWaterfallDiv'));
-                });
+                    },
+
+                    "series": [
+                      {
+                          "values": [
+                            4642,
+                            4345,
+                            2350,
+                            1251,
+                            5252,
+                            6464,
+                            1234,
+                            4567,
+                            8907,
+                            5678,
+                            6515,
+                            1556
+                          ]
+                      }
+                    ]
+                }
+                window.onclick = function () {  // Render Method[2]
+                    zingchart.render({
+                        id: 'paretoDiv',
+                        data: chartsdata,
+                        height: 400,
+                        width: 600
+                    });
+                };
+                $('#CumulativeWaterfallDiv').empty();
+                $("<div id='paretoDiv'></div>").appendTo($('#CumulativeWaterfallDiv'));
+            });
 
 
             $('#ShowDailyTrendBtn').click(function () {
-                   // debugger;
+                // debugger;
                 var bardata = {
                     "type": "bar3d",
                     "title": {
@@ -210,184 +208,39 @@
                 };
                 $('#DailyTrendDiv').empty();
                 $("<div id='barDiv'></div>").appendTo($('#DailyTrendDiv'));
-                 
-
-                });
-
-                $('#ShowShiftButton').click(function () {
-                    debugger;
-                    var items = $("#Shiftlistbox").jqxListBox('getSelectedItems');
-                    var shifts = [];
-                    if (items.length > 0) {
-
-                        for (var i = 0; i < items.length; i++) {
-                            shifts.push(items[i]['value']);
-
-                        }
-
-                        var shiftCumulativeFilter = {
-                            From: $('#ShiftStartDateTimePickerDiv').jqxDateTimeInput('value'),
-                            To: $('#ShiftEndDateTimePickerDiv').jqxDateTimeInput('value'),
-
-                            Shifts: shifts
-                        };
-                        var RecordList;
-                        $.ajax({
-
-                            url: '/Home/GetShiftCumulativeRecords',
-                            data: "{'ShiftCumulativeFilter':" + JSON.stringify(shiftCumulativeFilter) + "}",
-                            type: "POST",
-                            contentType: "application/json",
-                            error: function () { alert("Error While Loading. Please Verify") },
-                            success: function (records) {
-                                $('#ShiftCumulativeDiv').empty();
-                                $("<div class='container-fluid'><div class='row' > <div class='col-md-12'> <div id='ReportGrid'></div></div></div> <div class='row'> <div class='col-md-1 col-md-offset-6'> <button style='margin-top:3px' id='ExportButton' class='btn btn-info btn-lg' >Export</button></div> </div></div>")
-                                    .appendTo($('#ShiftCumulativeDiv'));
 
 
-                                RecordList = records;
-                                var source = {
-                                    localdata: RecordList,
-                                    id: "id",
-                                    datatype: "json",
+            });
 
+            $('#ShowShiftButton').click(function () {
+                debugger;
+                var items = $("#Shiftlistbox").jqxListBox('getSelectedItems');
+                var shifts = [];
+                if (items.length > 0) {
 
-                                    datafields: [
-                                { name: 'Shift', type: 'string' },
-                                { name: 'UsefulTime', type: 'number' },
-                                { name: 'TotalQuantity', type: 'number' },
-                                { name: 'DefectQuantity', type: 'number' },
-                                { name: 'GoodQuantity', type: 'number' },
-                                { name: 'QualityRate', type: 'number' },
-                                { name: 'PerformanceRate', type: 'number' },
-                                { name: 'AvailabilityRate', type: 'number' },
-                                { name: 'OEE', type: 'number' },
-                                { name: 'UtilizationRate', type: 'number' },
-                                { name: 'NEE', type: 'number' },
-                                { name: 'POT', type: 'number' },
-                                { name: 'SPT', type: 'number' },
-                                { name: 'UPT', type: 'number' },
-                                { name: 'RT', type: 'number' },
-                                { name: 'PerformanceLossTime', type: 'number' },
-                                { name: 'QualityDefectTime', type: 'number' },
-                                { name: 'EquipmentBreakdown', type: 'number' },
-                                { name: 'ChangeOver', type: 'number' },
-                                { name: 'MaterialShortage', type: 'number' },
-                                { name: 'QualityDowntime', type: 'number' },
-                                { name: 'NonProductionTime', type: 'number' },
-                                { name: 'PreventiveMaintenance', type: 'number' },
-                                { name: 'ManagementMeeting', type: 'number' },
-                                { name: 'RegulatoryBreaks', type: 'number' },
-                                { name: 'PilotRun', type: 'number' },
-
-                                    ]
-                                };
-                                var pagerrenderer = function () {
-                                    var element = $("<div style='margin-top: 5px; width: 100%; height: 100%;'></div>");
-                                    var paginginfo = $("#ReportGrid").jqxGrid('getpaginginformation');
-                                    for (i = 0; i < paginginfo.pagescount; i++) {
-                                        // add anchor tag with the page number for each page.
-                                        var anchor = $("<a style='padding: 5px;' href='#" + i + "'>" + i + "</a>");
-                                        anchor.appendTo(element);
-                                        anchor.click(function (event) {
-                                            // go to a page.
-                                            var pagenum = parseInt($(event.target).text());
-                                            $("#ReportGrid").jqxGrid('gotopage', pagenum);
-                                        });
-                                    }
-                                    return element;
-                                }
-
-                                var dataAdapter = new $.jqx.dataAdapter(source);
-
-                                $('#ReportGrid').jqxGrid({
-
-                                    width: '100%',
-                                    height: 300,
-                                    source: dataAdapter,
-                                    pageable: true,
-                                    autoheight: true,
-                                    pagerrenderer: pagerrenderer,
-                                    columnsresize: true,
-                                    columns: [
-                                      { text: 'Shift', dataField: 'Shift' },
-                                      { text: 'OEE', dataField: 'OEE', cellsformat: 'p2' },
-                                      { text: 'NEE', dataField: 'NEE', cellsformat: 'p2' },
-                                      { text: 'Total Quantity', dataField: 'TotalQuantity', cellsformat: 'd' },
-                                      { text: 'Defect Quantity', dataField: 'DefectQuantity', cellsformat: 'd' },
-                                      { text: 'Good Quantity', dataField: 'GoodQuantity', cellsformat: 'd' },
-                                      { text: 'Quality Rate', dataField: 'QualityRate', cellsformat: 'p2' },
-                                      { text: 'Performance Rate', dataField: 'PerformanceRate', cellsformat: 'p2' },
-                                      { text: 'Availability Rate', dataField: 'AvailabilityRate', cellsformat: 'p2' },
-
-                                      { text: 'Utilization Rate', dataField: 'UtilizationRate', cellsformat: 'p2' },
-
-                                      { text: 'POT', dataField: 'POT', cellsformat: 'd' },
-                                      { text: 'SPT', dataField: 'SPT', cellsformat: 'd' },
-                                      { text: 'UPT', dataField: 'UPT', cellsformat: 'd' },
-                                      { text: 'UT', dataField: 'UsefulTime', cellsformat: 'd' },
-                                      { text: 'RT', dataField: 'RT', cellsformat: 'd' },
-                                      { text: 'PLT', dataField: 'PerformanceLossTime', cellsformat: 'd' },
-                                      { text: 'QDT', dataField: 'QualityDefectTime', cellsformat: 'd' },
-                                      { text: 'Equipment Breakdown', dataField: 'EquipmentBreakdown', cellsformat: 'd' },
-                                      { text: 'Change Over', dataField: 'ChangeOver', cellsformat: 'd' },
-                                       { text: 'Material Shortage', dataField: 'MaterialShortage', cellsformat: 'd' },
-                                      { text: 'Quality Downtime', dataField: 'QualityDowntime', cellsformat: 'd' },
-                                      { text: 'Non-ProductionTime', dataField: 'NonProductionTime', cellsformat: 'd' },
-                                      { text: 'Preventive Maintenance', dataField: 'PreventiveMaintenance', cellsformat: 'd' },
-                                       { text: 'Management Meeting', dataField: 'ManagementMeeting', cellsformat: 'd' },
-                                      { text: 'Regulatory Breaks', dataField: 'RegulatoryBreaks', cellsformat: 'd' },
-                                      { text: 'PilotRun/Excess WIP', dataField: 'PilotRun', cellsformat: 'd' }
-                                    ]
-
-
-                                });
-                                $('#ReportGrid').jqxGrid('autoresizecolumns');
-                                $('#ReportGrid').jqxGrid({ pagesize: 10 });
-                                $("#ExportButton").on("click", function () {
-                                    $('#ReportGrid').jqxGrid('exportdata', 'csv', 'ShiftCumulativeReport');
-
-
-                                });
-                                $("#columntableReportGrid").children("div:eq(1)").css("background-color", "orange");
-                                $("#columntableReportGrid").children("div:eq(2)").css("background-color", "red");
-                            }
-                        });
-                    }
-                });
-
-
-                $('#ShowMachineButton').click(function () {
-
-                    debugger;
-                    var items = $("#Machinelistbox").jqxListBox('getSelectedItems');
-                    var machines = [];
-                    if (items.length > 0) {
-
-                        for (var i = 0; i < items.length; i++) {
-                            machines.push(items[i]['value']);
-
-                        }
+                    for (var i = 0; i < items.length; i++) {
+                        shifts.push(items[i]['value']);
 
                     }
-                    var machineCumulativeFilter = {
-                        From: $('#MachineStartDateTimePickerDiv').jqxDateTimeInput('value'),
-                        To: $('#MachineEndDateTimePickerDiv').jqxDateTimeInput('value'),
 
-                        Machines: machines
+                    var shiftCumulativeFilter = {
+                        From: $('#ShiftStartDateTimePickerDiv').jqxDateTimeInput('value'),
+                        To: $('#ShiftEndDateTimePickerDiv').jqxDateTimeInput('value'),
+
+                        Shifts: shifts
                     };
                     var RecordList;
                     $.ajax({
 
-                        url: '/Home/GetMachineCumulativeRecords',
-                        data: "{'MachineCumulativeFilter':" + JSON.stringify(machineCumulativeFilter) + "}",
+                        url: '/Home/GetShiftCumulativeRecords',
+                        data: "{'ShiftCumulativeFilter':" + JSON.stringify(shiftCumulativeFilter) + "}",
                         type: "POST",
                         contentType: "application/json",
-                        error: function () { alert("Error While Saving. Please Verify") },
+                        error: function () { alert("Error While Loading. Please Verify") },
                         success: function (records) {
-                            $('#MachineCumulativeDiv').empty();
+                            $('#ShiftCumulativeDiv').empty();
                             $("<div class='container-fluid'><div class='row' > <div class='col-md-12'> <div id='ReportGrid'></div></div></div> <div class='row'> <div class='col-md-1 col-md-offset-6'> <button style='margin-top:3px' id='ExportButton' class='btn btn-info btn-lg' >Export</button></div> </div></div>")
-                                .appendTo($('#MachineCumulativeDiv'));
+                                .appendTo($('#ShiftCumulativeDiv'));
 
 
                             RecordList = records;
@@ -398,7 +251,7 @@
 
 
                                 datafields: [
-                            { name: 'Machine', type: 'string' },
+                            { name: 'Shift', type: 'string' },
                             { name: 'UsefulTime', type: 'number' },
                             { name: 'TotalQuantity', type: 'number' },
                             { name: 'DefectQuantity', type: 'number' },
@@ -455,7 +308,7 @@
                                 pagerrenderer: pagerrenderer,
                                 columnsresize: true,
                                 columns: [
-                                  { text: 'Machine', dataField: 'Machine' },
+                                  { text: 'Shift', dataField: 'Shift' },
                                   { text: 'OEE', dataField: 'OEE', cellsformat: 'p2' },
                                   { text: 'NEE', dataField: 'NEE', cellsformat: 'p2' },
                                   { text: 'Total Quantity', dataField: 'TotalQuantity', cellsformat: 'd' },
@@ -490,7 +343,7 @@
                             $('#ReportGrid').jqxGrid('autoresizecolumns');
                             $('#ReportGrid').jqxGrid({ pagesize: 10 });
                             $("#ExportButton").on("click", function () {
-                                $('#ReportGrid').jqxGrid('exportdata', 'csv', 'MachineCumulativeReport');
+                                $('#ReportGrid').jqxGrid('exportdata', 'csv', 'ShiftCumulativeReport');
 
 
                             });
@@ -498,12 +351,157 @@
                             $("#columntableReportGrid").children("div:eq(2)").css("background-color", "red");
                         }
                     });
-                });
-
-
-
+                }
             });
-      
+
+
+            $('#ShowMachineButton').click(function () {
+
+                debugger;
+                var items = $("#Machinelistbox").jqxListBox('getSelectedItems');
+                var machines = [];
+                if (items.length > 0) {
+
+                    for (var i = 0; i < items.length; i++) {
+                        machines.push(items[i]['value']);
+
+                    }
+
+                }
+                var machineCumulativeFilter = {
+                    From: $('#MachineStartDateTimePickerDiv').jqxDateTimeInput('value'),
+                    To: $('#MachineEndDateTimePickerDiv').jqxDateTimeInput('value'),
+
+                    Machines: machines
+                };
+                var RecordList;
+                $.ajax({
+
+                    url: '/Home/GetMachineCumulativeRecords',
+                    data: "{'MachineCumulativeFilter':" + JSON.stringify(machineCumulativeFilter) + "}",
+                    type: "POST",
+                    contentType: "application/json",
+                    error: function () { alert("Error While Saving. Please Verify") },
+                    success: function (records) {
+                        $('#MachineCumulativeDiv').empty();
+                        $("<div class='container-fluid'><div class='row' > <div class='col-md-12'> <div id='ReportGrid'></div></div></div> <div class='row'> <div class='col-md-1 col-md-offset-6'> <button style='margin-top:3px' id='ExportButton' class='btn btn-info btn-lg' >Export</button></div> </div></div>")
+                            .appendTo($('#MachineCumulativeDiv'));
+
+
+                        RecordList = records;
+                        var source = {
+                            localdata: RecordList,
+                            id: "id",
+                            datatype: "json",
+
+
+                            datafields: [
+                        { name: 'Machine', type: 'string' },
+                        { name: 'UsefulTime', type: 'number' },
+                        { name: 'TotalQuantity', type: 'number' },
+                        { name: 'DefectQuantity', type: 'number' },
+                        { name: 'GoodQuantity', type: 'number' },
+                        { name: 'QualityRate', type: 'number' },
+                        { name: 'PerformanceRate', type: 'number' },
+                        { name: 'AvailabilityRate', type: 'number' },
+                        { name: 'OEE', type: 'number' },
+                        { name: 'UtilizationRate', type: 'number' },
+                        { name: 'NEE', type: 'number' },
+                        { name: 'POT', type: 'number' },
+                        { name: 'SPT', type: 'number' },
+                        { name: 'UPT', type: 'number' },
+                        { name: 'RT', type: 'number' },
+                        { name: 'PerformanceLossTime', type: 'number' },
+                        { name: 'QualityDefectTime', type: 'number' },
+                        { name: 'EquipmentBreakdown', type: 'number' },
+                        { name: 'ChangeOver', type: 'number' },
+                        { name: 'MaterialShortage', type: 'number' },
+                        { name: 'QualityDowntime', type: 'number' },
+                        { name: 'NonProductionTime', type: 'number' },
+                        { name: 'PreventiveMaintenance', type: 'number' },
+                        { name: 'ManagementMeeting', type: 'number' },
+                        { name: 'RegulatoryBreaks', type: 'number' },
+                        { name: 'PilotRun', type: 'number' },
+
+                            ]
+                        };
+                        var pagerrenderer = function () {
+                            var element = $("<div style='margin-top: 5px; width: 100%; height: 100%;'></div>");
+                            var paginginfo = $("#ReportGrid").jqxGrid('getpaginginformation');
+                            for (i = 0; i < paginginfo.pagescount; i++) {
+                                // add anchor tag with the page number for each page.
+                                var anchor = $("<a style='padding: 5px;' href='#" + i + "'>" + i + "</a>");
+                                anchor.appendTo(element);
+                                anchor.click(function (event) {
+                                    // go to a page.
+                                    var pagenum = parseInt($(event.target).text());
+                                    $("#ReportGrid").jqxGrid('gotopage', pagenum);
+                                });
+                            }
+                            return element;
+                        }
+
+                        var dataAdapter = new $.jqx.dataAdapter(source);
+
+                        $('#ReportGrid').jqxGrid({
+
+                            width: '100%',
+                            height: 300,
+                            source: dataAdapter,
+                            pageable: true,
+                            autoheight: true,
+                            pagerrenderer: pagerrenderer,
+                            columnsresize: true,
+                            columns: [
+                              { text: 'Machine', dataField: 'Machine' },
+                              { text: 'OEE', dataField: 'OEE', cellsformat: 'p2' },
+                              { text: 'NEE', dataField: 'NEE', cellsformat: 'p2' },
+                              { text: 'Total Quantity', dataField: 'TotalQuantity', cellsformat: 'd' },
+                              { text: 'Defect Quantity', dataField: 'DefectQuantity', cellsformat: 'd' },
+                              { text: 'Good Quantity', dataField: 'GoodQuantity', cellsformat: 'd' },
+                              { text: 'Quality Rate', dataField: 'QualityRate', cellsformat: 'p2' },
+                              { text: 'Performance Rate', dataField: 'PerformanceRate', cellsformat: 'p2' },
+                              { text: 'Availability Rate', dataField: 'AvailabilityRate', cellsformat: 'p2' },
+
+                              { text: 'Utilization Rate', dataField: 'UtilizationRate', cellsformat: 'p2' },
+
+                              { text: 'POT', dataField: 'POT', cellsformat: 'd' },
+                              { text: 'SPT', dataField: 'SPT', cellsformat: 'd' },
+                              { text: 'UPT', dataField: 'UPT', cellsformat: 'd' },
+                              { text: 'UT', dataField: 'UsefulTime', cellsformat: 'd' },
+                              { text: 'RT', dataField: 'RT', cellsformat: 'd' },
+                              { text: 'PLT', dataField: 'PerformanceLossTime', cellsformat: 'd' },
+                              { text: 'QDT', dataField: 'QualityDefectTime', cellsformat: 'd' },
+                              { text: 'Equipment Breakdown', dataField: 'EquipmentBreakdown', cellsformat: 'd' },
+                              { text: 'Change Over', dataField: 'ChangeOver', cellsformat: 'd' },
+                               { text: 'Material Shortage', dataField: 'MaterialShortage', cellsformat: 'd' },
+                              { text: 'Quality Downtime', dataField: 'QualityDowntime', cellsformat: 'd' },
+                              { text: 'Non-ProductionTime', dataField: 'NonProductionTime', cellsformat: 'd' },
+                              { text: 'Preventive Maintenance', dataField: 'PreventiveMaintenance', cellsformat: 'd' },
+                               { text: 'Management Meeting', dataField: 'ManagementMeeting', cellsformat: 'd' },
+                              { text: 'Regulatory Breaks', dataField: 'RegulatoryBreaks', cellsformat: 'd' },
+                              { text: 'PilotRun/Excess WIP', dataField: 'PilotRun', cellsformat: 'd' }
+                            ]
+
+
+                        });
+                        $('#ReportGrid').jqxGrid('autoresizecolumns');
+                        $('#ReportGrid').jqxGrid({ pagesize: 10 });
+                        $("#ExportButton").on("click", function () {
+                            $('#ReportGrid').jqxGrid('exportdata', 'csv', 'MachineCumulativeReport');
+
+
+                        });
+                        $("#columntableReportGrid").children("div:eq(1)").css("background-color", "orange");
+                        $("#columntableReportGrid").children("div:eq(2)").css("background-color", "red");
+                    }
+                });
+            });
+
+
+
+        });
+
 
     </script>
 }
@@ -521,14 +519,14 @@
         </ul>
         <div id="CumulativeWaterfallDiv">
             <div class="container-fluid" style="margin-top:1%">
-              
+
 
                 <div class="row" style="padding-top:5px; margin:1% 0% 0% 10%">
                     <div class="col-md-3" style="margin:1% 0% 0% 3%">
                         <div id="OverallMachinelistbox">
 
                         </div>
-                        
+
 
                         <button id="ShowCumulativeWaterfallBtn" class="btn btn-info btn-lg" style="margin:2% 0% 0% 20%">
                             Show
@@ -538,7 +536,7 @@
             </div>
             @*<div id='chartDiv'>
 
-            </div>*@
+                </div>*@
         </div>
         <div id="MonthlyWaterfallDiv">
             <div class="row" style="margin:1% 0% 0% 5%">
@@ -555,9 +553,9 @@
                         Show
                     </button>
                 </div>
-                
+
             </div>
-          
+
         </div>
         <div id="DailyTrendDiv">
 
@@ -582,46 +580,46 @@
             </div>
         </div>
         <div id="MTTRMTBFDiv">
-           
-                <div class="row" style="padding-top:5px;margin:1% 1% 0% -5%">
-                    <div class="col-md-2" style="text-align:right">
-                        <b> From:</b>
+
+            <div class="row" style="padding-top:5px;margin:1% 1% 0% -5%">
+                <div class="col-md-2" style="text-align:right">
+                    <b> From:</b>
+                </div>
+                <div class="col-md-4">
+                    <div id="MTTRMTBFFromDatePickerDiv">
+
                     </div>
-                    <div class="col-md-4">
-                        <div id="MTTRMTBFFromDatePickerDiv">
+                </div>
+                <div class="col-md-2" style="text-align:right">
+                    <b> To:</b>
+                </div>
+                <div class="col-md-4">
+                    <div id="MTTRMTBFToDatePickerDiv">
 
-                        </div>
                     </div>
-                    <div class="col-md-2" style="text-align:right">
-                        <b> To:</b>
-                    </div>
-                    <div class="col-md-4">
-                        <div id="MTTRMTBFToDatePickerDiv">
+                </div>
 
-                        </div>
-                    </div>
+                <div class="col-md-3" style="margin:3% 0% 0% 45%">
+                    <div id="Machinelistbox">
 
-                    <div class="col-md-3" style="margin:3% 0% 0% 45%">
-                        <div id="Machinelistbox">
-
-                        </div>
-
-                        <button id="ShowMTTRMTBFBtn" class="btn btn-info btn-lg " style="margin:3% 0% 0% 16%">
-                            Show
-                        </button>
                     </div>
 
-                    
+                    <button id="ShowMTTRMTBFBtn" class="btn btn-info btn-lg " style="margin:3% 0% 0% 16%">
+                        Show
+                    </button>
                 </div>
 
 
-          
-           
+            </div>
+
+
+
+
         </div>
-     
-
-    
 
 
-</div>
+
+
+
+    </div>
 </div>
