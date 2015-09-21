@@ -91,7 +91,9 @@
     <script type="text/javascript">
         $(function () {
 
-
+            $.ajaxSetup({
+                isLocal: false
+            });
             $('.roundedDiv').corner('keep 10px');
             $('#inputbtn').click(function () {
                 document.location = '@Url.Action("Index","MachineOutputRecords")';

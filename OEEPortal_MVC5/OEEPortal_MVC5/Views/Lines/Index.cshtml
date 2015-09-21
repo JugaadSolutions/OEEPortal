@@ -1,4 +1,4 @@
-﻿@model IEnumerable<OEEPortal_MVC5.Models.Line>
+﻿
 
 
 @section menu{
@@ -7,29 +7,10 @@
 
 @section scripts{
     <script type="text/javascript">
-        function addLines(lines) {
-            var noOfLines = lines.length;
-
-            for (var i = 0; i < noOfLines; i++) {
-
-                var rowId = "LineRow" + parseInt(i / 4).toString();
-                var divId = "LineDiv" + (i).toString();
-
-                var Id = lines[i]["LineId"];
-                var LineName = lines[i]["Name"];
-
-                var divappend = $("<div class='col-md-3' id=\"" + divId + "\"></div>");
-                var btnappend = $("<button class='btn btn-info btn-lg btn-block' line-id=\"" + Id.toString() + "\"></button>").html(LineName);
-
-
-                $("#" + rowId).append(divappend);
-                $("#" + divId).append(btnappend);
-
-            }
-        }
+        
         $.ajax({
 
-            url: '/Home/GetLines',
+            url: '@Url.Action("GetLines","Home")',
 
             dataType: 'json',
             async: true,
@@ -38,7 +19,7 @@
 
                 //debugger;
 
-                addLines(lines);
+                addLines(lines,'@Url.Action("GetMachines","Home")','@Url.Action("Create","MachineOutputRecords")');
             }
         });
     </script>

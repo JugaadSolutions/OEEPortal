@@ -29,7 +29,7 @@
             var MachineList = [];
 
             $.ajax({
-                url: '/Home/GetMachines',
+                url: '@Url.Action("GetMachines","Home")',
                 type: "POST",
                 data: "{'id':" + "0}",
                 contentType: "application/json",
@@ -232,7 +232,7 @@
                     var RecordList;
                     $.ajax({
 
-                        url: '/Home/GetShiftCumulativeRecords',
+                        url: '@Url.Action("GetShiftCumulativeRecords","Home")',
                         data: "{'ShiftCumulativeFilter':" + JSON.stringify(shiftCumulativeFilter) + "}",
                         type: "POST",
                         contentType: "application/json",
@@ -377,7 +377,7 @@
                 var RecordList;
                 $.ajax({
 
-                    url: '/Home/GetMachineCumulativeRecords',
+                    url: '@Url.Action("GetMachineCumulativeRecords","Home")',
                     data: "{'MachineCumulativeFilter':" + JSON.stringify(machineCumulativeFilter) + "}",
                     type: "POST",
                     contentType: "application/json",

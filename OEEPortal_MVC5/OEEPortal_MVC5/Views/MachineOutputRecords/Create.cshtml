@@ -30,7 +30,7 @@
        
             //debugger;
             var ajx =  $.ajax({
-                url: '/Home/GetReferences/',
+                url: '@Url.Action("GetReferences","Home")',
                 data: "{'machine':" + @Machine+ "}",
                 type: "POST",
                 contentType: "application/json",
@@ -158,10 +158,10 @@
 
 
             }
-            //$.post("/MachineOutputRecords/Create", { jsonInput: "Sagar" });
+         
 
             $.ajax({
-                url: '/MachineOutputRecords/Create',
+                url:'@Url.Action("Create","MachineOutputRecords")',
                 data: "{'MachineOutputRecord':" + JSON.stringify(record) +"}",
                 type: "POST",
                 contentType: "application/json",

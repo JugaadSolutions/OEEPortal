@@ -1,5 +1,5 @@
 ﻿/// <reference path="addMachines.js" />
-function addLines(lines) {
+function addLines(lines,getMachinesUrl,createMachinesUrl) {
     var noOfLines = lines.length;
 
     for (var i = 0; i < noOfLines; i++) {
@@ -25,14 +25,14 @@ function addLines(lines) {
                 LineName: $(e.currentTarget).html()
             };
             $.ajax({
-                url: '/Home/GetMachines',
+                url: getMachinesUrl,
                 type: "POST",
                 data: "{'id':" + i.toString() + "}",
                 contentType: "application/json",
                 error: function () { alert('GetMachines Failure'); },
                 success: function (machines) {
 
-                    addMachines(machines);
+                    addMachines(machines,createMachinesUrl);
                 }
             });
         });

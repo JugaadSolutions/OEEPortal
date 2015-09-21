@@ -35,7 +35,7 @@
             var MachineList;
 
             $.ajax({
-                url: '/Home/GetMachines',
+                url: '@Url.Action("GetMachines","Home")',
                 type: "POST",
                 data: "{'id':" + "0}",
                 contentType: "application/json",
@@ -68,7 +68,7 @@
             });
 
             $.ajax({
-                url: '/Home/GetShifts',
+                url: '@Url.Action("GetShifts","Home")',
                 type: "POST",
                 data: "{'id':" + "0}",
                 contentType: "application/json",
@@ -129,7 +129,7 @@
                     var RecordList;
                     $.ajax({
 
-                        url: '/Home/GetMonthlyCumulativeRecords',
+                        url: '@Url.Action("GetMonthlyCumulativeRecords","Home")',
                         data: "{'MonthlyCumulativeFilter':" + JSON.stringify(monthlyCumulativeFilter) + "}",
                         type: "POST",
                         contentType: "application/json",
@@ -276,7 +276,7 @@
                 var RecordList;
                 $.ajax({
 
-                    url: '/Home/GetDailyCumulativeRecords',
+                    url: '@Url.Action("GetDailyCumulativeRecords","Home")',
                     data: "{'DailyCumulativeFilter':" + JSON.stringify(dailyCumulativeFilter) + "}",
                     type: "POST",
                     contentType: "application/json",
@@ -433,7 +433,7 @@
                     var RecordList;
                     $.ajax({
 
-                        url: '/Home/GetShiftCumulativeRecords',
+                        url: '@Url.Action("GetShiftCumulativeRecords","Home")',
                         data: "{'ShiftCumulativeFilter':" + JSON.stringify(shiftCumulativeFilter) + "}",
                         type: "POST",
                         contentType: "application/json",
@@ -578,7 +578,7 @@
                 var RecordList;
                 $.ajax({
 
-                    url: '/Home/GetMachineCumulativeRecords',
+                    url: '@Url.Action("GetMachineCumulativeRecords","Home")',
                     data: "{'MachineCumulativeFilter':" + JSON.stringify(machineCumulativeFilter) + "}",
                     type: "POST",
                     contentType: "application/json",
@@ -725,7 +725,7 @@
 
                 $.ajax({
 
-                    url: '/Home/GetMachineOutputRecords',
+                    url: '@Url.Action("GetMachineOutputRecords","Home")',
                     data: "{'LogFilter':" + JSON.stringify(logfilter) + "}",
                     type: "POST",
                     contentType: "application/json",

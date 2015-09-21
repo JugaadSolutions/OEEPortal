@@ -12,22 +12,22 @@
 <script src="~/Scripts/appScripts/addLines.js"></script>
     <script type="text/javascript">
 
-        $body = $("body");
+    $body = $("body");
 
-        $(document).on({
-            ajaxStart: function () { $body.addClass("loading"); },
-            ajaxStop: function () { $body.removeClass("loading"); }
-            });
+    $(document).on({
+        ajaxStart: function () { $body.addClass("loading"); },
+        ajaxStop: function () { $body.removeClass("loading"); }
+    });
 
-            
-            $(function () {
-                //  debugger;
 
-                
+    $(function () {
+        //  debugger;
 
-                $.ajax({
 
-                    url: '/Home/GetLines',
+
+        $.ajax({
+
+            url: '@Url.Action("GetLines","Home")',
 
                     dataType: 'json',
                     async: true,
@@ -36,7 +36,7 @@
 
                         //debugger;
 
-                        addLines(lines);
+                        addLines(lines,'@Url.Action("GetMachines","Home")','@Url.Action("Create","MachineOutputRecords")')
                     }
                 });
             });
