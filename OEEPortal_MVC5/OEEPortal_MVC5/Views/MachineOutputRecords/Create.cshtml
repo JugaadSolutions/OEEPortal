@@ -27,13 +27,7 @@
         var ReferenceList;
         $(function () {
 
-            //$('#OEEForm').jqxValidator({
-            //    rules: [
-            //           { input: '#OperatorIDInput', message: 'This field is required!', rule: 'required',position:'topcenter' },
-            //           { input: '#StartDateTimePickerInput', message: 'This field is required!', rule: 'required',position:'topcenter' },
-            //           { input: '#EndDateTimePickerInput', message: 'This field is required!',rule: 'required',position:'topcenter' }
-            //    ]
-            //});
+       
             //debugger;
             var ajx =  $.ajax({
                 url: '/Home/GetReferences/',
@@ -118,7 +112,7 @@
 
         $('#SaveButton').on("click", function () {
 
-            //$('#OEEForm').jqxValidator('validate');
+         
             //debugger;
             var selectedReference = $("#ReferenceCombobox").jqxComboBox('getSelectedItem');
             var referenceId = selectedReference.value;

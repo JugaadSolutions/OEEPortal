@@ -191,10 +191,12 @@ namespace OEEPortal.Controllers
 
         public JsonResult GetMachineCumulativeRecords(MachineCumulativeFilter machineCumulativeFilter)
         {
-            List<MachineCumulativeRecord> MachineCumulativeRecords = new List<MachineCumulativeRecord>();
+            List<CumulativeRecord> CumulativeRecords = new List<CumulativeRecord>();
             List<MachineOutput> MachineOutputRecords = new List<MachineOutput>();
             Dictionary<String, List<MachineOutput>> MachineOutputRecordGroup =
                 new Dictionary<string, List<MachineOutput>>();
+
+
             using (OEEPortalContext db = new OEEPortalContext())
             {
 
@@ -278,8 +280,8 @@ namespace OEEPortal.Controllers
 
                 foreach (KeyValuePair<String, List<MachineOutput>> kv in MachineOutputRecordGroup)
                 {
-                    MachineCumulativeRecord mc = new MachineCumulativeRecord();
-                    mc.Machine = kv.Key;
+                    CumulativeRecord mc = new CumulativeRecord();
+                    mc.Pivot = kv.Key;
 
                     foreach (MachineOutput o in kv.Value)
                     {
@@ -337,13 +339,13 @@ namespace OEEPortal.Controllers
 
                     mc.NEE = (mc.OEE * mc.UtilizationRate) / 100;
 
-                    MachineCumulativeRecords.Add(mc);
+                    CumulativeRecords.Add(mc);
                 }
 
 
 
 
-                return Json(MachineCumulativeRecords, JsonRequestBehavior.AllowGet);
+                return Json(CumulativeRecords, JsonRequestBehavior.AllowGet);
 
 
             }

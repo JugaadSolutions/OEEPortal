@@ -22,14 +22,24 @@
 
 
         var MachineCol = $("<div class='col-md-3' id=\"" + divId + "\"></div>");
-        var MachineButton = $("<button class='btn btn-info btn-lg btn-block' ></button>").html(MachineName);
+        var MachineButton = $("<button class='btn btn-info btn-lg btn-block' data-machine=\""+ Machine +"\"></button>").html(MachineName);
 
-
+        
         $("#" + rowId).append(MachineCol);
         MachineCol.append(MachineButton);
 
-        MachineButton.on("click", function (e) {
-            location.href = '/MachineOutputRecords/Create/?Machine=' + Machine.toString();
-        });
+        
     }
+
+    $('.btn').bind("click", function (e) {
+        onMachineClick($(this));
+
+    });
+}
+
+function onMachineClick(elem)
+{
+    debugger;
+    var id = elem.data("machine");
+    location.href = '/MachineOutputRecords/Create/?Machine=' + id;
 }

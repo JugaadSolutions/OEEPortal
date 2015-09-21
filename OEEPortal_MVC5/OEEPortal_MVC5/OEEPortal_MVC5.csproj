@@ -201,6 +201,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\CumulativeRecord.cs" />
     <Compile Include="Models\DailyCumulativeRecord.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Line.cs" />
@@ -685,6 +686,7 @@
     <Content Include="Images\SEPFC.jpg" />
     <Content Include="Images\uiTabsArrow.png" />
     <Content Include="Scripts\app.js" />
+    <Content Include="Scripts\appScripts\addLines.js" />
     <Content Include="Scripts\appScripts\addMachines.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
     <Content Include="Scripts\bootstrap.js" />
