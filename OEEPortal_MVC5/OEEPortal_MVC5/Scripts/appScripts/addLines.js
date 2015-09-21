@@ -1,5 +1,6 @@
 ﻿/// <reference path="addMachines.js" />
-function addLines(lines,getMachinesUrl,createMachinesUrl) {
+function addLines(lines, getMachinesUrl, createMachinesUrl) {
+    debugger;
     var noOfLines = lines.length;
 
     for (var i = 0; i < noOfLines; i++) {
@@ -31,7 +32,7 @@ function addLines(lines,getMachinesUrl,createMachinesUrl) {
                 contentType: "application/json",
                 error: function () { alert('GetMachines Failure'); },
                 success: function (machines) {
-
+                    debugger;
                     addMachines(machines,createMachinesUrl);
                 }
             });

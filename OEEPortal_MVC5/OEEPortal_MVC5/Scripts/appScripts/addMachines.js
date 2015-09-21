@@ -3,8 +3,9 @@
     var noOfMachines = machines.length;
     $("#BaseContainerDiv").empty();
 
-    var machineRows = parseInt(noOfMachines % 4, 10).toString();
+    var machineRows = Math.ceil(noOfMachines / 4, 10).toString();
 
+    if (machineRows == 0) machineRows = 1;
 
     for (var i = 0; i < machineRows; i++) {
         var machineRowDiv = $("<div class='row' style='padding-top:5px' id=MachineRow" + i.toString() + "></div>");
